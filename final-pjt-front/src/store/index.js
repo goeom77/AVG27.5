@@ -16,15 +16,21 @@ export default new Vuex.Store({
   ],
   state: {
     articles: [],
+    movies: [],
+    ////////////////////////////////////////accounts//////////////
     token: null,
-    movies : [],
   },
   getters: {
+    ////////////////////////////////////////accounts//////////////
     isLogin(state) {
       return state.token ? true : false
-    }
+    },
   },
   mutations: {
+    MOVIE_DATA(state, moviedata) {
+      state.movies = moviedata
+    },
+    ////////////////////////////////////////accounts//////////////
     SIGN_UP(state, token) {
       state.token = token
     },
@@ -36,9 +42,6 @@ export default new Vuex.Store({
       state.token = token
       router.push({ name: 'ArticleView' })
     },
-    MOVIE_DATA(state, moviedata) {
-      state.movies = moviedata
-    }
   },
   actions: {
     getArticles(context) {
@@ -46,11 +49,11 @@ export default new Vuex.Store({
         method: 'get',
         url: `${API_URL}/api/v1/articles/`,
         headers: {
-          Authorization: `Token ${ context.state.token }`
+          Authorization: `Token ${context.state.token}`
         }
       })
         .then((res) => {
-          console.log(res, context)
+          // console.log(res, context)
           // console.log(res.data)
           context.commit('GET_ARTICLES', res.data)
         })
@@ -58,6 +61,10 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    getMovieData(context, moviedata) {
+      context.commit('MOVIE_DATA', moviedata)
+    },
+    ////////////////////////////////////////accounts//////////////
     signUp(context, payload) {
       axios({
         method: 'post',
@@ -71,6 +78,7 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
+          this.$router.push({ name: 'ArticleView' })
         })
     },
     logIn(context, payload) {
@@ -89,9 +97,6 @@ export default new Vuex.Store({
         .catch((err) => 
           console.log(err))
     },
-    getMovieData(context, moviedata) {
-      context.commit('MOVIE_DATA', moviedata)
-    }
   },
   modules: {
   }

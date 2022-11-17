@@ -16,7 +16,7 @@ export default {
   components: {
     ArticleList,
   },
-  computed:{
+  computed: {
     isLogin() {
       return this.$store.getters.isLogin
     }
