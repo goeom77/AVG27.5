@@ -3,6 +3,7 @@
     <h5>{{ article.id }}</h5>
     <p>작성자 : {{ article.username }}</p>
     <p>{{ article.title }}</p>
+    <p>{{ article.type }}</p>
     <router-link :to="{ name: 'DetailView', params: { id: article.id } }">
       [DETAIL]
     </router-link>

@@ -17,6 +17,7 @@ export default new Vuex.Store({
   state: {
     articles: [],
     token: null,
+    movies : [],
   },
   getters: {
     isLogin(state) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    SIGN_UP(state, token) {
+      state.token = token
+    },
     GET_ARTICLES(state, articles) {
       state.articles = articles
     },
@@ -31,6 +35,9 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
       router.push({ name: 'ArticleView' })
+    },
+    MOVIE_DATA(state, moviedata) {
+      state.movies = moviedata
     }
   },
   actions: {
@@ -39,11 +46,11 @@ export default new Vuex.Store({
         method: 'get',
         url: `${API_URL}/api/v1/articles/`,
         headers: {
-          Authorization: `Token ${context.state.token}`
+          Authorization: `Token ${ context.state.token }`
         }
       })
         .then((res) => {
-          // console.log(res, context)
+          console.log(res, context)
           // console.log(res.data)
           context.commit('GET_ARTICLES', res.data)
         })
@@ -79,7 +86,12 @@ export default new Vuex.Store({
           // console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
         })
+        .catch((err) => 
+          console.log(err))
     },
+    getMovieData(context, moviedata) {
+      context.commit('MOVIE_DATA', moviedata)
+    }
   },
   modules: {
   }

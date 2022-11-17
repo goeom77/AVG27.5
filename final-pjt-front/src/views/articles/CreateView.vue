@@ -6,6 +6,15 @@
     <form @submit.prevent="createArticle">
       <label for="title">제목 : </label>
       <input type="text" id="title" v-model.trim="title"><br>
+
+      <label for="type">종류 : </label>
+        <select id="title" v-model.trim="val">
+          <option disabled="disabled">선택해 주세요.</option>
+          <option value="공지사항">공지사항</option>
+          <option value="자유게시판">자유게시판</option>
+          <option value="Q&A">Q&A</option>
+        </select>
+      <br>
       <label for="content">내용 : </label>
       <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
       <input type="submit" id="submit">
@@ -25,6 +34,7 @@ export default {
     return {
       title: null,
       content: null,
+      type: null,
     }
   },
   methods: {
@@ -44,13 +54,13 @@ export default {
         data: {
           title: title,
           content: content,
+          type: this.type,
         },
         headers: {
           Authorization: `Token ${this.$store.state.token}`
         }
       })
-        .then((res) => {
-          console.log(res)
+        .then(() => {
           this.$router.push({ name: 'ArticleView' })
         })
         .catch((err) => {
