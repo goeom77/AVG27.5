@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import ArticleView from '@/views/articles/ArticleView'
 import CreateView from '@/views/articles/CreateView'
 import DetailView from '@/views/articles/DetailView'
+import EditView from '@/views/articles/EditView'
 
 import SignUpView from '@/views/accounts/SignUpView'
 import LogInView from '@/views/accounts/LogInView'
@@ -19,19 +20,33 @@ const routes = [
     name: 'ArticleView',
     component: ArticleView
   },
-
+  
   {
     path: '/create',
     name: 'CreateView',
     component: CreateView
   },
+  
+  {
+    path: '/:id',
+    name: 'DetailView',
+    component: DetailView,
+  },
 
+  {
+    path: '/edit',
+    name: 'EditView',
+    component: EditView
+  },
+  
+  ////////////////////////////////////////////////
+  
   {
     path: '/signup',
     name: 'SignUpView',
     component: SignUpView
   },
-
+  
   {
     path: '/login',
     name: 'LogInView',
@@ -44,11 +59,7 @@ const routes = [
     component: LogOutView
   },
 
-  {
-    path: '/:id',
-    name: 'DetailView',
-    component: DetailView,
-  },
+  ///////////////////////////////////////////////////
 
   {
     path: '/movies',

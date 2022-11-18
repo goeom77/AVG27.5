@@ -8,6 +8,7 @@
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
     <button @click="articleDelete" >[DELETE]</button>
+    <router-link :to="{ name: 'EditCreateView', params : {id : article.id}}">[EDIT]</router-link>
   </div>
 </template>
 
