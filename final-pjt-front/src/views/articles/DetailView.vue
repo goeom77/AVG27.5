@@ -7,6 +7,7 @@
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
+    <button @click="articleDelete" >[DELETE]</button>
   </div>
 </template>
 
@@ -38,7 +39,21 @@ export default {
         .catch((err) => {
           console.log(err)
         })
-    }
+    },
+    articleDelete() {
+      axios({
+        method: 'delete',
+        url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`
+      })
+      .then(() => {
+        console.log(this.$store.state.articles)
+        this.$store.dispatch('ArticleDelete', this.article.id)
+        this.$router.push({ name: 'ArticleView' })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
   }
 }
 </script>

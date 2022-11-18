@@ -3,9 +3,11 @@ import VueRouter from 'vue-router'
 import ArticleView from '@/views/articles/ArticleView'
 import CreateView from '@/views/articles/CreateView'
 import DetailView from '@/views/articles/DetailView'
+
 import SignUpView from '@/views/accounts/SignUpView'
 import LogInView from '@/views/accounts/LogInView'
 import LogOutView from '@/views/accounts/LogOutView'
+
 import MovieView from '@/views/movies/MovieView'
 import MovieDetailView from '@/views/movies/MovieDetailView'
 

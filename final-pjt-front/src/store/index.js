@@ -42,6 +42,12 @@ export default new Vuex.Store({
       state.token = token
       router.push({ name: 'ArticleView' })
     },
+    ////////////////////////////////////////articles//////////////
+    ARTICLE_DELETE(state, article_id) {
+      state.articles = state.articles.filter((article) => {
+        return !(article.id === article_id)
+      })
+    }
   },
   actions: {
     getArticles(context) {
@@ -97,6 +103,10 @@ export default new Vuex.Store({
         .catch((err) => 
           console.log(err))
     },
+    ////////////////////////////////////////articles//////////////
+    ArticleDelete(context, article_id) {
+      context.commit('ARTICLE_DELETE', article_id)
+      }
   },
   modules: {
   }
