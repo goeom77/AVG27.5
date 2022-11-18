@@ -12,7 +12,7 @@ const API_URL = 'http://127.0.0.1:8000'
 
 export default new Vuex.Store({
   plugins: [
-    createPersistedState()
+    createPersistedState() // 계산 된 값을 유지
   ],
   state: {
     articles: [],
@@ -23,7 +23,7 @@ export default new Vuex.Store({
   getters: {
     ////////////////////////////////////////accounts//////////////
     isLogin(state) {
-      return state.token ? true : false
+      return state.token ? true : false //로그인 상태면 true 아니면 false
     },
   },
   mutations: {

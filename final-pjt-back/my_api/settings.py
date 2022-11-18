@@ -65,6 +65,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+
 REST_FRAMEWORK = {
     # Authentication
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -184,3 +185,5 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+ACCOUNT_EMAIL_VERIFICATION = "none" # 회원가입 과정에서 email 인증 사용 x
