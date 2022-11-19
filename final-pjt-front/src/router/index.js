@@ -8,6 +8,7 @@ import EditView from '@/views/articles/EditView'
 import SignUpView from '@/views/accounts/SignUpView'
 import LogInView from '@/views/accounts/LogInView'
 import LogOutView from '@/views/accounts/LogOutView'
+import ProfileView from '@/views/accounts/ProfileView'
 
 import MovieView from '@/views/movies/MovieView'
 import MovieDetailView from '@/views/movies/MovieDetailView'
@@ -59,6 +60,11 @@ const routes = [
     component: LogOutView
   },
 
+  {
+    path: '/profile/:username',
+    name: 'ProfileView',
+    component: ProfileView
+  },
   ///////////////////////////////////////////////////
 
   {

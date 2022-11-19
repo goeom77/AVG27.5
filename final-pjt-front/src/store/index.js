@@ -19,6 +19,8 @@ export default new Vuex.Store({
     movies: [],
     ////////////////////////////////////////accounts//////////////
     token: null,
+    username: null,
+    mbti: 'ESFJ',
   },
   getters: {
     ////////////////////////////////////////accounts//////////////
@@ -40,13 +42,19 @@ export default new Vuex.Store({
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
       state.token = token
-      router.push({ name: 'ArticleView' })
+    },
+    SAVE_USER(state, username) {
+      state.username = username
     },
     ////////////////////////////////////////articles//////////////
     ARTICLE_DELETE(state, article_id) {
       state.articles = state.articles.filter((article) => {
         return !(article.id === article_id)
       })
+    },
+    LOG_OUT(state, islogin) {
+      state.islogin = !islogin
+      state.token = null
     }
   },
   actions: {
@@ -62,6 +70,7 @@ export default new Vuex.Store({
           // console.log(res, context)
           // console.log(res.data)
           context.commit('GET_ARTICLES', res.data)
+          this.$router.push({ name: 'ArticleView' })
         })
         .catch((err) => {
           console.log(err)
@@ -84,10 +93,10 @@ export default new Vuex.Store({
         .then((res) => {
           // console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
-          this.$router.push({ name: 'ArticleView' })
         })
     },
     logIn(context, payload) {
+      const username = payload.username
       axios({
         method: 'post',
         url: `${API_URL}/accounts/login/`,
@@ -97,16 +106,36 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
+        })
+        .then(() => {
+          context.commit('SAVE_USER',username)
+          console.log(username)
+          router.push({ name: 'ProfileView' })
         })
         .catch((err) => 
           console.log(err))
-    },
-    ////////////////////////////////////////articles//////////////
-    ArticleDelete(context, article_id) {
-      context.commit('ARTICLE_DELETE', article_id)
-      }
+      },
+      getProfileData(context) {
+        const username = context.state.username
+        axios({
+          method: 'get',
+          url: `${API_URL}/accounts/profile/${username}/`,
+        })
+          .then((res) => {
+            console.log(res.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+      ////////////////////////////////////////articles//////////////
+      ArticleDelete(context, article_id) {
+        context.commit('ARTICLE_DELETE', article_id)
+      },
+      logOut(context, islogin) {
+        context.commit('LOG_OUT', islogin)
+      },
   },
   modules: {
   }
