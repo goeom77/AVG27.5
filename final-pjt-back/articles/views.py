@@ -52,13 +52,19 @@ def article_detail(request, article_pk):
 
 
 @api_view(['GET'])
-def comment_list(request):
+def comment_list(request, article_pk):
     if request.method == 'GET':
         # comments = Comment.objects.all()
-        comments = get_list_or_404(Comment)
+        comments = get_list_or_404(Comment, article_id=article_pk)
         serializer = CommentSerializer(comments, many=True)
         return Response(serializer.data)
-
+    
+    elif request.method == 'POST':
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'DELETE', 'PUT'])
 def comment_detail(request, comment_pk):

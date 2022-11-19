@@ -7,7 +7,7 @@
       <img :src="imgUrl" class="card-img-top" alt="...">
       <div class="card-body">
         <h3 class="card-title">{{ movieTitle }}</h3>
-        <h5 class="card-text">{{ vote_average }}</h5>
+        <h5 class="card-text">⭐: {{ vote_average }}</h5>
       </div>
     </div>
   </div>

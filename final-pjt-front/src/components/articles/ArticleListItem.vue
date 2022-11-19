@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h5>{{ article.id }}</h5>
+    <h5>글 번호 : {{ article.id }}</h5>
     <p>작성자 : {{ article.username }}</p>
-    <p>{{ article.title }}</p>
-    <p>{{ article.type }}</p>
-    <router-link :to="{ name: 'DetailView', params: { id: article.id } }">
+    <p>제목 : {{ article.title }}</p>
+    <p>타입 : {{ article.type }}</p>
+    <router-link :to="{ name: 'DetailView', params: { id : article.id}  }">
       [DETAIL]
     </router-link>
     <hr>

@@ -3,7 +3,7 @@
     <h1>게시글 수정</h1>
     <form @submit.prevent="articleEdit">
       <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title"><br>
+      <input :value="title" @input="title=$event.target.value" class="form-control" type="text"><br>
 
       <label for="type">종류 : </label>
         <select id="type" v-model.trim="type">
@@ -14,7 +14,7 @@
         </select>
       <br>
       <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
+      <textarea :value="content" @input="content=$event.target.value" class="form-control" rows="30"></textarea><br>
       <input type="submit" id="submit">
     </form>
   </div>
@@ -30,6 +30,9 @@ export default {
   data() {
     return {
       article: null,
+      title: null,
+      content: null,
+      type: null,
     }
   },
   created() {
@@ -42,8 +45,11 @@ export default {
         url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`
       })
         .then((res) => {
-          console.log('수정할 내용 챙김')
           this.article = res.data
+          this.title = this.article.title
+          this.content = this.article.content
+          this.type = this.article.type
+          console.log(this.article)
         })
         .catch((err) => {
           console.log(err)
@@ -64,12 +70,19 @@ export default {
       })
     },
     articleEdit() {
+      const articleItem = {
+        title: this.title,
+        content: this.content,
+        type : this.type
+      }
       axios({
         method: 'PUT',
-        url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`
+        url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`,
+        data: articleItem,
       })
         .then((res) => {
-          this.article = res.data
+          console.log(res) 
+          this.$router.push({ name: 'DetailView', params: this.article.id})
         })
         .catch((err) => {
           console.log(err)

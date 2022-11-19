@@ -1,11 +1,11 @@
 <template>
   <div>
-    <h1>게시글 작성</h1>
-    <form @submit.prevent="createArticle">
+    <form @submit.prevent="onSubmit">
       <label for="title">제목 : </label>
       <input type="text" id="title" v-model.trim="title"><br>
+
       <label for="type">종류 : </label>
-      <select id="type" v-model.trim="type">
+        <select id="type" v-model.trim="type">
           <option disabled="disabled">선택해 주세요.</option>
           <option value="공지사항">공지사항</option>
           <option value="자유게시판">자유게시판</option>
