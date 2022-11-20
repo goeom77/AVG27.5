@@ -5,6 +5,7 @@
       v-for="comment in comments"
       :key="comment.id"
       :comment="comment"
+      @deleteComment="deleteComment"
     >
     </comment-list-item>
     <textarea v-model="content" class="form-control" placeholder="댓글을 남겨보세요." rows="5"></textarea>
@@ -18,6 +19,10 @@
 import axios from 'axios'
 import CommentListItem from '@/components/articles/CommentListItem.vue'
 
+
+const API_URL = 'http://127.0.0.1:8000'
+
+
 export default {
   name: 'CommentList',
   data: function () {
@@ -25,7 +30,7 @@ export default {
       comments: [],
       comment: null,
       content: null,
-      user: null,
+      user: 1,
     }
   },
   props: {
@@ -36,38 +41,52 @@ export default {
   },
   methods: {
     createComment: function () {
-      const commentItem = {
-        content: this.content,
-        user: this.user,
-        article: this.articleId,
-      }
-      if (commentItem.content) {
-        axios({
-          method: 'post',
-          url: `http://127.0.0.1:8000/articles/${this.articleId}/comment/`,
-          data: commentItem,
+      const content = this.content
+      const article = this.articleId
+      const user = this.user
+      axios({
+        method: 'post',
+        url: `${API_URL}/articles/${this.articleId}/comment/`,
+        data: {
+          content: content,
+          article: article,
+          user: user,
+        },
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
+      })
+        .then((res) => {
+          this.content = null
+          this.comment = res.data
+          this.comments.push(this.comment)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    deleteComment(){
+      axios({
+          method: 'get',
+          url: `${API_URL}/articles/${this.articleId}/comment/`,
           headers: {Authorization: `Token ${this.$store.state.token}`}
         })
           .then((res) => {
-            this.content = null
-            this.comment = res.data
-            this.comments.push(this.comment)
-            // console.log(res.data)
+            this.comments = res.data 
           })
-          .catch((err) => {
-            console.log(err)
+          .catch(() => {
+            this.comments = []
           })
-      }
-    },
+    }
   },
   created: function(){
     axios({
           method: 'get',
-          url: `http://127.0.0.1:8000/articles/${this.articleId}/comment/`,
+          url: `${API_URL}/articles/${this.articleId}/comment/`,
           headers: {Authorization: `Token ${this.$store.state.token}`}
         })
           .then((res) => {
-            console.log(res, '댓글 받아오는 중!!')
+            console.log('처음으로 댓글 받아올거야!')
             this.comments = res.data 
           })
           .catch((err) => {

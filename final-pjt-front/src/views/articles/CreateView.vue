@@ -43,13 +43,16 @@ export default {
       if (!title) {
         alert('제목을 입력해주세요')
         return
+      } else if (!type) {
+        alert('타입을 정해주세요')
+        return
       } else if (!content) {
         alert('내용을 입력해주세요')
         return
       }
       axios({
         method: 'post',
-        url: `${API_URL}/api/v1/articles/`,
+        url: `${API_URL}/articles/`,
         data: {
           title: title,
           content: content,

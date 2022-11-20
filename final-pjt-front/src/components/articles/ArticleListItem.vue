@@ -4,7 +4,7 @@
     <p>작성자 : {{ article.username }}</p>
     <p>제목 : {{ article.title }}</p>
     <p>타입 : {{ article.type }}</p>
-    <router-link :to="{ name: 'DetailView', params: { id : article.id}  }">
+    <router-link :to="{ name: 'DetailView', params: {id : article.id}  }">
       [DETAIL]
     </router-link>
     <hr>

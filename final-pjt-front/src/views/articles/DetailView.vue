@@ -8,7 +8,7 @@
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
     <button @click="articleDelete" >[DELETE]</button>
-    <router-link :to="{ name: 'EditView', params : {id : article.id}}" :article_edit="article">[EDIT]</router-link>
+    <router-link :to="{ name: 'EditView',  params : {id : article.id}}">[EDIT]</router-link>
     <div>
       <!-- 댓글내용 -->
       <comment-list :articleId="article.id"></comment-list>
@@ -34,12 +34,13 @@ export default {
   },
   created() {
     this.getArticleDetail()
+    console.log('디테일 도착')
   },
   methods: {
     getArticleDetail() {
       axios({
         method: 'get',
-        url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`
+        url: `${API_URL}/articles/${this.$route.params.id}/`
       })
         .then((res) => {
           this.article = res.data
@@ -51,7 +52,7 @@ export default {
     articleDelete() {
       axios({
         method: 'delete',
-        url: `${API_URL}/api/v1/articles/${this.$route.params.id}/`
+        url: `${API_URL}/articles/${this.$route.params.id}/`
       })
       .then(() => {
         this.$store.dispatch('ArticleDelete', this.article.id)
