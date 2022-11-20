@@ -1,11 +1,33 @@
 <template>
   <div class="article-list">
     <h3>Article List</h3>
-    <ArticleListItem
-      v-for="article in articles"
-      :key="article.id"
-      :article="article"
-    />
+    <div>
+      <b-card no-body>
+        <b-tabs card>
+          <b-tab title="자유게시판" active>
+            <ArticleListItem
+              v-for="article in article1"
+              :key="article.id"
+              :article="article"
+            />
+          </b-tab>
+          <b-tab title="Q&A">
+            <ArticleListItem
+              v-for="article in article2"
+              :key="article.id"
+              :article="article"
+            />
+          </b-tab>
+          <b-tab title="공지사항">
+            <ArticleListItem
+              v-for="article in article3"
+              :key="article.id"
+              :article="article"
+            />
+          </b-tab>
+        </b-tabs>
+      </b-card>
+    </div>
   </div>
 </template>
 
@@ -17,9 +39,20 @@ export default {
   components: {
     ArticleListItem
   },
+  data() {
+    return {
+      article_1: []
+    }
+  },
   computed: {
-    articles() {
-      return this.$store.state.articles
+    article1(){
+      return this.$store.state.articles.filter((article)=> article.type === '자유게시판')
+    },
+    article2(){
+      return this.$store.state.articles.filter((article)=> article.type === 'Q&A')
+    },
+    article3(){
+      return this.$store.state.articles.filter((article)=> article.type === '공지사항')
     }
   }
 }

@@ -1,9 +1,8 @@
 <template>
   <div>
     <h1>Detail</h1>
-    <p>글 번호 : {{ article?.id }}</p>
+    <h2>제목 : {{ article?.title }}</h2>
     <p>게시판 : {{ article?.type }}</p>
-    <p>제목 : {{ article?.title }}</p>
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>

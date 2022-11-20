@@ -84,4 +84,6 @@ def comment_detail(request, comment_pk):
             serializer.save()
             return Response(serializer.data)
 
-
+def article_1(request):
+    article_1 = get_list_or_404(Article).filter(type='공지사항')
+    

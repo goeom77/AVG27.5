@@ -61,7 +61,7 @@ export default new Vuex.Store({
     getArticles(context) {
       axios({
         method: 'get',
-        url: `${API_URL}/api/v1/articles/`,
+        url: `${API_URL}/articles/`,
         headers: {
           Authorization: `Token ${context.state.token}`
         }
