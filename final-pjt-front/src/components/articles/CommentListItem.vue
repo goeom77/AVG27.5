@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-content-between">
       <div>
-        <!-- <p>id : {{ comment.id }}</p> -->
+        <p>id : {{ comment.id }}</p>
         <p>content : {{ comment.content }}</p>
         <p>user : {{ comment.user }}</p>
         <p>article : {{ comment.article }}</p>
@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
-const API_URL = 'http://127.0.0.1:8000'
+// const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'CommentListItem',
@@ -29,23 +29,12 @@ export default {
   data() {
     return {
       commentId: this.comment.id,
-      // articleId: this.comment.article
+      articleId: this.comment.article
     }
   },
   methods: {
     deleteComment: function () {
-      // const articleId = this.articleId
-      axios({
-        method: 'delete',
-        url: `${API_URL}/articles/comment/${this.commentId}/`,
-      })
-      .then(() => {
-        // console.log(res, 'item에서 삭제중!!')
-        this.$emit('deleteComment')
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      this.$emit('deleteComment', this.commentId)
     },
   },
 }

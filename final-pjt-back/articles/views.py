@@ -58,7 +58,6 @@ def comment_list_create(request, article_pk):
         return Response(serializer.data)
     
     elif request.method == 'POST':
-        article = get_object_or_404(Article, pk=article_pk)
         serializer = CommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
@@ -66,8 +65,9 @@ def comment_list_create(request, article_pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET', 'DELETE', 'PUT'])
-def comment_detail(request, comment_pk):
+@api_view(['GET', 'DELETE'])
+def comment_detail(request, article_pk, comment_pk):
+    article = get_object_or_404(Article, pk=article_pk)
     comment = get_object_or_404(Comment, pk=comment_pk)
 
     if request.method == 'GET':
@@ -76,14 +76,8 @@ def comment_detail(request, comment_pk):
 
     elif request.method == 'DELETE':
         comment.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        comments = get_list_or_404(Comment, article_id=article_pk)
+        serializer = CommentListSerializer(comments, many=True)
+        return Response(serializer.data)
 
-    elif request.method == 'PUT':
-        serializer = CommentSerializer(comment, data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
-
-def article_1(request):
-    article_1 = get_list_or_404(Article).filter(type='공지사항')
     

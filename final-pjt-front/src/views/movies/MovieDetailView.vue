@@ -10,16 +10,20 @@
         <div class="video-container">
           <iframe class="video-iframe" width="100%" height="300" :src="`https://www.youtube-nocookie.com/embed/${this.youtubeurl}`" frameborder="0" allowfullscreen></iframe>
         </div>
+        <ReviewList :movieId="movie.id"></ReviewList>
       </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-
+import ReviewList from '@/components/movies/ReviewList'
 
 export default {
   name: 'MovieDetailView',
+  components: {
+    ReviewList,
+  },
   data() {
     return {
       movie: null,

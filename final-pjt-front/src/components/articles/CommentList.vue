@@ -19,9 +19,7 @@
 import axios from 'axios'
 import CommentListItem from '@/components/articles/CommentListItem.vue'
 
-
 const API_URL = 'http://127.0.0.1:8000'
-
 
 export default {
   name: 'CommentList',
@@ -38,6 +36,9 @@ export default {
   },
   components: {
     CommentListItem,
+  },
+  created(){
+    this.commentlist()
   },
   methods: {
     createComment: function () {
@@ -65,33 +66,51 @@ export default {
           console.log(err)
         })
     },
-    deleteComment(){
+    deleteComment(commentId){
       axios({
-          method: 'get',
-          url: `${API_URL}/articles/${this.articleId}/comment/`,
-          headers: {Authorization: `Token ${this.$store.state.token}`}
+        method: 'delete',
+        url: `${API_URL}/articles/${this.articleId}/comment/${commentId}/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
+      })
+        .then((res) => {
+          // console.log(res, 'item에서 삭제중!!')
+          this.comments = res.data
         })
-          .then((res) => {
-            this.comments = res.data 
-          })
-          .catch(() => {
-            this.comments = []
-          })
+        .catch((err) => {
+          console.log(err)
+          this.comments = []
+        })
+    },
+      // axios({
+      //     method: 'delete',
+      
+      //     url: `${API_URL}/articles/${this.articleId}/comment/${this.comment.id}/`,
+      //     headers: {Authorization: `Token ${this.$store.state.token}`}
+      //   })
+      //     .then((res) => {
+      //       this.comments = res.data
+      //     })
+      //     .catch((err) => {
+      //       console.log(err)
+      //       // this.comments = []
+      //     })
+    // },
+    commentlist() {
+      axios({
+        method: 'get',
+        url: `${API_URL}/articles/${this.articleId}/comment/`,
+        headers: {Authorization: `Token ${this.$store.state.token}`}
+      })
+        .then((res) => {
+          console.log('처음으로 댓글 받아올거야!')
+          this.comments = res.data 
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
-  },
-  created: function(){
-    axios({
-          method: 'get',
-          url: `${API_URL}/articles/${this.articleId}/comment/`,
-          headers: {Authorization: `Token ${this.$store.state.token}`}
-        })
-          .then((res) => {
-            console.log('처음으로 댓글 받아올거야!')
-            this.comments = res.data 
-          })
-          .catch((err) => {
-            console.log(err)
-          })
   },
 }
 </script>

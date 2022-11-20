@@ -2,10 +2,11 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
 from django.core import serializers
+from rest_framework import status
 
-
-from .models import Movie
+from .models import Movie, Review
 from .serializers.movie import MovieListSerializer
+from .serializers.review import ReviewListSerializer, ReviewSerializer
 from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework.decorators import api_view
 # Create your views here.
@@ -15,12 +16,40 @@ from rest_framework.decorators import api_view
 def movie_list(request):
     movies = get_list_or_404(Movie)
     serializers = MovieListSerializer(movies, many=True)
-    # print(serializers.data)
     return Response(serializers.data)
 
+@api_view(['GET','POST'])
+def review_list_create(request, movie_pk):
+    if request.method == 'GET':
+        reviews = get_list_or_404(Review, movie_id=movie_pk)
+        serializer = ReviewListSerializer(reviews, many=True)
+        return Response(serializer.data)
+    
+    elif request.method == 'POST':
+
+        serializer = ReviewSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# def article_json_2(request):
-#     articles = Article.objects.all()
-#     data = serializers.serialize articles)
-#     return HttpResponse(data, )
+@api_view(['GET', 'DELETE', 'PUT'])
+def review_detail(request, movie_pk, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+
+    if request.method == 'GET':
+        serializer = ReviewSerializer(review)
+        return Response(serializer.data)
+
+    elif request.method == 'DELETE':
+        review.delete()
+        reviews = get_list_or_404(Review, movie_id=movie_pk)
+        serializer = ReviewListSerializer(reviews, many=True)
+        return Response(serializer.data)
+        
+    elif request.method == 'PUT':
+        serializer = ReviewSerializer(review, data=request.data)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)
