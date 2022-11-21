@@ -60,7 +60,7 @@ def profile_or_edit(request, username):
     if request.method == 'GET':
         serializer = ProfileSerializer(user)
         print(serializer)
-        return Response(serializer.1)
+        return Response(serializer.data)
     
     elif request.user.is_authenticated:
         serializer = ProfileSerializer(data=request.data, instance=user)
