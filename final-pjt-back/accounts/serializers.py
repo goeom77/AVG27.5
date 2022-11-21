@@ -1,17 +1,3 @@
-# from rest_framework import serializers
-# from django.contrib.auth import get_user_model
-# from .models import AddData
-
-# User = get_user_model()
-
-# class UserSerializer(serializers.ModelSerializer):
-    
-#     class Meta:
-#         model = User
-#         exclude = ['password']
-
-# class ProfileUserSerializer(serializers.ModelSerializer):
-#     followers = UserSerializer(many=True, read_only=True)
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 # from movies.models import Movie
@@ -40,15 +26,21 @@ class ProfileSerializer(serializers.ModelSerializer):
     # keep_movies = MovieFollowSerializer(many=True, read_only=True)
     class Meta:
         model = get_user_model()
-        fields = ('pk', 'username', 'email', 'followings', 'followers', 'profile_img')
+        fields = ('pk', 'username', 'email', 'followings', 'followers', 'profile_img','nickname','age','mbti')
         read_only_fields = ('followings', 'followers')
 
 class CustomSignupSerializer(RegisterSerializer):
     profile_img = serializers.CharField(min_length=0)
+    nickname = serializers.CharField(min_length=0)
+    age = serializers.IntegerField()
+    mbti = serializers.CharField(min_length=0)
     # genre_likes = serializers.JSONField(default=dict)
     def get_cleaned_data(self):
         data = super().get_cleaned_data()
         data['profile_img'] = self.validated_data.get('profile_img', '')
+        data['nickname'] = self.validated_data.get('nickname', '')
+        data['age'] = self.validated_data.get('age', '')
+        data['mbti'] = self.validated_data.get('mbti', '')
         # data['genre_likes'] = self.validated_data.get('genre_likes', '')
 
         return data

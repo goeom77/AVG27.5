@@ -59,11 +59,11 @@ export default new Vuex.Store({
       state.username = username
     },
     GET_NOW_USER(state, payload) {
-      console.log(payload)
+      // console.log(payload)
       state.user = payload
     },
     GET_PROFILE_USER(state, payload) {
-      console.log(payload)
+      // console.log(payload)
       state.profileuser = payload
     },
     ////////////////////////////////////////articles//////////////
@@ -103,7 +103,7 @@ export default new Vuex.Store({
         data: payload
       })
         .then((res) => {
-          // console.log(res)
+          console.log(res.data)
           context.commit('SAVE_TOKEN', res.data.key)
           context.dispatch('getUsername', payload.username)
           router.push({ name: 'MovieView' })
@@ -135,7 +135,7 @@ export default new Vuex.Store({
           url: `${API_URL}/accounts/profile/${username}/`,
         })
           .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             context.commit('GET_NOW_USER', res.data)
           })
           .catch((err) => {
@@ -148,7 +148,7 @@ export default new Vuex.Store({
           url: `${API_URL}/accounts/profile/${payload.username}/`,
         })
           .then((res) => {
-            console.log(res.data)
+            // console.log(res.data)
             context.commit('GET_PROFILE_USER', res.data)
           })
           .catch((err) => {
@@ -157,6 +157,18 @@ export default new Vuex.Store({
       },
       logOut(context, islogin) {
         context.commit('LOG_OUT', islogin)
+      },
+      followPut(context, follow_id){
+        axios({
+          method: 'post',
+          url: `${API_URL}/accounts/${follow_id}/follow/`,
+          headers: {
+            Authorization: `Token ${context.state.token}`},
+        })
+         .then((res) => {
+            // console.log('follow상태')
+            console.log(res)
+         })
       },
       ////////////////////////////////////////articles//////////////
       ArticleDelete(context, article_id) {

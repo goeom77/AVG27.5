@@ -2,7 +2,7 @@
   <div>
     <h1>Sign Up Page</h1>
     <form @submit.prevent="signUp">
-      <label for="username">username : </label>
+      <label for="username">id : </label>
       <input type="text" id="username" v-model="payload.username"><br>
 
       <label for="password1"> password : </label>
@@ -13,6 +13,15 @@
       <br>
       <label for="img"> 프로필 사진 : </label>
       <input type="file" ref="doc" id="img" @change="findImg"> 
+      <br>  
+      <label for="nickname"> nickname : </label>
+      <input type="text" id="nickname" v-model="payload.nickname"> 
+      <br>  
+      <label for="age"> 나이 : </label>
+      <input type="number" min="0" max="150" id="age" v-model="payload.age"> 
+      <br> 
+      <label for="mbti"> mbti : </label>
+      <input type="text" id="mbti" v-model="payload.mbti"> 
       <br>  
       <input type="submit" value="SignUp">
     </form>
@@ -29,6 +38,9 @@ export default {
         password1: '',
         password2: '',
         profile_img: '',
+        nickname: '',
+        age: 0,
+        mbti: '',
       }
     }
   },

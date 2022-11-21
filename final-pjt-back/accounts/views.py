@@ -77,13 +77,14 @@ def follow(request, user_pk):
     me = request.user
 
     if you.followers.filter(pk=me.pk).exists():
-    # if me in you.followers.all():
         # 언팔로우
+        print('unfollow')
         you.followers.remove(me)
         serializer = ProfileSerializer(you)
         return Response(serializer.data)
     else:
         # 팔로우
+        print('follow로 들어옴')
         you.followers.add(me)
         serializer = ProfileSerializer(you)
         return Response(serializer.data)
