@@ -20,6 +20,7 @@ export default new Vuex.Store({
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
+    profileuser: {},
     mbti: 'ESFJ',
   },
   getters: {
@@ -46,16 +47,22 @@ export default new Vuex.Store({
     SAVE_USER(state, username) {
       state.username = username
     },
+    LOG_OUT(state, islogin) {
+      state.islogin = !islogin
+      state.token = null
+    },
+    UPDATE_USER(state, username) {
+      state.username = username
+    },
+    GET_PROFILE_DATA(state, userdata) {
+      state.profileuser = userdata
+    },
     ////////////////////////////////////////articles//////////////
     ARTICLE_DELETE(state, article_id) {
       state.articles = state.articles.filter((article) => {
         return !(article.id === article_id)
       })
     },
-    LOG_OUT(state, islogin) {
-      state.islogin = !islogin
-      state.token = null
-    }
   },
   actions: {
     getArticles(context) {
@@ -84,15 +91,12 @@ export default new Vuex.Store({
       axios({
         method: 'post',
         url: `${API_URL}/accounts/signup/`,
-        data: {
-          username: payload.username,
-          password1: payload.password1,
-          password2: payload.password2,
-        }
+        data: payload
       })
         .then((res) => {
-          // console.log(res)
+          console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
+          router.push({ name: 'ProfileView' })
         })
     },
     logIn(context, payload) {
@@ -100,41 +104,35 @@ export default new Vuex.Store({
       axios({
         method: 'post',
         url: `${API_URL}/accounts/login/`,
-        data: {
-          username: payload.username,
-          password: payload.password,
-        }
+        data: payload
       })
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
-        })
-        .then(() => {
-          context.commit('SAVE_USER',username)
-          console.log(username)
-          router.push({ name: 'ProfileView' })
+          context.dispatch('getProfileData',username)
+          router.push({ name: 'HomeView' })
+          // context.commit('SET_PROFILE', res.data) 이 데이터가 뭐지? 유저 토큰 아닌가?
         })
         .catch((err) => 
           console.log(err))
       },
-      getProfileData(context) {
-        const username = context.state.username
+      getProfileData(context,username) {
         axios({
           method: 'get',
           url: `${API_URL}/accounts/profile/${username}/`,
         })
           .then((res) => {
-            console.log(res.data)
+            context.commit('GET_PROFILE_DATA', res)
           })
           .catch((err) => {
             console.log(err)
           })
       },
+      logOut(context, islogin) {
+        context.commit('LOG_OUT', islogin)
+      },
       ////////////////////////////////////////articles//////////////
       ArticleDelete(context, article_id) {
         context.commit('ARTICLE_DELETE', article_id)
-      },
-      logOut(context, islogin) {
-        context.commit('LOG_OUT', islogin)
       },
   },
   modules: {

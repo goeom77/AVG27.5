@@ -27,6 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+#커스텀 회원가입 폼 설정
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'accounts.serializers.CustomSignupSerializer',
+}
+ACCOUNT_ADAPTER = 'accounts.adapter.CustomAccountAdapter'
 
 # Application definition
 
@@ -36,12 +41,13 @@ INSTALLED_APPS = [
     'articles',
     'movies',
     
-    'rest_framework',
 
     # CORS policy
     "corsheaders",
 
     # Auth
+    'django_extensions',
+    'rest_framework',
     'rest_framework.authtoken',
     'dj_rest_auth',
 
@@ -53,7 +59,7 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
 
     # OpenAPI 3.0
-    'drf_spectacular',
+    # 'drf_spectacular',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -79,7 +85,7 @@ REST_FRAMEWORK = {
     ],
 
     # spectacular Settings
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    # 'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SPECTACULAR_SETTINGS = {
@@ -163,9 +169,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
