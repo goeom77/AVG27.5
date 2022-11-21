@@ -15,7 +15,7 @@
           <router-link class="nav-link" v-if="!isLogin" :to="{ name: 'SignUpView' }">SignUp</router-link>
         </li>
         <div>
-          <router-link :to="{ name: 'LogInView' }" v-if="!isLogin">LogIn</router-link>
+          <router-link :to="{ name: 'LogInView' }" v-if="!isLogin">LogIn</router-link> |
           <router-link :to="{ name: 'LogOutView' }" v-if="isLogin">LogOut</router-link>
         </div>
         <li class="nav-item">

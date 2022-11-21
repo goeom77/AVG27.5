@@ -11,6 +11,9 @@ export default {
   name: 'app',
   components: {
     HomeView
+  },
+  created() {
+    this.$router.push({name: 'MovieView'})
   }
 }
 

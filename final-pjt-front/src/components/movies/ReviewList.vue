@@ -36,7 +36,7 @@ export default {
       review: null,
       content: null,
       vote_average: null,
-      user: 1,
+      user: 7,
       reviewId : null,
     }
   },
