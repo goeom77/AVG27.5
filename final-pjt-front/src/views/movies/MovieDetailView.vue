@@ -18,39 +18,39 @@ import ReviewList from '@/components/movies/ReviewList'
 import YoutubeCard from '@/components/movies/YoutubeCard'
 
 export default {
-name: 'MovieDetailView',
-components: {
-  ReviewList,
-  YoutubeCard,
-},
-data() {
-  return {
-    movie: null,
-  }
-},
-computed: {
-  movies() {
-    return this.$store.state.movies
+  name: 'MovieDetailView',
+  components: {
+    ReviewList,
+    YoutubeCard,
   },
-  poster_path(){
-    return 'https://image.tmdb.org/t/p/original/' + this.movie.poster_path
-  }
-},
-methods: {
-  getMovieById(id) {
-    console.log(id)
-    // const id = this.$route.params.id
-    for (const movie of this.movies) {
+  data() {
+    return {
+      movie: null,
+    }
+  },
+  computed: {
+    movies() {
+      return this.$store.state.movies
+    },
+    poster_path(){
+      return 'https://image.tmdb.org/t/p/original/' + this.movie.poster_path
+    }
+  },
+  methods: {
+    getMovieById(id) {
+      console.log(id)
+      // const id = this.$route.params.id
+      for (const movie of this.movies) {
       if (movie.id === Number(id)) {
         this.movie = movie
         break
+        }
       }
-    }
-  },
-},
-created() {
-  this.getMovieById(this.$route.params.id)
+    },
+  created() {
+    this.getMovieById(this.$route.params.id)
 
+  }
 }
 }
 </script>

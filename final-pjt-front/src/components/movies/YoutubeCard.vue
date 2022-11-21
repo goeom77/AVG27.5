@@ -1,59 +1,56 @@
 <template>
-  <div class="video-wrap">
+<div class="video-wrap">
     <div  v-if="mainData !== null"></div>
     <div class="d-flex justify-content-center video-container">
-      <iframe id="video" type="text/html" width="640" height="360"
+    <iframe id="video" type="text/html" width="640" height="360"
         :src="`http://www.youtube.com/embed/${mainData}?enablejsapi=1&origin=http://example.com&mute=1&autoplay=1`"
         frameborder="0"
-      ></iframe>
+    ></iframe>
     </div>
-  </div>
+</div>
 </template>
 
 
 
 <script>
 import axios from 'axios'
-
 // const API_KEY = process.env.VUE_APP_API_KEY
 const API_KEY = 'AIzaSyAoU6xtX-CvV6Z11ujc1WHLttVFL2khZN8'
-
 export default {
-  name : 'YoutubeCard',
-  data() {
+name : 'YoutubeCard',
+data() {
     return {
-      mainData: null,
+    mainData: null,
     }
-  },
-  props: {
+},
+props: {
     movie_title: String,
-  },
-  created() {
+},
+created() {
     this.movieSerch()
-  },
-  methods: {
+},
+methods: {
     movieSerch() {
-      const movie_search = this.movie_title + ' 예고편'
-      const API_URL = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&type=video&q=${movie_search}`
-
-      axios({
+    const movie_search = this.movie_title + ' 예고편'
+    const API_URL = `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&part=snippet&type=video&q=${movie_search}`
+    axios({
         method: 'get',
         url: API_URL
-      })
-      .then((response) => {
+    })
+    .then((response) => {
         // this.searchDatas = response.data.items
         this.mainData = response.data.items[0].id.videoId
         // this.mainDataDetail = response.data.items[0].snippet.title
         // this.mainDataDescription = response.data.items[0].snippet.description
         console.log(response.data.items)
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         console.log(error)
-      })
-      // console.log('여긴왔나?')
-      // console.log(`keywordInputData : ${inputData}`)
+    })
+    // console.log('여긴왔나?')
+    // console.log(`keywordInputData : ${inputData}`)
     },
-  }
+}
 }
 </script>
 

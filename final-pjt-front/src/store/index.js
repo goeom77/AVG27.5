@@ -20,6 +20,7 @@ export default new Vuex.Store({
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
+    user: {},// pk 쓸거면 user.pk쓰세요~
     profileuser: {},
     mbti: 'ESFJ',
   },
@@ -54,8 +55,16 @@ export default new Vuex.Store({
     UPDATE_USER(state, username) {
       state.username = username
     },
-    GET_PROFILE_DATA(state, userdata) {
-      state.profileuser = userdata
+    GET_USERNAME(state, username) {
+      state.username = username
+    },
+    GET_NOW_USER(state, payload) {
+      console.log(payload)
+      state.user = payload
+    },
+    GET_PROFILE_USER(state, payload) {
+      console.log(payload)
+      state.profileuser = payload
     },
     ////////////////////////////////////////articles//////////////
     ARTICLE_DELETE(state, article_id) {
@@ -94,9 +103,10 @@ export default new Vuex.Store({
         data: payload
       })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           context.commit('SAVE_TOKEN', res.data.key)
-          router.push({ name: 'ProfileView' })
+          context.dispatch('getUsername', payload.username)
+          router.push({ name: 'MovieView' })
         })
     },
     logIn(context, payload) {
@@ -108,20 +118,38 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('SAVE_TOKEN', res.data.key)
-          context.dispatch('getProfileData',username)
-          router.push({ name: 'HomeView' })
+          context.dispatch('getUsername', username)
+          context.dispatch('getNowUser',username)
+          router.push({ name: 'MovieView' })
           // context.commit('SET_PROFILE', res.data) 이 데이터가 뭐지? 유저 토큰 아닌가?
         })
         .catch((err) => 
           console.log(err))
       },
-      getProfileData(context,username) {
+      getUsername(context, username) {
+        context.commit('GET_USERNAME', username)
+      },
+      getNowUser(context,username) {
         axios({
           method: 'get',
           url: `${API_URL}/accounts/profile/${username}/`,
         })
           .then((res) => {
-            context.commit('GET_PROFILE_DATA', res)
+            console.log(res.data)
+            context.commit('GET_NOW_USER', res.data)
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      },
+      getProfileUser(context,payload) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/accounts/profile/${payload.username}/`,
+        })
+          .then((res) => {
+            console.log(res.data)
+            context.commit('GET_PROFILE_USER', res.data)
           })
           .catch((err) => {
             console.log(err)

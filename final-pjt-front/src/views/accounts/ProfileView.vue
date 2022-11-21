@@ -1,15 +1,15 @@
 <template>
   <div>
-    <h1>Profile</h1>
+    <h1>프로필</h1>
     <div>
       <img
-        :src="currentuser.profile_img ? currentuser.profile_img : 'https://user-images.githubusercontent.com/90893428/169695116-afc5cb17-b075-43c9-9ff8-7c8155c8dd79.png'"
+        :src="profileuser.profile_img ? profileuser.profile_img : 'https://media.discordapp.net/attachments/997060428385484880/1042322474165096478/image.png'"
         alt="프로필 사진이 없습니다."
       />
     </div>
     <div>
-      팔로워 : {{currentuser.followers.length ? currentuser.followers.length : 0}}
-      팔로잉 : {{currentuser.followings.length ? currentuser.followings.length : 0}}
+      {{profileuser.followers.length ? profileuser.followers.length : '_'}}팔로워
+      {{profileuser.followings.length ? profileuser.followings.length : '_'}}팔로잉
     </div>
   </div>
 
@@ -21,25 +21,30 @@
 export default {
   name: 'ProfileView',
   computed: {
-    currentuser() {
-      return this.$store.state.currentuser
-    },
     isLogin() {
       return this.$store.gatters.isLogin
     },
-    // username() {
-    //   return this.$store.state.username
-    // }
+    user() {
+      return this.$store.state.user
+    },
+    profileuser() {
+      return this.$store.state.profileuser
+    },
+    samePeople() {
+      // true 같은 사람 false 다른 사람
+      return this.$route.params.username === this.user.username
+    },
   },
   created() {
-    const payload = { username: this.$route.params.username };
-    this.getProfileData(payload);
+    const payload = { username: this.$route.params.username }
+    this.getProfileData(payload)
   },
-  // methods() {
-  //   getProfiledata(payload) {
-  //     this.$store.dispatch('getProfileData',payload)
-  //   }
-  // }
+  methods: {
+    getProfileData(payload) {
+      // console.log(payload)
+      this.$store.dispatch('getProfileUser', payload)
+    }
+  },
 }
 </script>
 
