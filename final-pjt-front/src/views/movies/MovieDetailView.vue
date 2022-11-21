@@ -1,7 +1,7 @@
 <template>
   <div class="fill-container">
     <div>
-      <YoutubeCard class="you" :movie_title="movie.title"/>
+      <YoutubeCard class="youtube" :movie_title="movie_title"/>
       <img class="poster" :src="poster_path" alt="..." width="250px">
       <h5 class="card-title">{{ movie?.title }}</h5>
       <p class="card-text">release_date : {{ movie?.release_date }}</p>
@@ -26,6 +26,7 @@ export default {
   data() {
     return {
       movie: null,
+      movie_title: null,
     }
   },
   computed: {
@@ -36,22 +37,20 @@ export default {
       return 'https://image.tmdb.org/t/p/original/' + this.movie.poster_path
     }
   },
+  created() {
+    this.getMovieById(this.$route.params.id)
+  },
   methods: {
     getMovieById(id) {
-      console.log(id)
-      // const id = this.$route.params.id
       for (const movie of this.movies) {
       if (movie.id === Number(id)) {
         this.movie = movie
+        this.movie_title = movie.title
         break
         }
       }
     },
-  created() {
-    this.getMovieById(this.$route.params.id)
-
   }
-}
 }
 </script>
 
@@ -61,7 +60,7 @@ export default {
   margin-left: 35%;
   z-index: 1;
 }
-.you{
+.youtube{
   z-index: -1;
 }
 </style>

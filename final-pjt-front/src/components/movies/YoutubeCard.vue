@@ -16,6 +16,7 @@
 import axios from 'axios'
 // const API_KEY = process.env.VUE_APP_API_KEY
 const API_KEY = 'AIzaSyAoU6xtX-CvV6Z11ujc1WHLttVFL2khZN8'
+
 export default {
 name : 'YoutubeCard',
 data() {
@@ -38,17 +39,12 @@ methods: {
         url: API_URL
     })
     .then((response) => {
-        // this.searchDatas = response.data.items
         this.mainData = response.data.items[0].id.videoId
-        // this.mainDataDetail = response.data.items[0].snippet.title
-        // this.mainDataDescription = response.data.items[0].snippet.description
         console.log(response.data.items)
     })
     .catch((error) => {
         console.log(error)
     })
-    // console.log('여긴왔나?')
-    // console.log(`keywordInputData : ${inputData}`)
     },
 }
 }
