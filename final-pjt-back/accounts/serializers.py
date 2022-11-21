@@ -23,7 +23,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     # 유저가 좋아요한 게시글 / 유저가 작성한 게시글 / 유저가 팔로우한 영화들
     # like_articles = ArticleSerializer(many=True, read_only=True)
     # articles = ArticleSerializer(many=True, read_only=True)
-    # keep_movies = MovieFollowSerializer(many=True, read_only=True)
+    # wishedmovies = MovieFollowSerializer(many=True, read_only=True)
     class Meta:
         model = get_user_model()
         fields = ('pk', 'username', 'email', 'followings', 'followers', 'profile_img','nickname','age','mbti')

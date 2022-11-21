@@ -9,6 +9,7 @@ import SignUpView from '@/views/accounts/SignUpView'
 import LogInView from '@/views/accounts/LogInView'
 import LogOutView from '@/views/accounts/LogOutView'
 import ProfileView from '@/views/accounts/ProfileView'
+import ProfileEditView from '@/views/accounts/ProfileEditView'
 
 import MovieView from '@/views/movies/MovieView'
 import MovieDetailView from '@/views/movies/MovieDetailView'
@@ -59,7 +60,13 @@ const routes = [
     name: 'LogOutView',
     component: LogOutView
   },
-
+  
+  {
+    path: '/profile/edit/:username',
+    name: 'ProfileEditView',
+    component: ProfileEditView
+  },
+  
   {
     path: '/profile/:username',
     name: 'ProfileView',
@@ -75,7 +82,7 @@ const routes = [
 
   {
     path: '/movies/:id',
-    name: 'MovieDetail',
+    name: 'detail',
     component: MovieDetailView,
   },
 

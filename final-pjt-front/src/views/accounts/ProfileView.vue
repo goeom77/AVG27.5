@@ -1,8 +1,9 @@
 <template>
   <div>
     <h1>프로필</h1>
-    <div>
+    <div class="imgbox">
       <img
+      class="profile"
       :src="profileuser.profile_img ? profileuser.profile_img : 'https://media.discordapp.net/attachments/997060428385484880/1042322474165096478/image.png'"
       alt="프로필 사진이 등록해주세요."
       />
@@ -14,8 +15,16 @@
       mbti : {{user.mbti}}
     </div>
     <div>
-      <button v-if="samePeople"><span>Edit Profile</span></button>
-      <div v-else @click="followPut(profileuser.pk)">
+      <button v-if="samePeople">
+        <router-link
+        :to="{
+          name: 'ProfileEditView',
+          params: {
+            username: user.username,
+          },
+        }"
+        ><span>Edit Profile</span></router-link></button>
+      <div v-else @click="followPut()">
        <!-- v-else -->
         <button v-if="follow"><span>UnFollow</span></button>
         <button v-else><span>Follow</span></button>
@@ -40,10 +49,14 @@ import FollowUser from '@/components/profiles/FollowUser.vue'
 // import axios from 'axios'
 // const API_URL = 'http://127.0.0.1:8000'
 export default {
-  
   name: 'ProfileView',
   components: {
     FollowUser,
+  },
+  data() {
+    return {
+      follow: false
+    }
   },
   computed: {
     isLogin() {
@@ -57,28 +70,49 @@ export default {
     },
     samePeople() {
       // true 같은 사람 false 다른 사람
+      // console.log('사람비교')
+      // console.log(this.$route.params.username)
+      // console.log(this.user.username)
       return this.$route.params.username === this.user.username
     },
-    follow() {
-      return this.profileuser.pk in this.user.followers
-    },
   },
-  created() {
+  async created() {
     const payload = { username: this.$route.params.username }
     this.getProfileData(payload)
+    this.followCheck()
   },
   methods: {
     getProfileData(payload) {
       // console.log(payload)
       this.$store.dispatch('getProfileUser', payload)
     },
-    followPut(profileuser_id) {
-      this.$store.dispatch('followPut', profileuser_id)
+    followPut() {
+      this.$store.dispatch('followPut',this.profileuser.pk)
     },
+    // followCheck() {
+    //   if (
+    //     this.profileuser.followers.some(
+    //       (e) => e === this.user.pk
+    //     )) { 
+    //       this.follow = true 
+    //   } else {
+    //     this.follow = false
+    //   } 
+    // },
   },
 }
 </script>
 
 <style>
-
+.imgbox {
+  width: 150px;
+  height: 150px; 
+  border-radius: 70%;
+  overflow: hidden;
+}
+.profile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 </style>

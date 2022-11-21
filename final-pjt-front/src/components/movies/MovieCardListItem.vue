@@ -1,14 +1,14 @@
 <template>
-  <div
-    @click="movieDetail(movie.id)"
-    style="width: 100px; height: 200px; margin:1rem; background-color: rgba(50, 60, 65, 0.9)"
-  >
-    <img v-if="movie.poster_path" :src="imgUrl" class="card-img-top" alt="Not Found" onerror="this.src='#';" >
-    <!-- <img v-else src="" height="72%" alt=""></img> -->
-    <div class="card-body d-flex align-items-start flex-column">
-      <p class="card-title fw-bold fs-6 mb-auto">{{ movie.title }}</p>
-      <p class="my-0 align-text-bottom" v-if="movie.release_date">{{ movie.release_date | dateParse('YYYY-MM-DD') | dateFormat('YYYY') }}</p>
-      <p class="my-0 align-text-bottom">⭐: {{ movie.vote_average }}</p>
+  <div class="col row justify-content-center" style="margin: 10px 0px;">
+    <div
+      @click="movieDetail(movie.id)"
+      class="card" style="width: 400px"
+    >
+      <img :src="imgUrl" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h3 class="card-title">{{ movieTitle }}</h3>
+        <h5 class="card-text">⭐: {{ vote_average }}</h5>
+      </div>
     </div>
   </div>
 </template>
@@ -43,4 +43,5 @@ export default {
 </script>
 
 <style>
+
 </style>
