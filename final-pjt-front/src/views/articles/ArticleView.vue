@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <h1 class="allfont">Article Page</h1>
     <router-link :to="{ name: 'CreateView'}">[CREATE]</router-link>
     <hr>

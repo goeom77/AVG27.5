@@ -1,5 +1,6 @@
 <template>
-  <div class="allfont">
+  <div>
+    <h1 class="allfont">Detail</h1>
     <h2>제목 : {{ article?.title }}</h2>
     <p>게시판 : {{ article?.type }}</p>
     <p>내용 : {{ article?.content }}</p>
@@ -66,7 +67,6 @@ export default {
   }
 }
 </script>
-
 <style>
 .allfont{
   color: white

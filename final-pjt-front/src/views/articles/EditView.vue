@@ -1,6 +1,6 @@
 <template>
-  <div class="allfont">
-    <h1>게시글 수정</h1>
+  <div>
+    <h1 class="allfont">게시글 수정</h1>
     <form @submit.prevent="articleEdit">
       <label for="title">제목 : </label>
       <input :value="title" @input="title=$event.target.value" class="form-control" type="text"><br>

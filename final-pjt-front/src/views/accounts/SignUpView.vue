@@ -1,34 +1,100 @@
 <template>
-  <div>
-    <img src="https://discord.com/channels/@me/997060428385484880/1044398046328402011" alt="">
+  <div class="signup-card">
     <div>
-      <form @submit.prevent="signUp">
-        <div>
-          <label for="username">id : </label>
-          <input type="text" id="username" v-model="payload.username"><br>
+      <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
+    </div>
+    <div class="signup-card-div">
+      <b-form @submit.prevent="signUp" @reset="onReset">
+        <div class="signup-card-div-input mt-1">
+          <b-form-group id="input-group-1" label="Your ID: " label-for="input-1">
+            <b-form-input
+              id="input-1"
+              v-model="payload.username"
+              type="text"
+              placeholder="Enter your ID"
+              required
+            ></b-form-input>
+          </b-form-group>
     
-          <label for="password1"> password : </label>
-          <input type="password" id="password1" v-model="payload.password1"><br>
+          <b-form-group id="input-group-2" label="Your Name: " label-for="input-2">
+            <b-form-input
+              id="input-2"
+              v-model="payload.nickname"
+              type="text"
+              placeholder="Enter your nickname"
+              required
+            ></b-form-input>
+          </b-form-group>
     
-          <label for="password2"> password confirmation : </label>
-          <input type="password" id="password2" v-model="payload.password2">
-          <br>
-          <label for="img"> 프로필 사진 : </label>
-          <input type="file" ref="doc" id="img" @change="findImg"> 
-          <br>  
-          <label for="nickname"> nickname : </label>
-          <input type="text" id="nickname" v-model="payload.nickname"> 
-          <br>  
-          <label for="age"> 나이 : </label>
-          <input type="number" min="0" max="150" id="age" v-model="payload.age"> 
-          <br> 
-          <label for="mbti"> mbti : </label>
-          <input type="text" id="mbti" v-model="payload.mbti">  
+          <b-form-group id="input-group-3" label="Password: " label-for="input-3">
+            <b-form-input
+              id="input-3"
+              type="password"
+              placeholder="Enter your Password"
+              v-model="payload.password1"
+              required
+            ></b-form-input>
+          </b-form-group>
+    
+          <b-form-group id="input-group-4" label="Password Check: " label-for="input-4">
+            <b-form-input
+              id="input-4"
+              type="password"
+              v-model="payload.password2"
+              placeholder="Enter your Password Again"
+              required
+              description="password를 다시 입력해주세요."
+            ></b-form-input>
+          </b-form-group>
+
+          
+          <b-form-group id="input-group-6" label="Age: " label-for="input-6">
+            <b-form-input
+            id="input-6"
+            type="number"
+            placeholder="20" 
+            min="0" 
+            max="130"
+            v-model="payload.age"
+            required
+            ></b-form-input>
+          </b-form-group>
+
+          <b-form-group id="input-group-5" label="MBTI: " label-for="input-5">
+            <b-form-select
+              id="input-5"
+              v-model="payload.mbti"
+              :options="options"
+              required
+            ></b-form-select>
+          </b-form-group>
+
+          <!-- <b-form-group id="input-group-8" label-for="input-8">
+            <b-form-file
+              id="input-8"
+              v-model="payload.profile_img"
+              @change="findImg"
+              type="file"
+              ref="doc"
+              :state="Boolean(payload.profile_img)"
+              placeholder="Choose a file or drop it here..."
+              drop-placeholder="Drop file here..."
+            ></b-form-file>
+          </b-form-group> -->
+          <b-form-group>
+            <label for="img"> Profile IMG:  </label>
+            <br>
+            <input type="file" ref="doc" id="img" @change="findImg" > 
+          </b-form-group>
+          <div class="m-3"></div>
+          <b-button type="submit" variant="primary">회원가입</b-button>
+          <b-button type="reset" variant="danger">Reset</b-button>
         </div>
-        <input type="submit" value="SignUp">
-      </form>
+      </b-form> 
     </div>
   </div>
+  
+
 </template>
 
 <script>
@@ -43,8 +109,9 @@ export default {
         profile_img: '',
         nickname: '',
         age: 0,
-        mbti: '',
-      }
+        mbti: null,
+      },
+      options: [{ text: 'Select One', value: null }, 'ESTJ','ESFJ','ENTJ','ENFJ','ESTP','ESFP','ENTP','ENFP','ISTJ','ISFJ','INTJ','INFJ','ISTP','ISFP','INTP','INFP'],
     }
   },
   methods: {
@@ -58,9 +125,46 @@ export default {
     },
     signUp() {
       // console.log(this.payload)
-      const payload = this.payload
+      const payload = this.payload      
       this.$store.dispatch('signUp', payload)
+    },
+    onReset(event) {
+        event.preventDefault()
+        // Reset our form values
+        this.payload.username = ''
+        this.payload.password1 = ''
+        this.payload.password2 = ''
+        this.payload.profile_img = ''
+        this.payload.nickname = ''
+        this.payload.age = 0
+        this.payload.mbti =null
+        // Trick to reset/clear native browser form validation state
     }
   }
 }
 </script>
+<style>
+.signup-card {
+  margin: 0 auto;
+  margin-top: 100px;
+  height: 100vh;
+}
+.signup-card-div {
+  padding: 25px;
+  margin: 0 auto;
+  min-height: auto;
+  min-width: 700px;
+  height: 510px;
+  width: 900px;
+  background-color: #D9D9D9;
+  border-radius: 10px;
+}
+.signup-card-div-input {
+  
+  margin: 0 auto;
+  min-height: 300px;
+  min-width: 600px;
+  height: 350px;
+  width: 850px;
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
-  <div class=''>
-    <nav class="navbar bg-secondary bg-opacity-10">
+  <div>
+    <nav id='nav' class="navbar">
       <ul class="nav">
         <li class="nav-item">
           <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
@@ -68,9 +68,10 @@ export default {
     }
   },
 }
-
 </script>
 
 <style>
-
+#nav {
+  background-color: #232323;
+}
 </style>

@@ -24,9 +24,9 @@ export default new Vuex.Store({
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
-    user: {},// user.pk 
+    user: {},// user.pk
     profileuser: {},
-    mbti: 'ESFJ',
+    mbti: '',
   },
   getters: {
     ////////////////////////////////////////accounts//////////////
@@ -51,11 +51,10 @@ export default new Vuex.Store({
           vote_average: movie.vote_average,
         }
         state.movies.push(movie_g)
-        console.log('받았어 !')
-        console.log(state.movies)
-        
-      })} 
-    },
+        // console.log('받았어 !')
+        // console.log(state.movies)
+
+    })},
     // SET_MOVIE_REVIEWS(state, reviewdata) {
     //   state.movies = 
     // },
@@ -98,6 +97,7 @@ export default new Vuex.Store({
         return !(article.id === article_id)
       })
     },
+  },
   actions: {
     getArticles(context) {
       axios({
@@ -132,7 +132,7 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    // likeReview(context, data) {
+     // likeReview(context, data) {
     //   const movie_pk = data.moviePk
     //   const review_pk = data.reviewPk
     //   axios({
@@ -237,7 +237,7 @@ export default new Vuex.Store({
           console.log(res)
       })
     },
-      ////////////////////////////////////////articles//////////////
+    ////////////////////////////////////////articles//////////////
     ArticleDelete(context, article_id) {
       context.commit('ARTICLE_DELETE', article_id)
     },
