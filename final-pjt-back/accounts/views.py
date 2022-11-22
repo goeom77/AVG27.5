@@ -90,5 +90,5 @@ def follow(request, user_pk):
 def users(request):
     users = get_list_or_404(get_user_model())
     # users.remove(request.pk)
-    serializer = UserInfoSerializer(users, many=True)
+    serializer = ProfileSerializer(users, many=True)
     return Response(serializer.data)

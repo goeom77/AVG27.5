@@ -17,7 +17,6 @@ export default {
     if (this.isLogin) {
       this.$store.dispatch('logOut',this.isLogin)
     } else {
-      user1001
       this.$router.back()
     }
   }

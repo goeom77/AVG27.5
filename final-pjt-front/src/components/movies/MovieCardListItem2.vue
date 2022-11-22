@@ -117,7 +117,7 @@ export default {
   transform: translateY(-50%) translateZ(60px) scale(0.94);
   top: 50%;
   position: absolute;
-  left: 0;
+  left: 1rem;
   padding: 2rem;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
