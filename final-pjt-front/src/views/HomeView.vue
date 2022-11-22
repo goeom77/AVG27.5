@@ -45,6 +45,7 @@ export default {
   created() {
     this.getmoviedata()
     this.getmovielatest()
+    this.getuserinfo()
   },
   methods: {
     getmoviedata() {
@@ -65,6 +66,9 @@ export default {
       if (movie_length === undefined) {
       this.$store.dispatch('getMovieLatest')
       }
+    },
+    getuserinfo() {
+      this.$store.dispatch('getUserInfo')
     }
   },
 }

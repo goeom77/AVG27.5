@@ -214,6 +214,19 @@ export default new Vuex.Store({
           console.log(res)
       })
     },
+    getUserInfo(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/users/`,
+      })
+        .then((res) => {
+          context.commit('GET_USER_INFO', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      context.commit('GET_USER_INFO')
+    },
     ////////////////////////////////////////articles//////////////
     ArticleDelete(context, article_id) {
       context.commit('ARTICLE_DELETE', article_id)
