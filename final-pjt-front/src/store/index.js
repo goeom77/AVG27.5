@@ -66,8 +66,7 @@ export default new Vuex.Store({
     SAVE_USER(state, username) {
       state.username = username
     },
-    LOG_OUT(state, islogin) {
-      state.islogin = !islogin
+    LOG_OUT(state) {
       state.token = null
       state.user = {}
     },
@@ -137,6 +136,9 @@ export default new Vuex.Store({
           context.dispatch('getUsername', payload.username)
           router.push({ name: 'LogInView' })
         })
+        .catch(() => {
+          alert('양식에 맞지 않습니다.')
+        })
     },
     profileEdit(context, payload) {
       const username = payload.username
@@ -167,8 +169,8 @@ export default new Vuex.Store({
           router.push({ name: 'MovieView' })
           // context.commit('SET_PROFILE', res.data) 이 데이터가 뭐지? 유저 토큰 아닌가?
         })
-        .catch((err) => 
-          console.log(err))
+        .catch(() => 
+          alert('다시 로그인을 시도해 주세요.'))
     },
     getUsername(context, username) {
       context.commit('GET_USERNAME', username)
@@ -200,7 +202,11 @@ export default new Vuex.Store({
         })
     },
     logOut(context, islogin) {
-      context.commit('LOG_OUT', islogin)
+      if (islogin) {
+        context.commit('LOG_OUT')
+      } else {
+        router.push({ name: 'MovieView' })
+      }
     },
     followPut(context, follow_id){
       axios({

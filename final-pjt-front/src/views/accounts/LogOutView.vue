@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>LogOut</h1>
+    
   </div>
 </template>
 
@@ -13,10 +13,11 @@ export default {
     },
   },                                                                                                                                                                 
   created() {
+    console.log(this.isLogin)
     if (this.isLogin) {
       this.$store.dispatch('logOut',this.isLogin)
     } else {
-      alert('잘못된 접근입니다')
+      user1001
       this.$router.back()
     }
   }
