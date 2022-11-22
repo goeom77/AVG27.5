@@ -7,20 +7,16 @@
       <p class="card-text">개봉 날짜 : {{ movie?.release_date }}</p>
       <p class="card-text">평점 : {{ movie?.vote_average }}</p>
       <p class="card-text">줄거리 : {{ movie?.overview }}</p>
-      <ReviewList :movieId="movie.id"></ReviewList>
     </div>
   </div>
 </template>
 
 <script>
-
-import ReviewList from '@/components/movies/ReviewList'
 import YoutubeCard from '@/components/movies/YoutubeCard'
 
 export default {
-  name: 'MovieDetailView',
+  name: 'MovieDetailViewLatest',
   components: {
-    ReviewList,
     YoutubeCard,
   },
   data() {

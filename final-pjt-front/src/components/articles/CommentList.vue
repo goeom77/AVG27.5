@@ -28,7 +28,11 @@ export default {
       comments: [],
       comment: null,
       content: null,
-      user: 1,
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.user.pk
     }
   },
   props: {
@@ -83,20 +87,6 @@ export default {
           this.comments = []
         })
     },
-      // axios({
-      //     method: 'delete',
-      
-      //     url: `${API_URL}/articles/${this.articleId}/comment/${this.comment.id}/`,
-      //     headers: {Authorization: `Token ${this.$store.state.token}`}
-      //   })
-      //     .then((res) => {
-      //       this.comments = res.data
-      //     })
-      //     .catch((err) => {
-      //       console.log(err)
-      //       // this.comments = []
-      //     })
-    // },
     commentlist() {
       axios({
         method: 'get',

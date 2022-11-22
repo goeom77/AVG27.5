@@ -24,7 +24,7 @@ export default new Vuex.Store({
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
-    user: {},// pk 쓸거면 user.pk쓰세요~
+    user: {},// user.pk 
     profileuser: {},
     mbti: 'ESFJ',
   },
@@ -39,6 +39,7 @@ export default new Vuex.Store({
       state.movies = moviedata
     },
     MOVIE_LATEST(state, moviedata) {
+      state.movie_latest = []
       state.movie_latest = moviedata
       moviedata.forEach(movie => {
         const movie_g = {
@@ -50,8 +51,14 @@ export default new Vuex.Store({
           vote_average: movie.vote_average,
         }
         state.movies.push(movie_g)
-      })
+        console.log('받았어 !')
+        console.log(state.movies)
+        
+      })} 
     },
+    // SET_MOVIE_REVIEWS(state, reviewdata) {
+    //   state.movies = 
+    // },
     ////////////////////////////////////////accounts//////////////
     SIGN_UP(state, token) {
       state.token = token
@@ -91,7 +98,6 @@ export default new Vuex.Store({
         return !(article.id === article_id)
       })
     },
-  },
   actions: {
     getArticles(context) {
       axios({
@@ -126,6 +132,22 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    // likeReview(context, data) {
+    //   const movie_pk = data.moviePk
+    //   const review_pk = data.reviewPk
+    //   axios({
+    //     url: `${API_URL}/${movie_pk}/reviews/${review_pk}/like/`,
+    //     method: 'post',
+    //     headers: {
+    //       Authorization: `Token ${context.state.token}`
+    //     }
+    //   })
+    //     .then(res => {
+    //       console.log(res.data)
+    //       commit('SET_MOVIE_REVIEWS', res.data)
+    //     })
+    //     .catch(err => console.error(err.response))
+    // },
     ////////////////////////////////////////accounts//////////////
     signUp(context, payload) {
       axios({
@@ -170,55 +192,55 @@ export default new Vuex.Store({
         })
         .catch((err) => 
           console.log(err))
-      },
-      getUsername(context, username) {
-        context.commit('GET_USERNAME', username)
-      },
-      getNowUser(context,username) {
-        axios({
-          method: 'get',
-          url: `${API_URL}/accounts/profile/${username}/`,
+    },
+    getUsername(context, username) {
+      context.commit('GET_USERNAME', username)
+    },
+    getNowUser(context,username) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/profile/${username}/`,
+      })
+        .then((res) => {
+          // console.log(res.data)
+          context.commit('GET_NOW_USER', res.data)
         })
-          .then((res) => {
-            // console.log(res.data)
-            context.commit('GET_NOW_USER', res.data)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      },
-      getProfileUser(context,payload) {
-        axios({
-          method: 'get',
-          url: `${API_URL}/accounts/profile/${payload.username}/`,
+        .catch((err) => {
+          console.log(err)
         })
-          .then((res) => {
-            // console.log(res.data)
-            context.commit('GET_PROFILE_USER', res.data)
-          })
-          .catch((err) => {
-            console.log(err)
-          })
-      },
-      logOut(context, islogin) {
-        context.commit('LOG_OUT', islogin)
-      },
-      followPut(context, follow_id){
-        axios({
-          method: 'post',
-          url: `${API_URL}/accounts/${follow_id}/follow/`,
-          headers: {
-            Authorization: `Token ${context.state.token}`},
+    },
+    getProfileUser(context,payload) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/profile/${payload.username}/`,
+      })
+        .then((res) => {
+          // console.log(res.data)
+          context.commit('GET_PROFILE_USER', res.data)
         })
-         .then((res) => {
-            // console.log('follow상태')
-            console.log(res)
-         })
-      },
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    logOut(context, islogin) {
+      context.commit('LOG_OUT', islogin)
+    },
+    followPut(context, follow_id){
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/${follow_id}/follow/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`},
+      })
+      .then((res) => {
+          // console.log('follow상태')
+          console.log(res)
+      })
+    },
       ////////////////////////////////////////articles//////////////
-      ArticleDelete(context, article_id) {
-        context.commit('ARTICLE_DELETE', article_id)
-      },
+    ArticleDelete(context, article_id) {
+      context.commit('ARTICLE_DELETE', article_id)
+    },
   },
   modules: {
   }

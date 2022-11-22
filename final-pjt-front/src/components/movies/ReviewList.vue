@@ -36,12 +36,16 @@ export default {
       review: null,
       content: null,
       vote_average: null,
-      user: 7,
       reviewId : null,
     }
   },
   created(){
     this.reviewlist()
+  },
+  computed: {
+    user() {
+      return this.$store.state.user.pk
+    }
   },
   methods: {
     reviewlist(){
@@ -51,7 +55,6 @@ export default {
         headers: {Authorization: `Token ${this.$store.state.token}`}
       })
         .then((res) => {
-          console.log('처음으로 리뷰 받아올거야!')
           this.reviews = res.data 
         })
         .catch((err) => {
@@ -91,6 +94,7 @@ export default {
         })
         .catch((err) => {
           console.log(err)
+          // this.$router.push({ name: 'SignUpView' })
         })
     },
     deleteReview(reviewId){

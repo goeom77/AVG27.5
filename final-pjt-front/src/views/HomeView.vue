@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class=''>
+  <div class=''>
     <nav class="navbar bg-secondary bg-opacity-10">
       <ul class="nav">
         <li class="nav-item">
@@ -48,28 +48,27 @@ export default {
   },
   methods: {
     getmoviedata() {
+      const movie_length_latest = this.$store.movie_latest
+      if (movie_length_latest === undefined) {
       const movie_length = this.$store.movies
-      if (movie_length === undefined){
+      console.log(movie_length)
       axios.get(`${API_URL}/movies`)
         .then((res) => {
           this.$store.dispatch('getMovieData', res.data)
         })
         .catch((err) => { 
           console.log(err)
-        })} else {
-        console.log('데이터가 넘쳐요!')
-      }
+        })}
     },
     getmovielatest() {
       const movie_length = this.$store.movie_latest
       if (movie_length === undefined) {
-        this.$store.dispatch('getMovieLatest')
-      } else {
-        console.log('데이터가 넘쳐요!')
+      this.$store.dispatch('getMovieLatest')
       }
     }
-  }
+  },
 }
+
 </script>
 
 <style>

@@ -38,11 +38,6 @@ export default {
   components: {
     ArticleListItem
   },
-  data() {
-    return {
-      article_1: []
-    }
-  },
   computed: {
     article1(){
       return this.$store.state.articles.filter((article)=> article.type === '자유게시판')

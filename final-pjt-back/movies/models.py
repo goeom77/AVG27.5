@@ -16,8 +16,9 @@ class Movie(models.Model):
 
 class Review(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')     #리뷰 작성자
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')
     content = models.TextField()        
-    vote_average = models.FloatField()                                                                       #개인 영화 평점
+    vote_average = models.FloatField()      
+    liked_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews', blank=True)                                                                 #개인 영화 평점
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
