@@ -73,6 +73,7 @@ const routes = [
     name: 'ProfileView',
     component: ProfileView
   },
+
   ///////////////////////////////////////////////////
 
   {

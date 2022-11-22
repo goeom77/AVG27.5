@@ -14,12 +14,12 @@
         <li class="nav-item">
           <router-link class="nav-link" v-if="!isLogin" :to="{ name: 'SignUpView' }">SignUp</router-link>
         </li>
-        <div>
-          <router-link :to="{ name: 'LogInView' }" v-if="!isLogin">LogIn</router-link> |
-          <router-link :to="{ name: 'LogOutView' }" v-if="isLogin">LogOut</router-link>
-        </div>
         <li class="nav-item">
-          <router-link :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">Profile</router-link>
+          <router-link class="nav-link" :to="{ name: 'LogInView' }" v-if="!isLogin">LogIn</router-link>
+          <router-link class="nav-link" :to="{ name: 'LogOutView' }" v-if="isLogin">LogOut</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">Profile</router-link>
         </li>
       </ul>
     </nav>
@@ -42,8 +42,8 @@ export default {
       return this.$store.state.username
     }
   },
-    created() {
-    this.getmoviedata(),
+  created() {
+    this.getmoviedata()
     this.getmovielatest()
   },
   methods: {

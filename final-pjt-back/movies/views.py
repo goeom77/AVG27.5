@@ -5,7 +5,7 @@ from django.core import serializers
 from rest_framework import status
 
 from .models import Movie, Review
-from .serializers.movie import MovieListSerializer
+from .serializers.movie import MovieListSerializer, MovieSerializer
 from .serializers.review import ReviewListSerializer, ReviewSerializer
 from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework.decorators import api_view
@@ -79,3 +79,26 @@ def review_like(request, movie_pk, review_pk):
             'count': review.like_users.count()
         }
         return Response(context)
+
+@api_view(['POST'])
+def wish_movies(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    if movie.wishuser.filter(pk=user.pk).exists():
+        movie.wishuser.remove(user)
+        
+    else:
+        movie.wishuser.add(user)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def pick_movies(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    user = request.user
+    if movie.pickuser.filter(pk=user.pk).exists():
+        movie.pickuser.remove(user)
+    else:
+        movie.pickuser.add(user)
+    serializer = MovieSerializer(movie)
+    return Response(serializer.data)

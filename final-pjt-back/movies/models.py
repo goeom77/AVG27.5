@@ -11,7 +11,8 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     release_date = models.CharField(max_length=50)
     genres = models.ManyToManyField(Genre, related_name="movie_genres")                                      #장르와 영화 관계 설정
-    # kept_by_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='keep_movies', blank=True)
+    wishuser = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='wishmovies', blank=True)
+    pickuser = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='pickmovies', blank=True)
 
 
 class Review(models.Model):

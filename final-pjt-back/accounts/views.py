@@ -45,7 +45,7 @@
 #         return HttpResponse(serializer.data)
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.contrib.auth import get_user_model
-from .serializers import ProfileSerializer
+from .serializers import ProfileSerializer, UserInfoSerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -68,9 +68,6 @@ def profile_or_edit(request, username):
             serializer.save()
             return Response(serializer.data)
         
-
-
-
 @api_view(['POST'])
 def follow(request, user_pk):
     you = get_object_or_404(get_user_model(), pk=user_pk)
@@ -88,3 +85,10 @@ def follow(request, user_pk):
         you.followers.add(me)
         serializer = ProfileSerializer(you)
         return Response(serializer.data)
+
+@api_view(['GET'])
+def users(request):
+    users = get_list_or_404(get_user_model())
+    # users.remove(request.pk)
+    serializer = UserInfoSerializer(users, many=True)
+    return Response(serializer.data)
