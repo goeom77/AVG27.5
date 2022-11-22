@@ -1,6 +1,5 @@
 <template>
   <div class="article-list">
-    <h3>Article List</h3>
     <div>
       <b-card no-body>
         <b-tabs card>

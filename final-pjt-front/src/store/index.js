@@ -8,6 +8,9 @@ Vue.use(Vuex)
 
 
 const API_URL = 'http://127.0.0.1:8000'
+// const MOVIE_API_KEY = process.env.VUE_APP_MOVIE_API_KEY
+const MOVIE_API_KEY = '859b52ab552de5015f0e7dbaa748474e'
+const LATEST_API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${MOVIE_API_KEY}&language=ko-kr&page=1`
 
 
 export default new Vuex.Store({
@@ -17,6 +20,7 @@ export default new Vuex.Store({
   state: {
     articles: [],
     movies: [],
+    movie_latest: [],
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
@@ -33,6 +37,20 @@ export default new Vuex.Store({
   mutations: {
     MOVIE_DATA(state, moviedata) {
       state.movies = moviedata
+    },
+    MOVIE_LATEST(state, moviedata) {
+      state.movie_latest = moviedata
+      moviedata.forEach(movie => {
+        const movie_g = {
+          id: movie.id,
+          title: movie.title,
+          genre_ids: movie.genre_ids,
+          poster_path: movie.poster_path,
+          overview: movie.overview,
+          vote_average: movie.vote_average,
+        }
+        state.movies.push(movie_g)
+      })
     },
     ////////////////////////////////////////accounts//////////////
     SIGN_UP(state, token) {
@@ -95,6 +113,18 @@ export default new Vuex.Store({
     },
     getMovieData(context, moviedata) {
       context.commit('MOVIE_DATA', moviedata)
+    },
+    getMovieLatest(context){
+      axios({
+        method: 'get',
+        url: `${LATEST_API_URL}`,
+      })
+        .then((res) => {
+          context.commit('MOVIE_LATEST', res.data.results)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     ////////////////////////////////////////accounts//////////////
     signUp(context, payload) {

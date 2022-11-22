@@ -1,12 +1,12 @@
 <template>
   <div class="fill-container">
-    <div>
-      <YoutubeCard class="you" :movie_title="movie?.title"/>
-      <img class="poster" :src="poster_path" alt="..." width="250px">
-      <h5 class="card-title">{{ movie?.title }}</h5>
-      <p class="card-text">release_date : {{ movie?.release_date }}</p>
-      <p class="card-text">vote_average : {{ movie?.vote_average }}</p>
-      <p class="card-text">overview : {{ movie?.overview }}</p>
+    <YoutubeCard class="youtube" :movie_title="movie_title"/>
+    <img class="poster" :src="imgUrl" alt="..." width="250px">
+    <div class="allfont fontbox">
+      <h1 class="card-title">{{ movie?.title }}</h1>
+      <p class="card-text">개봉 날짜 : {{ movie?.release_date }}</p>
+      <p class="card-text">평점 : {{ movie?.vote_average }}</p>
+      <p class="card-text">줄거리 : {{ movie?.overview }}</p>
       <ReviewList :movieId="movie.id"></ReviewList>
     </div>
   </div>
@@ -26,28 +26,32 @@ export default {
   data() {
     return {
       movie: null,
+      movie_title: null,
     }
   },
   computed: {
     movies() {
       return this.$store.state.movies
     },
-    poster_path(){
-      return `https://image.tmdb.org/t/p/original/${this.movie?.poster_path}`
-    }
+    imgUrl() {
+      return `https://image.tmdb.org/t/p/w500/${this.movie.poster_path}`
+    },
   },
   created() {
+    console.log(this.$route.params.id)
     this.getMovieById(this.$route.params.id)
   },
   methods: {
     getMovieById(id) {
       console.log(id)
-      // const id = this.$route.params.id
       for (const movie of this.movies) {
-      if (movie.id === Number(id)) {
-        this.movie = movie
-        break
-        }
+        console.log(1)
+        if (movie.id === Number(id)) {
+          this.movie = movie
+          this.movie_title = movie.title
+          console.log(this.movie)
+          break
+          }
       }
     },
   }
@@ -56,11 +60,19 @@ export default {
 
 <style>
 .poster {
-  margin-top: -400px;
+  margin-top: -250px;
   margin-left: 35%;
-  z-index: 1;
+  z-index: 25;
 }
-.you{
-  z-index: -1;
+.youtube{
+  z-index: 0;
+}
+.allfont{
+  color: white
+}
+.fontbox {
+  margin-top: -150px;
+  margin-right: 15%;
+  z-index: 50;
 }
 </style>

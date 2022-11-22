@@ -1,38 +1,45 @@
 <template>
-  <div>
-    <MovieCardList/>
+  <div style="margin: 5px 200px; width: 18%; height: 100px;">
+    <h1>최근 영화 추천</h1>
+    <div>
+      <MovieCardListItem2
+        v-for="movie in movie_latest"
+        :key="movie.id"
+        :movie="movie"
+      />
+    </div>
+
+    <h1>database 영화</h1>
+    <div>
+      <MovieCardListItem
+        v-for="movie in movies"
+        :key="movie.id"
+        :movie="movie"
+      />
+    </div>
   </div>
 </template>
 
 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 <script>
-import axios from 'axios'
-import MovieCardList from '@/components/movies/MovieCardList'
+import MovieCardListItem from '@/components/movies/MovieCardListItem'
+import MovieCardListItem2 from '@/components/movies/MovieCardListItem2'
 
-const API_URL = 'http://127.0.0.1:8000'
 
 export default {
   name: 'MovieView',
   components: {
-    MovieCardList,
+    MovieCardListItem,
+    MovieCardListItem2,
   },
-  created() {
-    this.getmoviedata()
-  },
-  methods: {
-  getmoviedata() {
-    axios.get(`${API_URL}/movies`)
-      .then((res) => {
-        console.log('axios then 들어옴')
-        console.log(res.data)
-        this.$store.dispatch('getMovieData', res.data)
-      })
-      .catch((err) => { 
-        console.log(err)
-      })
+  computed:{
+    movies() {
+      return this.$store.state.movies
+    },
+    movie_latest() {
+      return this.$store.state.movie_latest
     }
   },
-
 }
 </script>
 

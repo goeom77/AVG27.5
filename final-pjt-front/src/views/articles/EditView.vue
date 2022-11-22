@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="allfont">
     <h1>게시글 수정</h1>
     <form @submit.prevent="articleEdit">
       <label for="title">제목 : </label>
@@ -94,5 +94,7 @@ export default {
 </script>
 
 <style>
-
+.allfont{
+  color: white
+}
 </style>

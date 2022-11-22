@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>Article Page</h1>
+  <div >
+    <h1 class="allfont">Article Page</h1>
     <router-link :to="{ name: 'CreateView'}">[CREATE]</router-link>
     <hr>
     <ArticleList/>
@@ -38,5 +38,7 @@ export default {
 </script>
 
 <style>
-
+.allfont{
+  color: white
+}
 </style>

@@ -28,6 +28,10 @@
 </template>
 
 <script>
+import axios from 'axios'
+
+const API_URL = 'http://127.0.0.1:8000'
+
 export default {
   name: 'HomeView',
   computed: {
@@ -36,6 +40,33 @@ export default {
       },
     username() {
       return this.$store.state.username
+    }
+  },
+    created() {
+    this.getmoviedata(),
+    this.getmovielatest()
+  },
+  methods: {
+    getmoviedata() {
+      const movie_length = this.$store.movies
+      if (movie_length === undefined){
+      axios.get(`${API_URL}/movies`)
+        .then((res) => {
+          this.$store.dispatch('getMovieData', res.data)
+        })
+        .catch((err) => { 
+          console.log(err)
+        })} else {
+        console.log('데이터가 넘쳐요!')
+      }
+    },
+    getmovielatest() {
+      const movie_length = this.$store.movie_latest
+      if (movie_length === undefined) {
+        this.$store.dispatch('getMovieLatest')
+      } else {
+        console.log('데이터가 넘쳐요!')
+      }
     }
   }
 }
