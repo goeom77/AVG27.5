@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <h1 class="allfont">게시글 수정</h1>
+  <div class="allfont">
+    <h1>게시글 수정</h1>
     <form @submit.prevent="articleEdit">
       <label for="title">제목 : </label>
       <input :value="title" @input="title=$event.target.value" class="form-control" type="text"><br>
       <label for="type">종류 : </label>
         <select id="type" v-model.trim="type">
           <option disabled="disabled">선택해 주세요.</option>
-          <option value="공지사항">공지사항</option>
+          <option v-if="user_now === 'admin'" value="공지사항">공지사항</option>
           <option value="자유게시판">자유게시판</option>
           <option value="Q&A">Q&A</option>
         </select>
@@ -33,6 +33,11 @@ export default {
       title: null,
       content: null,
       type: null,
+    }
+  },
+  computed: {
+    login_user() {
+      return this.$store.state.username 
     }
   },
   created() {

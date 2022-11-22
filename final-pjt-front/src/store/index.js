@@ -51,13 +51,7 @@ export default new Vuex.Store({
           vote_average: movie.vote_average,
         }
         state.movies.push(movie_g)
-        // console.log('받았어 !')
-        // console.log(state.movies)
-
     })},
-    // SET_MOVIE_REVIEWS(state, reviewdata) {
-    //   state.movies = 
-    // },
     ////////////////////////////////////////accounts//////////////
     SIGN_UP(state, token) {
       state.token = token
@@ -75,6 +69,7 @@ export default new Vuex.Store({
     LOG_OUT(state, islogin) {
       state.islogin = !islogin
       state.token = null
+      state.user = {}
     },
     UPDATE_USER(state, username) {
       state.username = username
@@ -108,8 +103,6 @@ export default new Vuex.Store({
         }
       })
         .then((res) => {
-          // console.log(res, context)
-          // console.log(res.data)
           context.commit('GET_ARTICLES', res.data)
           this.$router.push({ name: 'ArticleView' })
         })
@@ -132,22 +125,6 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-     // likeReview(context, data) {
-    //   const movie_pk = data.moviePk
-    //   const review_pk = data.reviewPk
-    //   axios({
-    //     url: `${API_URL}/${movie_pk}/reviews/${review_pk}/like/`,
-    //     method: 'post',
-    //     headers: {
-    //       Authorization: `Token ${context.state.token}`
-    //     }
-    //   })
-    //     .then(res => {
-    //       console.log(res.data)
-    //       commit('SET_MOVIE_REVIEWS', res.data)
-    //     })
-    //     .catch(err => console.error(err.response))
-    // },
     ////////////////////////////////////////accounts//////////////
     signUp(context, payload) {
       axios({

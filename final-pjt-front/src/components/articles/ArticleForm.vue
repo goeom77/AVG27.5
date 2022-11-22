@@ -7,7 +7,7 @@
       <label for="type">종류 : </label>
         <select id="type" v-model.trim="type">
           <option disabled="disabled">선택해 주세요.</option>
-          <option value="공지사항">공지사항</option>
+          <option v-if="user_now === 'admin'" value="공지사항">공지사항</option>
           <option value="자유게시판">자유게시판</option>
           <option value="Q&A">Q&A</option>
         </select>
@@ -34,19 +34,23 @@ export default {
       type: null,
     }
   },
+  computed: {
+    login_user() {
+      return this.$store.state.username 
+    }
+  },
   methods: {
     createArticle() {
       const title = this.title
       const content = this.content
       const type = this.type
-      
       if (!title) {
         alert('제목을 입력해주세요')
         return
       } else if (!content) {
         alert('내용을 입력해주세요')
         return
-      }
+      } 
       axios({
         method: 'post',
         url: `${API_URL}/articles/`,

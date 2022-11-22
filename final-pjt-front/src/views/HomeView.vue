@@ -6,10 +6,10 @@
           <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'MovieView' }">MoviePage</router-link>
+          <router-link class="nav-link" :to="{ name: 'MovieView' }">Movie</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" :to="{ name: 'ArticleView' }">Articles</router-link>
+          <router-link class="nav-link" :to="{ name: 'ArticleView' }">Article</router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" v-if="!isLogin" :to="{ name: 'SignUpView' }">SignUp</router-link>

@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     movies() {
-      return this.$store.state.movies
+      return this.$store.state.movie_latest
     },
     imgUrl() {
       return `https://image.tmdb.org/t/p/w500/${this.movie.poster_path}`
@@ -35,7 +35,7 @@ export default {
 
   },
   created() {
-    this.getmovielatest()
+
     this.getMovieById(this.$route.params.id)
   },
   methods: {
@@ -59,22 +59,21 @@ export default {
 }
 </script>
 
-
 <style>
-  .poster {
-    margin-top: -250px;
-    margin-left: 35%;
-    z-index: 25;
-  }
-  .youtube{
-    z-index: 0;
-  }
-  .allfont{
-    color: white
-  }
-  .fontbox {
-    margin-top: -150px;
-    margin-right: 15%;
-    z-index: 50;
-  }
+.poster {
+  margin-top: -250px;
+  margin-left: 35%;
+  z-index: 25;
+}
+.youtube{
+  z-index: 0;
+}
+.allfont{
+  color: white
+}
+.fontbox {
+  margin-top: -150px;
+  margin-right: 15%;
+  z-index: 50;
+}
 </style>

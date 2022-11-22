@@ -58,27 +58,28 @@ def review_like(request, movie_pk, review_pk):
     user = request.user
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
-        if user in review.like_users.all():
+        if user in review.liked_users.all():
             liked = True
         else:
             liked = False
         context = {
             'liked': liked,
-            'count': review.like_users.count()
+            'count': review.liked_users.count()
         }
         return Response(context)
     elif request.method == 'POST':
-        if user in review.like_users.all():
-            review.like_users.remove(user)
+        if user in review.liked_users.all():
+            review.liked_users.remove(user)
             liked = False
         else:
-            review.like_users.add(user)
+            review.liked_users.add(user)
             liked = True
         context = {
             'liked': liked,
-            'count': review.like_users.count()
+            'count': review.liked_users.count()
         }
         return Response(context)
+
 
 @api_view(['POST'])
 def wish_movies(request, movie_pk):
