@@ -13,7 +13,6 @@ def profile_or_edit(request, username):
     user = get_object_or_404(get_user_model(), username=username)
     if request.method == 'GET':
         serializer = ProfileSerializer(user)
-        print(serializer)
         return Response(serializer.data)
     
     elif request.user.is_authenticated:
@@ -23,12 +22,10 @@ def profile_or_edit(request, username):
             return Response(serializer.data)
 
 
-@api_view(['POST'])
-def follow(request, user_username):
-    you = get_object_or_404(get_user_model(), username=user_username)
+@api_view(['GET','POST'])
+def follow(request, username):
+    you = get_object_or_404(get_user_model(), username=username)
     me = request.user
-    print('me', me)
-    print('you',you)
     if request.method == 'GET':
         if me in you.followers.all():
             follow = True
@@ -55,3 +52,16 @@ def users(request):
     # users.remove(request.pk)
     serializer = ProfileSerializer(users, many=True)
     return Response(serializer.data)
+
+@api_view(['GET', 'PUT'])
+def usersearch(request, user_pk):
+    user = get_object_or_404(get_user_model(), pk=user_pk)
+    if request.method == 'GET':
+        serializer = ProfileSerializer(user)
+        return Response(serializer.data)
+    
+    elif request.user.is_authenticated:
+        serializer = ProfileSerializer(data=request.data, instance=user)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+            return Response(serializer.data)

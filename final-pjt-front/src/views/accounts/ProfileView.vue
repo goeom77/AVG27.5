@@ -8,7 +8,8 @@
       alt="프로필 사진을 등록해주세요."
       />
     </div>
-    {{ profileuser}}
+    {{ profileuser.followers }}
+    
     <div>
       이름 : {{profileuser.nickname}}
     </div>
@@ -27,14 +28,14 @@
         ><span>Edit Profile</span></router-link></button>
       <div v-else @click="followPut()">
       <!-- v-else -->
-        <button v-if="follow"><span>UnFollow</span></button>
-        <button v-else><span>Follow</span></button>
+        <button v-if="follow" @click="postfollow"><span>UnFollow</span></button>
+        <button v-else @click="postfollow"><span>Follow</span></button>
       </div>
     </div>
 
     <div>
-      {{profileuser.followers.length ? profileuser.followers.length : '_'}}팔로워
-      {{profileuser.followings.length ? profileuser.followings.length : '_'}}팔로잉
+      {{profileuser.followers.count ? profileuser.followers.count : '_'}}팔로워
+      {{profileuser.followings.count ? profileuser.followings.count : '_'}}팔로잉
     </div>
     <div>
       <div>
@@ -58,7 +59,7 @@ export default {
   data() {
     return {
       follow: false,
-      profileuser: {}
+      profileuser: {},
     }
   },
   computed: {
@@ -80,14 +81,14 @@ export default {
     },
   },
   created() {
+    console.log( this.$route.params.username)
     const payload = { username: this.$route.params.username }
     this.getProfileData(payload)
-    this.followCheck()
-
+    this.followCheck(payload)
   },
   methods: {
     getProfileData(payload) {
-      console.log('여기다!!',payload)
+      // console.log('여기다!!',payload)
       // this.$store.dispatch('getProfileUser', payload)
       axios({
         method: 'get',
@@ -104,19 +105,30 @@ export default {
     followPut() {
       this.$store.dispatch('followPut',this.profileuser.username)
     },
-    followCheck() {
+    followCheck(payload) {
       axios({
         method: 'get',
-        url: `${API_URL}/accounts/${this.params.username}/follow/`,
+        url: `${API_URL}/accounts/${payload.username}/follow/`,
         headers: {
-          headers: {Authorization: `Token ${this.$store.state.token}`}
+          Authorization: `Token ${this.$store.state.token}`
         }
+      })
         .then((res) => {
-          console.log('#########################')
-          console.log(res)
-        })
-    })
-    } 
+          this.follow = res.data
+      })
+    },
+    postfollow() {
+      axios({
+        method: 'post',
+        url: `${API_URL}/accounts/${this.$route.params.username}/follow/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`
+        }
+      })
+        .then((res) => {
+          this.follow = res.data
+      })
+    }
   },
 }
 
