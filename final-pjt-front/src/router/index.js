@@ -7,7 +7,6 @@ import EditView from '@/views/articles/EditView'
 
 import SignUpView from '@/views/accounts/SignUpView'
 import LogInView from '@/views/accounts/LogInView'
-import LogOutView from '@/views/accounts/LogOutView'
 import ProfileView from '@/views/accounts/ProfileView'
 import ProfileEditView from '@/views/accounts/ProfileEditView'
 
@@ -56,12 +55,6 @@ const routes = [
     component: LogInView
   },
 
-  {
-    path: '/logout',
-    name: 'LogOutView',
-    component: LogOutView
-  },
-  
   {
     path: '/profile/edit/:username',
     name: 'ProfileEditView',

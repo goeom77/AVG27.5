@@ -65,17 +65,20 @@ export default new Vuex.Store({
     },
     SAVE_USER(state, username) {
       state.username = username
+      console.log(state.username,'saveuser 뮤테이션')
     },
     LOG_OUT(state) {
       state.token = null
       state.user = {}
+      state.username = null
     },
     UPDATE_USER(state, username) {
       state.username = username
     },
     GET_USERNAME(state, username) {
-      // console.log(username)
+      console.log(username,'get_username뮤테이션')
       state.username = username
+      router.push({ name: 'MovieView' })
     },
     GET_NOW_USER(state, payload) {
       // console.log(payload)
@@ -131,8 +134,8 @@ export default new Vuex.Store({
         url: `${API_URL}/accounts/signup/`,
         data: payload
       })
-        .then((res) => {
-          console.log(res.data)
+        .then(() => {
+          // console.log(res.data)
           context.dispatch('getUsername', payload.username)
           router.push({ name: 'LogInView' })
         })
@@ -156,6 +159,7 @@ export default new Vuex.Store({
         })
     },
     logIn(context, payload) {
+      // console.log(payload)
       const username = payload.username
       axios({
         method: 'post',
@@ -163,17 +167,13 @@ export default new Vuex.Store({
         data: payload
       })
         .then((res) => {
+          // console.log(res.data)
           context.commit('SAVE_TOKEN', res.data.key)
-          context.dispatch('getUsername', username)
+          context.commit('GET_USERNAME', username)
           context.dispatch('getNowUser',username)
-          router.push({ name: 'MovieView' })
-          // context.commit('SET_PROFILE', res.data) 이 데이터가 뭐지? 유저 토큰 아닌가?
         })
         .catch(() => 
           alert('다시 로그인을 시도해 주세요.'))
-    },
-    getUsername(context, username) {
-      context.commit('GET_USERNAME', username)
     },
     getNowUser(context,username) {
       axios({
@@ -204,7 +204,9 @@ export default new Vuex.Store({
     logOut(context, islogin) {
       if (islogin) {
         context.commit('LOG_OUT')
+        router.push({ name: 'MovieView' })
       } else {
+        alert('로그인 안되어있음')
         router.push({ name: 'MovieView' })
       }
     },

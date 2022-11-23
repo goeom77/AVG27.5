@@ -4,7 +4,8 @@
       <b-nav id="movie-nav">
         <b-nav-item active>
           <router-link class="nav-link" :to="{ name: 'LogInView' }" v-if="!isLogin">로그인</router-link>
-          <router-link class="nav-link" :to="{ name: 'LogOutView' }" v-if="isLogin">로그아웃</router-link>
+          
+          <p  @click="isLogOut" v-if="isLogin">로그아웃</p>
         </b-nav-item>
         <b-nav-item>
           <router-link class="nav-link" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">프로필</router-link>
@@ -62,6 +63,9 @@ export default {
     movies() {
       return this.$store.state.movies
     },
+    username() {
+      return this.$store.state.username
+    },
     movie_latest() {
       this.movie_latest_data = _.sampleSize(this.$store.state.movie_latest,5)
       console.log(this.movie_latest_data)
@@ -70,6 +74,11 @@ export default {
       return this.$store.getters.isLogin
     },
   },
+  methods: {
+    isLogOut(){
+      this.$store.dispatch('logOut',this.isLogin)
+    },
+  }
 }
 </script>
 

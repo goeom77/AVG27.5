@@ -2,6 +2,7 @@
   <div>
     <h1 class="allfont">Detail</h1>
     <h2>제목 : {{ article?.title }}</h2>
+    <h2 @click='profileView'>쓴사람이름 : {{ article?.username }}</h2>
     <p>게시판 : {{ article?.type }}</p>
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>
@@ -61,8 +62,10 @@ export default {
         console.log(err)
       })
     },
-    articleEdit() {
-
+    profileView() {
+      console.log(this.article.user.username)
+      console.log(this.article)
+      this.$router.push({ name: 'ProfileView' , params:{ username : this.article.username }})
     }
   }
 }

@@ -2,11 +2,14 @@
   <div>
     <div class="d-flex justify-content-between">
       <div>
-        <p>id : {{ review.id }}</p>
-        <p>content : {{ review.content }}</p>
-        <p>user : {{ review.user }}</p>
-        <p>movie : {{ review.movie }}</p>
-        <p>vote_average : {{ review.vote_average }}</p>
+        <p>{{ review.user.username }}</p>
+        <p v-if="vote_average === 5">⭐⭐⭐⭐⭐</p>
+        <p v-if="vote_average === 4">⭐⭐⭐⭐</p>
+        <p v-if="vote_average === 3">⭐⭐⭐</p>
+        <p v-if="vote_average === 2">⭐⭐</p>
+        <p v-if="vote_average === 1">⭐</p>
+
+        <p>{{ review.content }}</p>
         <p>created_at : {{ review.created_at }}</p>
       </div>
       <div class="d-flex align-items-center">
@@ -23,6 +26,7 @@
       </div>
         <!-- <button @click="deleteReview">[Delete]</button> -->
       </div>
+      <hr>
     </div>
 </template>
 
@@ -49,6 +53,10 @@ export default {
     write_user() {
       return this.review.user.pk
     },
+    vote_average() {
+      return this.review.vote_average
+
+    }
   },
   created() {
     this.reviewlike

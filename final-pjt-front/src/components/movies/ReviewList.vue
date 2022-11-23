@@ -1,13 +1,15 @@
 <template>
   <div>
-    <p>review list</p>
+    <hr>
     <review-list-item class="container"
       v-for="review in reviews"
       :key="review.id"
       :review="review"
       @deleteReview="deleteReview"
     >
+
     </review-list-item>
+
     <b-form-rating v-model="vote_average" variant="warning" class="mb-2"></b-form-rating>
     <textarea v-model="content" class="form-control" placeholder="리뷰를 남겨보세요." rows="5"></textarea>
     <div class="d-flex justify-content-end my-2">

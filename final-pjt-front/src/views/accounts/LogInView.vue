@@ -63,6 +63,7 @@ export default {
     logIn() {
       const payload = this.payload
       this.$store.dispatch('logIn', payload)
+      console.log('로그인페이지', payload)
     },
     onReset(event) {
         event.preventDefault()

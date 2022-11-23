@@ -9,10 +9,10 @@
       />
     </div>
     <div>
-      이름 : {{user.nickname}}
+      이름 : {{profileuser.nickname}}
     </div>
     <div>
-      mbti : {{user.mbti}}
+      mbti : {{profileuser.mbti}}
     </div>
     <div>
       <button v-if="samePeople">
@@ -25,7 +25,7 @@
         }"
         ><span>Edit Profile</span></router-link></button>
       <div v-else @click="followPut()">
-       <!-- v-else -->
+      <!-- v-else -->
         <button v-if="follow"><span>UnFollow</span></button>
         <button v-else><span>Follow</span></button>
       </div>
@@ -46,8 +46,8 @@
 
 <script>
 import FollowUser from '@/components/profiles/FollowUser.vue'
-// import axios from 'axios'
-// const API_URL = 'http://127.0.0.1:8000'
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000'
 export default {
   name: 'ProfileView',
   components: {
@@ -55,7 +55,8 @@ export default {
   },
   data() {
     return {
-      follow: false
+      follow: false,
+      profileuser: {}
     }
   },
   computed: {
@@ -65,9 +66,9 @@ export default {
     user() {
       return this.$store.state.user
     },
-    profileuser() {
-      return this.$store.state.profileuser
-    },
+    // profileuser() {
+    //   return this.$store.state.profileuser
+    // },
     samePeople() {
       // true 같은 사람 false 다른 사람
       // console.log('사람비교')
@@ -76,15 +77,27 @@ export default {
       return this.$route.params.username === this.user.username
     },
   },
-  async created() {
+  created() {
+    console.log(this.$route.params.username)
     const payload = { username: this.$route.params.username }
     this.getProfileData(payload)
     this.followCheck()
   },
   methods: {
     getProfileData(payload) {
-      // console.log(payload)
-      this.$store.dispatch('getProfileUser', payload)
+      console.log('여기다!!',payload)
+      // this.$store.dispatch('getProfileUser', payload)
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/profile/${payload.username}/`,
+      })
+        .then((res) => {
+          this.profileuser = res.data
+          // context.commit('GET_PROFILE_USER', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     followPut() {
       this.$store.dispatch('followPut',this.profileuser.pk)
