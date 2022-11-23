@@ -81,26 +81,40 @@ def review_like(request, movie_pk, review_pk):
         return Response(context)
 
 
-@api_view(['POST'])
+@api_view(['GET','POST'])
 def wish_movies(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     user = request.user
-    if movie.wishuser.filter(pk=user.pk).exists():
-        movie.wishuser.remove(user)
-        wish = False
+    if request.method == 'GET':
+        if user in movie.wishuser.all():
+            wish = True
+        else:
+            wish = False
+        return Response(wish)
     else:
-        movie.wishuser.add(user)
-        wish = True
+        if movie.wishuser.filter(pk=user.pk).exists():
+            movie.wishuser.remove(user)
+            wish = False
+        else:
+            movie.wishuser.add(user)
+            wish = True
     return Response(wish)
 
-@api_view(['POST'])
+@api_view(['GET','POST'])
 def pick_movies(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     user = request.user
-    if movie.pickuser.filter(pk=user.pk).exists():
-        movie.pickuser.remove(user)
-        pick = False
+    if request.method == 'GET':
+        if user in movie.pickuser.all():
+            pick = True
+        else:
+            pick = False
+        return Response(pick)
     else:
-        movie.pickuser.add(user)
-        pick = True
-    return Response(pick)
+        if movie.pickuser.filter(pk=user.pk).exists():
+            movie.pickuser.remove(user)
+            pick = False
+        else:
+            movie.pickuser.add(user)
+            pick = True
+        return Response(pick)

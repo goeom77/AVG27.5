@@ -97,8 +97,8 @@ export default {
           console.log('처음으로 댓글 받아올거야!')
           this.comments = res.data 
         })
-        .catch(() => {
-          console.log('댓글이 없어용')
+        .catch((err) => {
+          console.log(err)
         })
     }
   },

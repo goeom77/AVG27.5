@@ -206,7 +206,7 @@ export default new Vuex.Store({
         context.commit('LOG_OUT')
         router.push({ name: 'MovieView' })
       } else {
-        alert('로그인 해주세요')
+        alert('로그인 안되어있음')
         router.push({ name: 'MovieView' })
       }
     },
@@ -221,6 +221,19 @@ export default new Vuex.Store({
           // console.log('follow상태')
           console.log(res)
       })
+    },
+    getUserInfo(context) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/users/`,
+      })
+        .then((res) => {
+          context.commit('GET_USER_INFO', res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+      context.commit('GET_USER_INFO')
     },
     ////////////////////////////////////////articles//////////////
     ArticleDelete(context, article_id) {

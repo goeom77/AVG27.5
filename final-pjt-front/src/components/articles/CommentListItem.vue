@@ -1,13 +1,17 @@
 <template>
   <div>
     <div class="d-flex justify-content-between">
-      <div>
-        <button class="btn btn-outline-danger btn-sm mx-3" @click='profileView'>글쓴이 : {{ comment.nickname }}</button>
-        <h5>{{ comment.content }}</h5>
+      <div >
+        <p>{{comment}}</p>
+        <p>id : {{ comment.id }}</p>
+        <p>content : {{ comment.content }}</p>
+        <p>user : {{ comment.user }}</p>
+        <button @click='profileView'>글쓴이 : {{ comment.username }}</button>
+        <p>article : {{ comment.article }}</p>
         <p>created_at : {{ comment.created_at }}</p>
       </div>
       <div class="d-flex align-items-center">
-        <button v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" @click="deleteComment">[Delete]</button>
+        <button @click="deleteComment">[Delete]</button>
       </div>
     </div>
     <hr>
@@ -30,18 +34,11 @@ export default {
       articleId: this.comment.article
     }
   },
-  computed: {
-    write_user() {
-      return this.comment.username
-    },
-    login_user() {
-      return this.$store.state.username
-    }
-  },
   methods: {
     deleteComment: function () {
       this.$emit('deleteComment', this.commentId)
     },
+ 
   },
 }
 </script>

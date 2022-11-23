@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex justify-content-between">
       <div>
-        <button @click='profileView'>글쓴이 : {{ review.user.nickname }}</button>
+        <button @click='profileView'>글쓴이 : {{ review.user.username }}</button>
         <p>{{ review.user.username }}</p>
         <p v-if="vote_average === 5">⭐⭐⭐⭐⭐</p>
         <p v-if="vote_average === 4">⭐⭐⭐⭐</p>
@@ -11,16 +11,16 @@
         <p v-if="vote_average === 1">⭐</p>
 
         <p>{{ review.content }}</p>
-        <p>작성 시간 : {{ review.created_at }}</p>
+        <p>created_at : {{ review.created_at }}</p>
       </div>
       <div class="d-flex align-items-center">
-        <button v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" @click="deleteReview">삭제</button>
+        <button v-if="login_user === write_user" @click="deleteReview" class="btn btn-outline-danger btn-sm mx-3">삭제</button>
         <div class="mx-2 pt-3">
           <span v-if="liked">
-            <button @click="like" class="fas fa-heart" style="color: red">❤</button>
+            <button @click="like" class="fas fa-heart" style="color: red"></button>
           </span>
           <span v-else>
-            <button @click="like" class="far fa-heart" >💛</button>
+            <button @click="like" class="far fa-heart" ></button>
           </span>
           <p class="text-center">{{ likeCount }}</p>
         </div>
@@ -60,10 +60,9 @@ export default {
     }
   },
   created() {
+    this.reviewlike
     this.login_user = this.$store.state.user.pk
     this.movieId = this.review.movie
-    this.reviewlike()
-    this.likeCount = this.review.like_users.count()
   },  
   updated() {
     this.reviewlike
