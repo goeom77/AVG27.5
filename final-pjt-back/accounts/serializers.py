@@ -21,12 +21,6 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ('pk', 'username', 'email', 'followings', 'wishmovies','pickmovies','followers', 'profile_img','nickname','age','mbti')
         read_only_fields = ('followings', 'followers')
 
-class UserInfoSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = get_user_model()
-        fields = ('pk', 'username','profile_img')
-
 
 class CustomSignupSerializer(RegisterSerializer):
     profile_img = serializers.CharField(min_length=0)

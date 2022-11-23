@@ -1,8 +1,6 @@
 <template>
   <div class="fill-container">
-    <div class="youtube">
-      <YoutubeCard :movie_title="movie_title"/>
-    </div>
+    <YoutubeCard class="youtube" :movie_title="movie_title"/>
     <img class="poster" :src="imgUrl" alt="..." width="250px">
     <div class="allfont fontbox">
       <h1 class="card-title">{{ movie?.title }}</h1>
@@ -34,9 +32,7 @@ export default {
     imgUrl() {
       return `https://image.tmdb.org/t/p/w500/${this.movie.poster_path}`
     },
-    token() {
-      return this.$store.state.token
-    }
+
   },
   created() {
 
@@ -71,12 +67,9 @@ export default {
 }
 .youtube{
   z-index: 0;
-  overflow: hidden;
-  position: relative;
-  height: 80%
 }
 .allfont{
-  color: white;
+  color: white
 }
 .fontbox {
   margin-top: -150px;

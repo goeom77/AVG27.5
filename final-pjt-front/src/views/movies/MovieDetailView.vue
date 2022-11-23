@@ -39,8 +39,8 @@ export default {
     return {
       movie: null,
       movie_title: null,
-      wish: true,
-      pick: true,
+      wish: false,
+      pick: false,
     }
   },
   computed: {

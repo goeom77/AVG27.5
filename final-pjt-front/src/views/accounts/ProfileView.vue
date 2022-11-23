@@ -5,9 +5,10 @@
       <img
       class="profile"
       :src="profileuser.profile_img ? profileuser.profile_img : 'https://media.discordapp.net/attachments/997060428385484880/1042322474165096478/image.png'"
-      alt="프로필 사진이 등록해주세요."
+      alt="프로필 사진을 등록해주세요."
       />
     </div>
+    {{ profileuser}}
     <div>
       이름 : {{profileuser.nickname}}
     </div>
@@ -47,6 +48,7 @@
 <script>
 import FollowUser from '@/components/profiles/FollowUser.vue'
 import axios from 'axios'
+
 const API_URL = 'http://127.0.0.1:8000'
 export default {
   name: 'ProfileView',
@@ -78,10 +80,10 @@ export default {
     },
   },
   created() {
-    console.log(this.$route.params.username)
     const payload = { username: this.$route.params.username }
     this.getProfileData(payload)
     this.followCheck()
+
   },
   methods: {
     getProfileData(payload) {
@@ -100,20 +102,24 @@ export default {
         })
     },
     followPut() {
-      this.$store.dispatch('followPut',this.profileuser.pk)
+      this.$store.dispatch('followPut',this.profileuser.username)
     },
-    // followCheck() {
-    //   if (
-    //     this.profileuser.followers.some(
-    //       (e) => e === this.user.pk
-    //     )) { 
-    //       this.follow = true 
-    //   } else {
-    //     this.follow = false
-    //   } 
-    // },
+    followCheck() {
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/${this.params.username}/follow/`,
+        headers: {
+          headers: {Authorization: `Token ${this.$store.state.token}`}
+        }
+        .then((res) => {
+          console.log('#########################')
+          console.log(res)
+        })
+    })
+    } 
   },
 }
+
 </script>
 
 <style>
