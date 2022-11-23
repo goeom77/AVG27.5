@@ -55,10 +55,16 @@ def users(request):
 
 @api_view(['GET', 'PUT'])
 def usersearch(request, user_pk):
-    user = get_object_or_404(get_user_model(), pk=user_pk)
+    user = get_object_or_404(get_user_model(), id=user_pk)
+    print(user)
     if request.method == 'GET':
         serializer = ProfileSerializer(user)
         return Response(serializer.data)
+# def profile_or_edit(request, username):
+#     user = get_object_or_404(get_user_model(), username=username)
+#     if request.method == 'GET':
+#         serializer = ProfileSerializer(user)
+#         return Response(serializer.data)
     
     elif request.user.is_authenticated:
         serializer = ProfileSerializer(data=request.data, instance=user)

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>프로필</h1>
+    {{profileuser}}
     <div class="imgbox">
       <img
       class="profile"
@@ -33,13 +34,18 @@
       </div>
     </div>
 
-    <div>
+    <!-- <div>
       {{profileuser.followers.count ? profileuser.followers.count : '_'}}팔로워
       {{profileuser.followings.count ? profileuser.followings.count : '_'}}팔로잉
-    </div>
+    </div> -->
     <div>
       <div>
-        <FollowUser/>
+        <p>팔로워</p>
+        <ProfileMini
+          v-for="people in profileuser.followers"
+          :key="people.id"
+          :people="people"
+        />
       </div>
     </div>
   </div>
@@ -47,14 +53,14 @@
 </template>
 
 <script>
-import FollowUser from '@/components/profiles/FollowUser.vue'
+import ProfileMini from '@/components/profiles/ProfileMini'
 import axios from 'axios'
 
 const API_URL = 'http://127.0.0.1:8000'
 export default {
   name: 'ProfileView',
   components: {
-    FollowUser,
+    ProfileMini,
   },
   data() {
     return {
