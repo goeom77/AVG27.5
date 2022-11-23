@@ -1,14 +1,15 @@
 <template>
-  <div
-    @click="movieDetail(movie.id)"
-    style="width: 100px; height: 200px; margin:1rem; background-color: rgba(50, 60, 65, 0.9)"
-  >
-    <img :src="imgUrl" class="card-img-top" >
-    <!-- <img v-else src="" height="72%" alt=""></img> -->
-    <div class="card-body d-flex align-items-start flex-column">
-      <p class="card-title fw-bold fs-6 mb-auto">{{ movie.title }}</p>
-      <p class="my-0 align-text-bottom" v-if="movie.release_date">{{ movie.release_date }}</p>
-      <p class="my-0 align-text-bottom">⭐: {{ movie.vote_average }}</p>
+  <div class="call" ontouchstart="this.classList.toggle('hover');">
+    <div class="container" @click="movieDetail(movie.id)">
+      <div class="front" style="background-image: url(https://unsplash.it/500/500/)">
+        <img :src="imgUrl" alt="" style="width:150px;">
+      </div>
+      <div class="back">
+        <div class="inner">
+          <p>{{ movieTitle }}</p>
+          <span>⭐: {{ vote_average }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>

@@ -23,17 +23,16 @@ export default {
   },
   created() {
     this.getArticles()
+    this.$store.dispatch('getArticles')
   },
   methods: {
     getArticles() {
-      if (this.isLogin) { 
-        this.$store.dispatch('getArticles')
-      } else {
+      if (!this.isLogin) { 
         alert('로그인이 필요한 서비스 입니다.')
         this.$router.push({ name: 'LogInView'})
       }
     }
-  }
+  },
 }
 </script>
 

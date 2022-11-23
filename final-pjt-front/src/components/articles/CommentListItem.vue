@@ -2,7 +2,8 @@
   <div>
     <div class="d-flex justify-content-between">
       <div>
-        <button class="btn btn-outline-danger btn-sm mx-3" @click='profileView'>글쓴이 : {{ comment.nickname }}</button>
+        {{comment}}
+        <button class="btn btn-outline-danger btn-sm mx-3" @click.prevent="profileView">글쓴이 : {{ comment.nickname }}</button>
         <h5>{{ comment.content }}</h5>
         <p>created_at : {{ comment.created_at }}</p>
       </div>
@@ -42,6 +43,11 @@ export default {
     deleteComment: function () {
       this.$emit('deleteComment', this.commentId)
     },
+    profileView() {
+      console.log(this.comment)
+      console.log(this.comment.user.username)
+      this.$router.push({ name: 'ProfileView' , params:{ username : this.comment.username }})
+    }
   },
 }
 </script>

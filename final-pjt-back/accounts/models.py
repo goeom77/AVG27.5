@@ -10,4 +10,3 @@ class User(AbstractUser):
     mbti = models.CharField(max_length=10)
     profile_img = models.TextField(default='https://assets.repress.co.kr/photos/2009ea104d2c842fed5461308d9f92d7/original.jpg', blank=True)
 
-

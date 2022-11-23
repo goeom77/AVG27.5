@@ -11,9 +11,7 @@
         />
       </div>
     </div>
-    <div class="m-5">
-
-    </div>
+    <div class="m-5"></div>
     <div>
       <h5>database 영화</h5>
       <div class="mainitem">

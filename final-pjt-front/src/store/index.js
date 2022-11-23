@@ -58,15 +58,12 @@ export default new Vuex.Store({
     },
     GET_ARTICLES(state, articles) {
       state.articles = articles
+      this.$router.push({ name: 'ArticleView' })
     },
     // 회원가입 && 로그인
     SAVE_TOKEN(state, token) {
       state.token = token
     },
-    // SAVE_USER(state, username) {
-    //   state.username = username
-    //   console.log(state.username,'saveuser 뮤테이션')
-    // },
     LOG_OUT(state) {
       state.token = null
       state.user = {}
@@ -97,6 +94,7 @@ export default new Vuex.Store({
   },
   actions: {
     getArticles(context) {
+      console.log('ddd')
       axios({
         method: 'get',
         url: `${API_URL}/articles/`,
@@ -106,7 +104,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_ARTICLES', res.data)
-          this.$router.push({ name: 'ArticleView' })
+          
         })
         .catch((err) => {
           console.log(err)

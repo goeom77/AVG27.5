@@ -6,10 +6,7 @@
 
 <script>
 import axios from 'axios'
-
 const API_URL = 'http://127.0.0.1:8000'
-
-
 export default {
   name: 'ProfileMini',
   props: {
@@ -20,8 +17,6 @@ export default {
   },
   methods: {
     getProfileData(people) {
-      // console.log('여기다!!',payload)
-      // this.$store.dispatch('getProfileUser', payload)
       axios({
         method: 'get',
         url: `${API_URL}/accounts/profile/${people}/`,
@@ -29,7 +24,6 @@ export default {
       })
         .then((res) => {
           console.log(res)
-          // context.commit('GET_PROFILE_USER', res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -40,5 +34,4 @@ export default {
 </script>
 
 <style>
-
 </style>
