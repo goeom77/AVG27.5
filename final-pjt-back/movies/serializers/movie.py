@@ -13,6 +13,7 @@ class MovieListSerializer(serializers.ModelSerializer):
             model = Review
             fields = ('id', 'movie', 'user', 'content', 'vote_average','created_at', 'updated_at', 'liked_users',)
     reviews = ReviewSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Movie
         fields = ('id','title','overview','poster_path','vote_average','release_date','genres','reviews','wishuser','pickuser') 

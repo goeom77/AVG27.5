@@ -1,18 +1,19 @@
 <template>
-  <div>
-    <h1 class="allfont">Detail</h1>
-    <h2>제목 : {{ article?.title }}</h2>
-    <button @click='profileView'>글쓴이 : {{ article?.username }}</button>
+  <div class="allfont">
+    <h1>{{ article?.title }}</h1>
+    <button @click='profileView'>글쓴이 : {{ article?.nickname }}</button>
     <p>게시판 : {{ article?.type }}</p>
-    <p>내용 : {{ article?.content }}</p>
+    <h3>내용 : {{ article?.content }}</h3>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
-    <button @click="articleDelete" >[DELETE]</button>
+    <button v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" @click="articleDelete" >[DELETE]</button>
     <router-link :to="{ name: 'EditView',  params : {id : article.id}}">[EDIT]</router-link>
     <div>
       <!-- 댓글내용 -->
-      <comment-list :articleId="article.id"></comment-list>
+      <hr>
+      <comment-list :articleId ="article.id"></comment-list>
     </div>
+    <router-link class="btn btn-outline-danger btn-sm mx-3" :to="{ name: 'ArticleView'}">[뒤로가기]</router-link>
   </div>
 </template>
 
@@ -35,6 +36,17 @@ export default {
   created() {
     this.getArticleDetail()
     console.log('디테일 도착')
+  },
+  computed: {
+    write_user() {
+      return this.article.username
+    },
+    login_user() {
+      return this.$store.state.username
+    },
+    nickname() {
+      return this.$store.state.user.nickname
+    }
   },
   methods: {
     getArticleDetail() {

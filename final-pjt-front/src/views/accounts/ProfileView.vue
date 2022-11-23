@@ -5,7 +5,7 @@
       <img
       class="profile"
       :src="profileuser.profile_img ? profileuser.profile_img : 'https://media.discordapp.net/attachments/997060428385484880/1042322474165096478/image.png'"
-      alt="프로필 사진이 등록해주세요."
+      alt="프로필 사진을 등록해주세요."
       />
     </div>
     <div>

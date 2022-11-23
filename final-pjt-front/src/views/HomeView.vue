@@ -1,5 +1,5 @@
 <template>
-  <div class="bv-example-row">
+  <div class="bv-example-row allfont">
     <b-row>
       <b-col xs="4" md="3" lg="2" sm="6">
         <div id='nav' class="text-center">
@@ -16,20 +16,20 @@
                 <router-link class="nav-link button button--winona" data-text="Go Article" :to="{ name: 'ArticleView' }">
                   <span>게시판</span></router-link>
               </li>
+              <li v-if="isLogin">
+                <router-link class="nav-link button button--winona" data-text="Go Profile" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">
+                  <span>{{ nickname }}</span></router-link>
+              </li>
+              <li>
+                <router-link class="nav-link button button--winona" data-text="Go Sign Up" :to="{ name: 'LogInView' }" v-if="!isLogin">
+                  <span>로그인</span></router-link>
+                <div class="nav-link button button--winona" data-text="Go Sign Up" @click="isLogOut" v-if="isLogin">
+                  <span>로그아웃</span>
+                </div>
+              </li>
               <li class="nav-item" v-if="!isLogin">
                 <router-link class="nav-link button button--winona" data-text="Go Sign Up" :to="{ name: 'SignUpView' }">
                   <span>회원가입</span></router-link>
-              </li>
-              <li active>
-                <router-link class="nav-link button button--winona" :to="{ name: 'LogInView' }" v-if="!isLogin">
-                  <span>로그인</span></router-link>
-                <div class="nav-link button button--winona" @click="isLogOut" v-if="isLogin">
-                  <span >로그아웃</span>
-                </div>
-              </li>
-              <li>
-                <router-link class="nav-link button button--winona" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">
-                  <span>프로필</span></router-link>
               </li>
             </ul>
           </nav>
@@ -56,12 +56,14 @@ export default {
       },
     username() {
       return this.$store.state.username
+    },
+    nickname() {
+      return this.$store.state.user.nickname
     }
   },
   created() {
     this.getmoviedata()
     this.getmovielatest()
-    this.getuserinfo()
   },
   methods: {
     getmoviedata() {
@@ -82,9 +84,6 @@ export default {
       if (movie_length === undefined) {
       this.$store.dispatch('getMovieLatest')
       }
-    },
-    getuserinfo() {
-      this.$store.dispatch('getUserInfo')
     },
     isLogOut(){
       this.$store.dispatch('logOut',this.isLogin)
