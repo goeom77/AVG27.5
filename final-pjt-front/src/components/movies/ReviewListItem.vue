@@ -2,6 +2,7 @@
   <div>
     <div class="d-flex justify-content-between">
       <div>
+        <button @click='profileView'>글쓴이 : {{ review.user.username }}</button>
         <p>{{ review.user.username }}</p>
         <p v-if="vote_average === 5">⭐⭐⭐⭐⭐</p>
         <p v-if="vote_average === 4">⭐⭐⭐⭐</p>
@@ -100,6 +101,9 @@ export default {
           console.log(error)
         })
     },
+    profileView() {
+      this.$router.push({ name: 'ProfileView' , params:{ username : this.review.user.username }})
+    }
   }
 }
 </script>

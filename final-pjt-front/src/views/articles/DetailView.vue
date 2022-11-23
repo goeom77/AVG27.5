@@ -2,7 +2,7 @@
   <div>
     <h1 class="allfont">Detail</h1>
     <h2>제목 : {{ article?.title }}</h2>
-    <h2 @click='profileView'>쓴사람이름 : {{ article?.username }}</h2>
+    <button @click='profileView'>글쓴이 : {{ article?.username }}</button>
     <p>게시판 : {{ article?.type }}</p>
     <p>내용 : {{ article?.content }}</p>
     <p>작성시간 : {{ article?.created_at }}</p>

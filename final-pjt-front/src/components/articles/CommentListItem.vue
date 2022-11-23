@@ -1,10 +1,12 @@
 <template>
   <div>
     <div class="d-flex justify-content-between">
-      <div>
+      <div >
+        <p>{{comment}}</p>
         <p>id : {{ comment.id }}</p>
         <p>content : {{ comment.content }}</p>
         <p>user : {{ comment.user }}</p>
+        <button @click='profileView'>글쓴이 : {{ comment.username }}</button>
         <p>article : {{ comment.article }}</p>
         <p>created_at : {{ comment.created_at }}</p>
       </div>
@@ -14,7 +16,7 @@
     </div>
     <hr>
   </div>
-</template>
+</template> 
 
 <script>
 // import axios from 'axios'
@@ -36,6 +38,7 @@ export default {
     deleteComment: function () {
       this.$emit('deleteComment', this.commentId)
     },
+ 
   },
 }
 </script>
