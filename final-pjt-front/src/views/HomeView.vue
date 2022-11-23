@@ -20,6 +20,17 @@
                 <router-link class="nav-link button button--winona" data-text="Go Sign Up" :to="{ name: 'SignUpView' }">
                   <span>회원가입</span></router-link>
               </li>
+              <li active>
+                <router-link class="nav-link button button--winona" :to="{ name: 'LogInView' }" v-if="!isLogin">
+                  <span>로그인</span></router-link>
+                <div class="nav-link button button--winona" @click="isLogOut" v-if="isLogin">
+                  <span >로그아웃</span>
+                </div>
+              </li>
+              <li>
+                <router-link class="nav-link button button--winona" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">
+                  <span>프로필</span></router-link>
+              </li>
             </ul>
           </nav>
         </div>
@@ -74,7 +85,10 @@ export default {
     },
     getuserinfo() {
       this.$store.dispatch('getUserInfo')
-    }
+    },
+    isLogOut(){
+      this.$store.dispatch('logOut',this.isLogin)
+    },
   },
 }
 </script>

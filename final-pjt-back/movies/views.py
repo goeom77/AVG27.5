@@ -87,11 +87,11 @@ def wish_movies(request, movie_pk):
     user = request.user
     if movie.wishuser.filter(pk=user.pk).exists():
         movie.wishuser.remove(user)
-        
+        wish = False
     else:
         movie.wishuser.add(user)
-    serializer = MovieSerializer(movie)
-    return Response(serializer.data)
+        wish = True
+    return Response(wish)
 
 @api_view(['POST'])
 def pick_movies(request, movie_pk):
@@ -99,7 +99,8 @@ def pick_movies(request, movie_pk):
     user = request.user
     if movie.pickuser.filter(pk=user.pk).exists():
         movie.pickuser.remove(user)
+        pick = False
     else:
         movie.pickuser.add(user)
-    serializer = MovieSerializer(movie)
-    return Response(serializer.data)
+        pick = True
+    return Response(pick)

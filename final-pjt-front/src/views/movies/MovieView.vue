@@ -1,17 +1,6 @@
 <template>
   <div>
-    <div>
-      <b-nav id="movie-nav">
-        <b-nav-item active>
-          <router-link class="nav-link" :to="{ name: 'LogInView' }" v-if="!isLogin">로그인</router-link>
-          
-          <p  @click="isLogOut" v-if="isLogin">로그아웃</p>
-        </b-nav-item>
-        <b-nav-item>
-          <router-link class="nav-link" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">프로필</router-link>
-        </b-nav-item>
-      </b-nav>
-    </div>
+    <div class="mt-5"></div>
     <div>
       <h5>최근 영화 추천</h5>
       <div class="mainitem">
@@ -74,11 +63,6 @@ export default {
       return this.$store.getters.isLogin
     },
   },
-  methods: {
-    isLogOut(){
-      this.$store.dispatch('logOut',this.isLogin)
-    },
-  }
 }
 </script>
 

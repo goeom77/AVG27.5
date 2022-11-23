@@ -63,10 +63,10 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token) {
       state.token = token
     },
-    SAVE_USER(state, username) {
-      state.username = username
-      console.log(state.username,'saveuser 뮤테이션')
-    },
+    // SAVE_USER(state, username) {
+    //   state.username = username
+    //   console.log(state.username,'saveuser 뮤테이션')
+    // },
     LOG_OUT(state) {
       state.token = null
       state.user = {}
