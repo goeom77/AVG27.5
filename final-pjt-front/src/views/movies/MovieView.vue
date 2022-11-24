@@ -77,4 +77,15 @@ export default {
   height:200px;
   width:100%
 }
+
+.scroll {
+  overflow: auto;
+  display: flex;
+  white-space: nowrap;
+  height:260px;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
 </style>

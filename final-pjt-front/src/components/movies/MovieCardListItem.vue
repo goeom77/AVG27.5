@@ -6,7 +6,7 @@
       </div>
       <div class="back">
         <div class="inner">
-          <p>{{ movieTitle }}</p>
+          <p width='100px' style="word-break:break-all">{{ movieTitle }}</p>
           <span>⭐: {{ vote_average }}</span>
         </div>
       </div>
@@ -44,5 +44,5 @@ export default {
 </script>
 
 <style>
-
+  
 </style>

@@ -1,11 +1,11 @@
 <template>
   <div class="login-card">
-    <div>
-      <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
+    <div style="text-align:center">
+      <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044766467331215390/232323.PNG" alt="">
     </div>
-    <div class="login-card-div">
+    <div class="login-card-div mt-3">
       <b-form @submit.prevent="logIn()" @reset="onReset">
-        <div class="pt-5"></div>
+        <div class="pt-4"></div>
         <div class="login-card-div-input">
           <b-form-group id="input-group-1" label="Your ID: " label-for="input-1">
             <b-form-input
@@ -25,12 +25,12 @@
               required
               ></b-form-input>
             </b-form-group>
-            <br>
-            <br>
-            <b-button type="submit" variant="primary">LOGIN</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
+            <div class="mt-5 pt-4"></div>
+            <div>
+              <b-button style="width:87%" type="submit" variant="primary">LOGIN</b-button>
+              <b-button style="width:10%%" type="reset" variant="danger">Reset</b-button>
+            </div>
         </div>
-  
       </b-form>
     </div>
 

@@ -1,96 +1,85 @@
 <template>
-  <div class="signup-card">
-    <div>
-      <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
-    </div>
-    <div class="signup-card-div">
-      <b-form @submit.prevent="signUp" @reset="onReset">
-        <div class="signup-card-div-input mt-1">
-          <b-form-group id="input-group-1" label="Your ID: " label-for="input-1">
-            <b-form-input
-              id="input-1"
-              v-model="payload.username"
-              type="text"
-              placeholder="Enter your ID"
+  <div>
+    <div class="signup-card">
+      <div style="text-align:center">
+        <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
+      </div>
+      <div class="signup-card-div">
+        <b-form @submit.prevent="signUp" @reset="onReset">
+          <div class="signup-card-div-input mt-1">
+            <b-form-group id="input-group-1" label="Your ID: " label-for="input-1">
+              <b-form-input
+                id="input-1"
+                v-model="payload.username"
+                type="text"
+                placeholder="Enter your ID"
+                required
+              ></b-form-input>
+            </b-form-group>
+      
+            <b-form-group id="input-group-2" label="Your Name: " label-for="input-2">
+              <b-form-input
+                id="input-2"
+                v-model="payload.nickname"
+                type="text"
+                placeholder="Enter your nickname"
+                required
+              ></b-form-input>
+            </b-form-group>
+      
+            <b-form-group id="input-group-3" label="Password: " label-for="input-3">
+              <b-form-input
+                id="input-3"
+                type="password"
+                placeholder="Enter your Password"
+                v-model="payload.password1"
+                required
+              ></b-form-input>
+            </b-form-group>
+      
+            <b-form-group id="input-group-4" label="Password Check: " label-for="input-4">
+              <b-form-input
+                id="input-4"
+                type="password"
+                v-model="payload.password2"
+                placeholder="Enter your Password Again"
+                required
+                description="password를 다시 입력해주세요."
+              ></b-form-input>
+            </b-form-group>
+            <b-form-group id="input-group-6" label="Age: " label-for="input-6">
+              <b-form-input
+              id="input-6"
+              type="number"
+              placeholder="20" 
+              min="0" 
+              max="130"
+              v-model="payload.age"
               required
-            ></b-form-input>
-          </b-form-group>
-    
-          <b-form-group id="input-group-2" label="Your Name: " label-for="input-2">
-            <b-form-input
-              id="input-2"
-              v-model="payload.nickname"
-              type="text"
-              placeholder="Enter your nickname"
-              required
-            ></b-form-input>
-          </b-form-group>
-    
-          <b-form-group id="input-group-3" label="Password: " label-for="input-3">
-            <b-form-input
-              id="input-3"
-              type="password"
-              placeholder="Enter your Password"
-              v-model="payload.password1"
-              required
-            ></b-form-input>
-          </b-form-group>
-    
-          <b-form-group id="input-group-4" label="Password Check: " label-for="input-4">
-            <b-form-input
-              id="input-4"
-              type="password"
-              v-model="payload.password2"
-              placeholder="Enter your Password Again"
-              required
-              description="password를 다시 입력해주세요."
-            ></b-form-input>
-          </b-form-group>
-
-          
-          <b-form-group id="input-group-6" label="Age: " label-for="input-6">
-            <b-form-input
-            id="input-6"
-            type="number"
-            placeholder="20" 
-            min="0" 
-            max="130"
-            v-model="payload.age"
-            required
-            ></b-form-input>
-          </b-form-group>
-
-          <b-form-group id="input-group-5" label="MBTI: " label-for="input-5">
-            <b-form-select
-              id="input-5"
-              v-model="payload.mbti"
-              :options="options"
-              required
-            ></b-form-select>
-          </b-form-group>
-
-          <!-- <b-form-group id="input-group-8" label-for="input-8">
-            <b-form-file
-              id="input-8"
-              v-model="payload.profile_img"
-              @change="findImg"
-              type="file"
-              ref="doc"
-              :state="Boolean(payload.profile_img)"
-              placeholder="Choose a file or drop it here..."
-              drop-placeholder="Drop file here..."
-            ></b-form-file>
-          </b-form-group> -->
-          <b-form-group>
-            <label for="img"> Profile IMG:  </label>
-            <br>
-            <input type="file" ref="doc" id="img" @change="findImg" > 
-          </b-form-group>
-          <div class="m-3"></div>
-          <b-button type="submit" variant="primary">회원가입</b-button>
-          <b-button type="reset" variant="danger">Reset</b-button>
-        </div>
-      </b-form> 
+              ></b-form-input>
+            </b-form-group>
+  
+            <b-form-group id="input-group-5" label="MBTI: " label-for="input-5">
+              <b-form-select
+                id="input-5"
+                v-model="payload.mbti"
+                :options="options"
+                required
+              ></b-form-select>
+            </b-form-group>
+            <b-form-group>
+              <label for="img"> Profile IMG:  </label>
+              <br>
+              <input type="file" ref="doc" id="img" @change="findImg" > 
+            </b-form-group>
+            <div class="m-3"></div>
+            <div>
+              <b-button style="width:90%" type="submit" variant="primary">LOGIN</b-button>
+              <b-button style="width:10%%" type="reset" variant="danger">Reset</b-button>
+            </div>
+          </div>
+        </b-form> 
+      </div>
     </div>
   </div>
   

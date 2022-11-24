@@ -1,12 +1,12 @@
 <template>
-  <div class="bv-example-row allfont">
+  <div style="width:200px;" class="bv-example-row allfont">
     <b-row>
       <b-col xs="4" md="3" lg="2" sm="6">
         <div id='nav' class="text-center">
           <nav class="navbar">
             <ul id='home-ul' class="nav">
               <li class="nav-item">
-                <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
+                <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044764237026840626/image.png" alt="">
               </li>
               <li class="nav-item">
                 <router-link class="nav-link button button--winona" data-text="Go Movie" :to="{ name: 'MovieView' }">
