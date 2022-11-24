@@ -62,9 +62,7 @@ export default {
     logIn() {
       const payload = this.payload
       this.$store.dispatch('logIn', payload)
-      // this.$store.dispatch('randomUser')
-      // const age = this.$store.state.user.age
-      // this.$store.dispatch('getMovieage', age)
+      console.log('로그인페이지', payload)
     },
   }
 }

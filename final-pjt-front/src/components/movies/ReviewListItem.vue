@@ -2,8 +2,7 @@
   <div>
     <div class="d-flex justify-content-between">
       <div>
-        <button @click='profileView'>글쓴이 : {{ review.user.nickname }}</button>
-        <p>{{ review.user.username }}</p>
+        <p class='putmouse' @click='profileView'>글쓴이 : {{ review.user.nickname }}</p>
         <p v-if="vote_average === 5">⭐⭐⭐⭐⭐</p>
         <p v-if="vote_average === 4">⭐⭐⭐⭐</p>
         <p v-if="vote_average === 3">⭐⭐⭐</p>

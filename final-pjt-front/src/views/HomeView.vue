@@ -23,7 +23,7 @@
               <li>
                 <router-link class="nav-link nav-button button--winona" data-text="Go Sign Up" :to="{ name: 'LogInView' }" v-if="!isLogin">
                   <span>로그인</span></router-link>
-                <div class="nav-link nav-button button--winona" data-text="Go Sign Up" @click="isLogOut" v-if="isLogin">
+                <div class="nav-link nav-button button--winona" data-text="Go Log In" @click="isLogOut" v-if="isLogin">
                   <span>로그아웃</span>
                 </div>
               </li>

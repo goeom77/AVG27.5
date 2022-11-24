@@ -31,8 +31,8 @@
               mbti : {{profileuser.mbti}}
             </div>
             <div style="margin:10px;">  
-              <span @click="followerclick">followers : {{ profileuser.followers.length ? profileuser.followers.length : 0}}  |</span>
-              <span @click="followingclick">  followings : {{ profileuser.followings.length ? profileuser.followings.length : 0 }}</span>
+              <span @click="followerclick" class="putmouse"> followers : {{ followers_count }} </span>
+              <span @click="followingclick" class="putmouse">  followings : {{ followings_count }}</span>
             </div>
             <div>
               <h3 class="articleTitle"></h3>
@@ -58,8 +58,8 @@
       <div>
         <div>
           <div class="profile-blank-height"></div>
-          <p style="font-size:x-large"><span @click="pickclick">PICK :</span>{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}}  | 
-          <span @click="wishclick">Wish :</span>{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
+          <p style="font-size:x-large"><span @click="pickclick" class="putmouse">PICK :</span>{{ pickmovies_count }}  | 
+          <span @click="wishclick" class="putmouse">Wish :</span>{{ wishmovies_count }} </p> 
         </div>
         <!-- 1일때 -->
         <div v-if="btn===1">
@@ -138,16 +138,16 @@ export default {
       return this.$route.params.username === this.user.username
     },
     followers_count() {
-      return this.profileuser.followers === [] ? this.profileuser.followers.length : 0;
+      return this.profileuser?.followers.length;
     },
     followings_count() {
-      return this.profileuser.followings === [] ? this.profileuser.followings.length : 0;
+      return this.profileuser?.followings.length;
     },
     pickmovies_count() {
-      return this.profileuser.pickmovies === [] ? this.profileuser.pickmovies.length : 0;
+      return this.profileuser?.pickmovies.length;
     },
     wishmovies_count() {
-      return this.profileuser.wishmovies === [] ? this.profileuser.wishmovies.length : 0;
+      return this.profileuser?.wishmovies.length;
     }
   },
   created() {

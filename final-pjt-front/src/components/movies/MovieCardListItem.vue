@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-11">
           <div class="card-body pt-1 pl-5 card-font-l">
-            <p class="card-title">{{ movieTitle }}</p>
+            <p class="card-title putmouse">{{ movieTitle }}</p>
             <p class="card-text">⭐: {{ vote_average }}</p>
           </div>
         </div>

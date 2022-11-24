@@ -1,21 +1,27 @@
 <template>
-  <div class="fill-container">
-    <YoutubeCard class="youtube" :movie_title="movie_title"/>
-    <img class="poster" :src="imgUrl" alt="..." width="250px">
-    <div class="allfont fontbox">
+  <div>
+    <div style="display:inline;">
+      <img class="poster" :src="imgUrl" alt="...">
+    </div>
+    <div class="imgfont fontbox">
       <h1 class="card-title">{{ movie?.title }}</h1>
       <p class="card-text">개봉 날짜 : {{ movie?.release_date }}</p>
       <p class="card-text">평점 : {{ movie?.vote_average }}</p>
-      <p class="card-text">줄거리 : {{ movie?.overview }}</p>
-      <div>
+      <div style="display:flex;">
         <div>
-          <button v-if="!pick" @click="choosepick">PICK</button>
-          <button v-if="pick" @click="choosepick">UNPICK</button>
+          <span v-if="!pick" @click="choosepick"><span class="button btnPush btnBlueGreen">PICK</span></span>
+          <span v-if="pick" @click="choosepick"><span class="button btnPush btnBlueGreen">UNPICK</span></span>
         </div>
         <div>
-          <button v-if="!wish" @click="choosewish">WISH</button>
-          <button v-if="wish" @click="choosewish">UNWISH</button>
+          <span v-if="!wish" @click="choosewish"><span class="button btnPush btnBlueGreen">WISH</span></span>
+          <span v-if="wish" @click="choosewish"><span class="button btnPush btnBlueGreen">UNWISH</span></span>
         </div>
+      </div>
+      <div style="margin-right:200px;">
+        <p class="card-text">줄거리 : {{ movie?.overview }}</p>
+      </div>
+      <div style="margin-right:200px;">
+        <YoutubeCard :movie_title="movie_title"/>
       </div>
       <ReviewList :movieId="movie.id"></ReviewList>
     </div>
@@ -133,15 +139,16 @@ export default {
 <style>
 .poster {
   margin-top: -250px;
-  margin-left: 35%;
-  z-index: 25;
+  margin-right: 35%;
+  z-index: 1;
 }
-.youtube{
-  z-index: 0;
-}
+
 .fontbox {
   margin-top: -150px;
   margin-right: 15%;
-  z-index: 50;
+  z-index: 2;
+}
+.imgfont {
+  color:antiquewhite;
 }
 </style>

@@ -106,5 +106,9 @@ export default {
 </script>
 
 <style>
+.putmouse:hover {
+  text-decoration: underline;
+  cursor : default 
+}
 
 </style>

@@ -14,8 +14,8 @@
     
 <script>
 import axios from 'axios'
-// const API_KEY = process.env.VUE_APP_API_KEY
-const API_KEY = 'AIzaSyAoOYbIO3DvghctpGdsIABC1SozCquM8Tc'
+const API_KEY = process.env.VUE_APP_API_KEY
+
 
 export default {
 name : 'YoutubeCard',

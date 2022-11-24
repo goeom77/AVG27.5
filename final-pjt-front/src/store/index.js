@@ -8,8 +8,9 @@ Vue.use(Vuex)
 
 
 const API_URL = 'http://127.0.0.1:8000'
-// const MOVIE_API_KEY = process.env.VUE_APP_MOVIE_API_KEY
-const MOVIE_API_KEY = '859b52ab552de5015f0e7dbaa748474e'
+
+const MOVIE_API_KEY = process.env.VUE_APP_MOVIE_API_KEY
+// const MOVIE_API_KEY = '859b52ab552de5015f0e7dbaa748474e'
 const LATEST_API_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${MOVIE_API_KEY}&language=ko-kr&page=1`
 
 
@@ -23,7 +24,7 @@ export default new Vuex.Store({
     movie_latest: [],
     movie_mbti: [],
     movie_age: [],
-    users: [],
+    users:[],
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
@@ -54,11 +55,6 @@ export default new Vuex.Store({
           vote_average: movie.vote_average,
         }
         state.movies.push(movie_g)
-        if (movie_g in state.movies) {
-          console.log('여기 있음!')
-        } else {
-          state.movies.push(movie_g)
-        }
     })},
     MOVIE_MBTI(state, movie_mbti) {
       state.movie_mbti = []
@@ -93,18 +89,14 @@ export default new Vuex.Store({
       router.push({ name: 'MovieView' })
     },
     GET_NOW_USER(state, payload) {
-      console.log('로그인 하는중',payload)
+      // console.log(payload)
       state.user = payload
     },
     GET_PROFILE_USER(state, payload) {
       // console.log(payload)
       state.profileuser = payload
     },
-    RANDOM_USER(state, users){
-      state.users = []
-      state.users = users
-      console.log(users)
-    },
+
     ////////////////////////////////////////articles//////////////
     ARTICLE_DELETE(state, article_id) {
       state.articles = state.articles.filter((article) => {
@@ -206,7 +198,6 @@ export default new Vuex.Store({
           // console.log(res.data)
           context.commit('SAVE_TOKEN', res.data.key)
           context.commit('GET_USERNAME', username)
-          this.$store.dispatch('randomUser')
           context.dispatch('getNowUser',username)
         })
         .catch(() => {
@@ -256,21 +247,6 @@ export default new Vuex.Store({
       })
       .then((res) => {
           console.log(res)
-      })
-    },
-    randomUser(context){
-      axios({
-        method: 'get',
-        url: `${API_URL}/accounts/users/`,
-        headers: {
-          Authorization: `Token ${context.state.token}`},
-      })
-      .then((res) => {
-        // console.log('랜덤유저 가져오는 중..',res)
-        context.commit('RANDOM_USER', res.data)
-      })
-      .catch(() => {
-        console.log('사용자가 없네요!')
       })
     },
     ////////////////////////////////////////articles//////////////

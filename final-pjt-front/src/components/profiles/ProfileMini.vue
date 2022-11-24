@@ -10,8 +10,9 @@
       />
     </div>
     <div>
-      {{person.nickname}}  {{person.mbti}}   |   
-      <button @click="goprofile">{{pickmovies_count}}</button>
+      <p>mbti: {{person.mbti}}</p>
+      <span @click="goprofile" class="putmouse">{{person.nickname}}</span> 님의 
+      pickmovie는: {{pickmovies_count}} 개
     </div>
     followers : {{ followers_count }}
     followings : {{ followings_count }}
@@ -37,14 +38,14 @@ export default {
   },
   computed: {
     followers_count() {
-      return this.person.followers === [] ? this.person.followers.length : 0;
+      return this.person?.followers.length;
     },
     followings_count() {
-      return this.person.followings === [] ? this.person.followings.length : 0;
+      return this.person?.followings.length;
     },
     pickmovies_count() {
-      return this.person.pickmovies === [] ? this.person.pickmovies.length : 0;
-    }
+      return this.person?.pickmovies.length;
+    },
   },
   methods: {
     getProfileData(people) {

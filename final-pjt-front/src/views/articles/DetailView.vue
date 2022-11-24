@@ -1,13 +1,16 @@
 <template>
-  <div class="allfont">
-    <h1>{{ article?.title }}</h1>
-    <button @click='profileView'>글쓴이 : {{ article?.nickname }}</button>
+  <div>
+    <div class="mainitem-blank-height"></div>
+    <div class="article-title-i m-3">
+      <h1>{{ article?.title }}</h1>
+    </div>
+    <p @click='profileView' class="putmouse">글쓴이 : {{ article?.nickname }}</p>
     <p>게시판 : {{ article?.type }}</p>
     <h3>내용 : {{ article?.content }}</h3>
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
+    <router-link v-if="login_user === write_user" class="btn btn-outline-success btn-sm mx-3" :to="{ name: 'EditView',  params : {id : article.id}}">[EDIT]</router-link>
     <button v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" @click="articleDelete" >[DELETE]</button>
-    <router-link v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" :to="{ name: 'EditView',  params : {id : article.id}}">[EDIT]</router-link>
     <div>
       <!-- 댓글내용 -->
       <hr>
@@ -75,8 +78,6 @@ export default {
       })
     },
     profileView() {
-      // console.log(this.article.user.username)
-      // console.log(this.article)
       this.$router.push({ name: 'ProfileView' , params:{ username : this.article.username }})
     }
   }
