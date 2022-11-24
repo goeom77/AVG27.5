@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="mt-5 "></div>
-    <div class="mainitem">
+    <div class="mainitem" style="width:2000px;">
       <div>
         <div>
           <h3 class="h3-m">{{ user_mbti }}인 {{user_nickname}}님 추천 영화</h3>
@@ -25,10 +25,8 @@
           </div>
         </div>
       </div>
-      <div class="mainitem-blank-size"></div>
       <div>
-        <div></div>
-        <div>
+        <div style="padding-left:200px;">
           <h3 class="h3-m">{{ user_age }}세 {{user_nickname}}님 추천 영화</h3>
           <div class="scroll">
             <MovieCardListItem
@@ -43,11 +41,11 @@
     <div class="mainitem-blank-height"></div>
     <div class="mainitem-blank-height"></div>
     <div>
-      <h3 class="h3-m">랜덤유저어쩌구</h3>
+      <h3 class="h3-m">database 영화</h3>
       <div class="mainitem">
-        <button @click="random_userpick">랜덤 돌려돌려</button>
+        
         <MovieCardListItem2
-          v-for="movie in movie_randomUser_data.pickmovies"
+          v-for="movie in movies"
           :key="movie.id"
           :movie="movie"
         />
@@ -74,16 +72,13 @@ export default {
       movie_latest_data: [],
       movie_mbti_data: [],
       movie_age_data: [],
-      movie_randomUser_data: [],
     }
   },
   created() {
-    this.movie_latest,
-    this.mbti,
-    this.age,
-    this.movie_age,
-    this.random_user,
-    this.random_userpick
+    this.movie_latest
+    this.mbti
+    this.age
+    this.movie_age
   },
   computed: {
     user_mbti(){
@@ -102,38 +97,33 @@ export default {
       return this.$store.state.username
     },
     movie_latest() {
-      this.movie_latest_data = _.sampleSize(this.$store.state.movie_latest,5)
+      this.movie_latest_data = _.sampleSize(this.$store.state.movie_latest,8)
       console.log(this.movie_latest_data)
     },
     isLogin() {
       return this.$store.getters.isLogin
     },
     movie_age() {
-      this.movie_age_data = _.sampleSize(this.$store.state.movie_age,5)
+      this.movie_age_data = _.sampleSize(this.$store.state.movie_age,8)
     },
     mbti() {
       console.log('얍')
       const mbti = this.$store.state.user.mbti
       if (mbti === 'INFJ' || mbti === 'ISTP' || mbti === 'ENFP') {
-        this.movie_mbti_data = _.sampleSize(this.$store.state.movie_latest,5)
+        this.movie_mbti_data = _.sampleSize(this.$store.state.movie_latest,8)
       } else if (mbti === 'ESFP' || mbti === 'ESFJ') {
-        this.movie_mbti_data = _.sampleSize(this.$store.state.movies,5)
+        this.movie_mbti_data = _.sampleSize(this.$store.state.movies,8)
       } else {
         console.log(mbti)
         this.$store.dispatch('getMovieMbti', mbti)
-        this.movie_mbti_data = _.sampleSize(this.$store.state.movie_mbti,5)
+        this.movie_mbti_data = _.sampleSize(this.$store.state.movie_mbti,8)
         }
       },
     age() {
       const age = this.$store.state.user.age
       this.$store.dispatch('getMovieage', age)
     },
-    random_user() {
-      this.$store.dispatch('randomUser')
-    },
-    random_userpick(){
-      this.movie_randomUser_data = _.sampleSize(this.$store.state.users, 1)
-    }
+
   }
 }
 

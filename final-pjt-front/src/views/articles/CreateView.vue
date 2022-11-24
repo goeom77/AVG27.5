@@ -1,19 +1,28 @@
 <template>
-  <div class="allfont">
+  <div class="allfont article-i">
+    <div class="mainitem-blank-height"></div>
+    <div class="mainitem-blank-height"></div>
     <h1>게시글 작성</h1>
     <form @submit.prevent="createArticle">
       <label for="title">제목 : </label>
-      <input type="text" id="title" v-model.trim="title"><br>
+      <div>
+        <input type="text" id="title" v-model.trim="title"><br>
+      </div>
       <label for="type">종류 : </label>
-      <select id="type" v-model.trim="type">
-          <option disabled="disabled">선택해 주세요.</option>
-          <option v-if="user_now === 'admin'" value="공지사항">공지사항</option>
-          <option value="자유게시판">자유게시판</option>
-          <option value="Q&A">Q&A</option>
-        </select>
-      <br>
+      <div>
+        <select id="type" v-model.trim="type">
+            <option disabled="disabled">선택해 주세요.</option>
+            <option v-if="user_now === 'admin'" value="공지사항">공지사항</option>
+            <option value="자유게시판">자유게시판</option>
+            <option value="Q&A">Q&A</option>
+          </select>
+      </div>
+      <div class="mainitem-blank-height"></div>
       <label for="content">내용 : </label>
-      <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
+      <div>
+
+        <textarea id="content" cols="30" rows="10" v-model="content" style="width:500px; height:300px"></textarea><br>
+      </div>
       <input type="submit" id="submit">
     </form>
   </div>
@@ -81,5 +90,9 @@ export default {
 <style>
 .allfont{
   color: white
+}
+.article-i {
+  margin: 0 auto;
+  padding: 0;
 }
 </style>

@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     movieDetail(id) {
-      this.$router.push({ name: 'MovieDetailViewLatest', params: {id}})
+      this.$router.push({ name: 'MovieDetailView', params: {id}})
     }
   }
 }

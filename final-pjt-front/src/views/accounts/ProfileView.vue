@@ -1,85 +1,108 @@
 <template>
   <div>
     <div class="mainitem-blank-height"></div>
-    <div class="profile-div-class">
-      <div>
-        <h1>프로필</h1>
-        <!-- {{profileuser}} -->
-        <div class="imgbox">
-          <img
-          class="profile"
-          :src="profileuser.profile_img ? profileuser.profile_img : '@/assets/noimage.png'"
-          alt="프로필 사진을 등록해주세요."
-          />
-        </div>
-      </div>
-      <div>
+    <div style="display:flex;">
+      <!-- 1번 -->
+      <div style="width:100px;"></div>
+      <!-- 1번 부속 -->
+      <div style="width:400px;">
+        <div class="profile-blank-height"></div>
+        <h1 style="margin-left:20px;">프로필</h1>
         <div>
-          이름 : {{profileuser.nickname}}  | 
-          나이 : {{profileuser.age}} 
-        </div>
-        <div>
-          mbti : {{profileuser.mbti}}
-        </div>
-        <p>followers : {{ profileuser.followers.length ? profileuser.followers.length : 0}}  | 
-        followings : {{ profileuser.followings.length ? profileuser.followings.length : 0 }}</p>
-        <div>
-          <button v-if="samePeople">
-            <router-link
-            :to="{
-              name: 'ProfileEditView',
-              params: {
-                username: user.username,
-              },
-            }"
-            ><span>Edit Profile</span></router-link></button>
-          <div v-else @click="followPut()">
-          <!-- v-else -->
-            <button v-if="follow" @click="postfollow"><span>UnFollow</span></button>
-            <button v-else @click="postfollow"><span>Follow</span></button>
+          <div>
+            <!-- {{profileuser}} -->
+            <div class="imgbox">
+              <img
+              class="profile"
+              :src="profileuser.profile_img ? profileuser.profile_img : '@/assets/noimage.png'"
+              alt="프로필 사진을 등록해주세요."
+              />
+            </div>
+          </div>
+          <div style="width:90px;"></div>
+          <div style="font-size:large; margin:10px;">
+            <div style="margin:10px;">
+              이름 : {{profileuser.nickname}}
+            </div>
+            <div style="margin:10px;">
+              나이 : {{profileuser.age}} 
+            </div>
+            <div style="margin:10px;">
+              mbti : {{profileuser.mbti}}
+            </div>
+            <div style="margin:10px;">  
+              <span @click="followerclick">followers : {{ profileuser.followers.length ? profileuser.followers.length : 0}}  |</span>
+              <span @click="followingclick">  followings : {{ profileuser.followings.length ? profileuser.followings.length : 0 }}</span>
+            </div>
+            <div>
+              <h3 class="articleTitle"></h3>
+              <div v-if="samePeople">
+                <router-link
+                :to="{
+                  name: 'ProfileEditView',
+                  params: {
+                    username: user.username,
+                  },
+                }"
+                ><span class="button btnPush btnBlueGreen">EDIT PROFILE</span></router-link></div>
+              <div v-else @click="followPut()">
+              <!-- v-else -->
+                <div v-if="follow" @click="postfollow"><span class="button btnPush btnBlueGreen">UNFOLLOW</span></div>
+                <div v-else @click="postfollow"><span class="button btnPush btnBlueGreen">FOLLOW</span></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-      <p>PIck :{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}}  | 
-      Wish :{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
-    <div>
-      <h5>{{profileuser.nickname}}님 PICK</h5>
-      <div class="mainitem">
-        <MovieCardListItem2
-          v-for="movie in profileuser.pickmovies"
-          :key="movie.id"
-          :movie="movie"
-        />
-      </div>
-      <hr>
-      <h5>{{profileuser.nickname}}님 WISH</h5>
-      <div class="mainitem">
-        <MovieCardListItem2
-          v-for="movie in profileuser.wishmovies"
-          :key="movie.id"
-          :movie="movie"
-        />
-      </div>
-    </div>
-    <div>
+      <!-- 2번 -->
       <div>
-        <hr>
-        <h1>followers</h1>
-        <ProfileMini
-          v-for="people in profileuser.followers"
-          :key="people.id"
-          :people="people"
-        />
-        <hr>
-      </div>
-      <div>
-        <h1>followings</h1>
-        <ProfileMini
-          v-for="people in profileuser.followings"
-          :key="people.id"
-          :people="people"
-        />
+        <div>
+          <div class="profile-blank-height"></div>
+          <p style="font-size:x-large"><span @click="pickclick">PICK :</span>{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}}  | 
+          <span @click="wishclick">Wish :</span>{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
+        </div>
+        <!-- 1일때 -->
+        <div v-if="btn===1">
+          <h1>{{profileuser.nickname}}님의 PICK</h1>
+          <div class="mainitem">
+            <MovieCardListItem2
+              v-for="movie in profileuser.pickmovies"
+              :key="movie.id"
+              :movie="movie"
+            />
+          </div>
+        </div>
+        <!-- 4일때 -->
+        <div v-if="btn===4">
+          <h1>{{profileuser.nickname}}님의 WISH</h1>
+          <div class="mainitem">
+            <MovieCardListItem2
+              v-for="movie in profileuser.wishmovies"
+              :key="movie.id"
+              :movie="movie"
+            />
+          </div>
+        </div>
+        <div>
+          <!-- 2일때 -->
+          <div v-if="btn===2">
+            <h1>followers</h1>
+            <ProfileMini
+              v-for="people in profileuser.followers"
+              :key="people.id"
+              :people="people"
+            />
+          </div>
+          <!-- 3일때 -->
+          <div v-if="btn===3">
+            <h1>followings</h1>
+            <ProfileMini
+              v-for="people in profileuser.followings"
+              :key="people.id"
+              :people="people"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -101,6 +124,7 @@ export default {
     return {
       follow: false,
       profileuser: {},
+      btn: 1,
     }
   },
   computed: {
@@ -174,6 +198,18 @@ export default {
           this.getProfileData(payload)
           
       })
+    },
+    pickclick() {
+      this.btn = 1
+    },
+    wishclick() {
+      this.btn = 4
+    },
+    followerclick() {
+      this.btn = 2
+    },
+    followingclick() {
+      this.btn = 3
     }
   },
 }
@@ -192,5 +228,34 @@ export default {
   height: 100%;
   object-fit: cover;
 }
-
+.profile-blank-height {
+  height: 200px;
+}
+span.button {
+  display: block;
+  position: relative;
+  float: left;
+  width: 200px;
+  padding: 0;
+  margin: 10px 20px 10px 0;
+  font-weight: 600;
+  text-align: center;
+  line-height: 50px;
+  color: #FFF;
+  border-radius: 5px;
+  transition: all 0.2s ;
+}
+.btnBlueGreen.btnPush {
+  box-shadow: 0px 5px 0px 0px #007144;
+}
+.btnPush:hover {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.btnBlueGreen {
+  background: #00AE68;
+}
+.btnBlueGreen.btnPush:hover {
+  box-shadow: 0px 0px 0px 0px #007144;
+}
 </style>

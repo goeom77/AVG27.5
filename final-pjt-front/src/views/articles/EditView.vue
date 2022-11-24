@@ -1,19 +1,28 @@
 <template>
-  <div class="allfont">
+  
+  <div>
+    <div class="mainitem-blank-height"></div>
+    <div class="mainitem-blank-height"></div>
     <h1>게시글 수정</h1>
-    <form @submit.prevent="articleEdit">
-      <label for="title">제목 : </label>
-      <input :value="title" @input="title=$event.target.value" class="form-control" type="text"><br>
-      <label for="type">종류 : </label>
+    <form @submit.prevent="articleEdit" class="p-2">
+      <label for="title"><h5>제목</h5></label>
+      <div>
+        <input :value="title" @input="title=$event.target.value" type="text"><br>
+      </div>
+      <label for="type"><h5>종류</h5></label>
+      <div class="formtag-form-choose">
         <select id="type" v-model.trim="type">
           <option disabled="disabled">선택해 주세요.</option>
           <option v-if="user_now === 'admin'" value="공지사항">공지사항</option>
           <option value="자유게시판">자유게시판</option>
           <option value="Q&A">Q&A</option>
         </select>
-      <br>
+      </div>
+
       <label for="content">내용 : </label>
-      <textarea :value="content" @input="content=$event.target.value" class="form-control" rows="30"></textarea><br>
+      <div>
+        <textarea :value="content" @input="content=$event.target.value" style="width:500px; height:300px"></textarea><br>
+      </div>
       <input type="submit" id="submit">
       <button @click="articleDelete">[DELETE]</button>
     </form>

@@ -1,9 +1,14 @@
 <template>
   <div>
-    <h1 class="allfont">게시판</h1>
-    <router-link :to="{ name: 'CreateView'}">[글쓰기]</router-link>
-    <hr>
-    <ArticleList/>
+    <div class="mainitem-blank-height"></div>
+    <div class="article-title-i m-3">
+      <h1 class="allfont mr-3">게시판</h1>
+      <router-link :to="{ name: 'CreateView'}">[글쓰기]</router-link>
+      <hr>
+      <div class="mr-3">
+        <ArticleList/>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -37,7 +42,8 @@ export default {
 </script>
 
 <style>
-.allfont{
-  color: white
+.article-title-i {
+  margin: 0 auto;
+  text-align: center;
 }
 </style>

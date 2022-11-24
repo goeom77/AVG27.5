@@ -1,7 +1,7 @@
 <template>
   <div class="article-list">
     <div>
-      <b-card no-body>
+      <b-card no-body class="article-body">
         <b-tabs card>
           <b-tab title="자유게시판" active>
             <ArticleListItem
@@ -56,4 +56,12 @@ export default {
 .article-list {
   text-align: start;
 }
+.article-body {
+  border-radius: 5px;
+  -moz-box-shadow: 0 0 3px #ccc;
+  -webkit-box-shadow: 0 0 3px #ccc;
+  box-shadow: 0 0 3px #ccc;
+  background-color: white;
+}
+
 </style>

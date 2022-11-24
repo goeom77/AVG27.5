@@ -139,9 +139,6 @@ export default {
 .youtube{
   z-index: 0;
 }
-.allfont{
-  color: white
-}
 .fontbox {
   margin-top: -150px;
   margin-right: 15%;

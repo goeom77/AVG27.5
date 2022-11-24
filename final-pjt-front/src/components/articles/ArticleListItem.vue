@@ -4,7 +4,7 @@
     <p>작성자 : {{ article.nickname }}</p>
     <p class="d-inline-block text-truncate" style="max-width: 400px;">{{ article.content }}</p>
     <p></p>
-    <router-link :to="{ name: 'DetailView', params: {id : article.id}  }">[DETAIL]</router-link>
+    <router-link :to="{ name: 'MovieDetailView', params: {id : article.id}  }">[DETAIL]</router-link>
     <hr>
   </div>
 </template>

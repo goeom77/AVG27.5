@@ -127,20 +127,5 @@ export default {
 </script>
 
 <style>
-.poster {
-  margin-top: -250px;
-  margin-left: 35%;
-  z-index: 25;
-}
-.youtube{
-  z-index: 0;
-}
-.allfont{
-  color: white
-}
-.fontbox {
-  margin-top: -150px;
-  margin-right: 15%;
-  z-index: 50;
-}
+
 </style>

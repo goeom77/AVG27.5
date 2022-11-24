@@ -14,7 +14,7 @@
       <br>
       <label for="content">내용 : </label>
       <textarea id="content" cols="30" rows="10" v-model="content"></textarea><br>
-      <input type="submit" id="submit">
+      <button type="submit" id="submit" class="form-btn"><span >Submit</span></button>
     </form>
   </div>
 </template>
@@ -75,5 +75,43 @@ export default {
 </script>
 
 <style>
-
+.form-btn {
+  width: 200px;
+  height: 35px;
+  border-radius: 30px;
+  border: none;
+  color: white;
+  background-color: #2b54c4;
+  text-align: center;
+  opacity: 1;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.form-btn:hover {
+  opacity: 0.7;
+  width: 260px;
+}
+.form-btn span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  font-size: 16px;
+}
+.form-btn span:after {
+  content: "\00bb";
+  font-size: 30px;
+  position: absolute;
+  opacity: 0;
+  bottom: -8px;
+  right: -15px;
+  transition: 0.5s;
+}
+.form-btn:hover span {
+  padding-right: 25px;
+}
+.form-btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 </style>

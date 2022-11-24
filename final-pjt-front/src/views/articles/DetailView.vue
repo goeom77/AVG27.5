@@ -83,7 +83,5 @@ export default {
 }
 </script>
 <style>
-.allfont{
-  color: white
-}
+
 </style>
