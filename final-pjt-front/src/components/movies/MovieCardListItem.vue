@@ -1,20 +1,22 @@
 <template>
-  <div class="call" ontouchstart="this.classList.toggle('hover');">
-    <div class="container" @click="movieDetail(movie.id)">
-      <div class="front" style="background-image: url(https://unsplash.it/500/500/)">
-        <img :src="imgUrl" alt="" style="width:150px;">
-      </div>
-      <div class="back">
-        <div class="inner">
-          <p width='100px' style="word-break:break-all">{{ movieTitle }}</p>
-          <span>⭐: {{ vote_average }}</span>
+  <div>
+    <div class="card mb-3 main-row card-row-backgroud" style="max-width: 540px;" @click="movieDetail(movie.id)">
+      <div class="row g-0">
+        <div class="col-md-1">
+          <img :src="imgUrl" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-11">
+          <div class="card-body pt-1 pl-5 card-font-l">
+            <p class="card-title">{{ movieTitle }}</p>
+            <p class="card-text">⭐: {{ vote_average }}</p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
-
+  
+  
 <script>
 export default {
   name: 'MovieCardListItem',
@@ -37,12 +39,19 @@ export default {
   },
   methods: {
     movieDetail(id) {
-      this.$router.push({ name: 'MovieDetail', params: {id}})
+      this.$router.push({ name: 'MovieDetailViewLatest', params: {id}})
     }
   }
 }
 </script>
 
 <style>
-  
+.card-row-backgroud {
+  background-color: #232323 !important;
+  outline: 0 !important;
+  border: 0 !important;
+}
+.card-font-l {
+  font-size: 17px !important;
+}
 </style>

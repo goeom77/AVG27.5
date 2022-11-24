@@ -6,29 +6,29 @@
           <nav class="navbar">
             <ul id='home-ul' class="nav">
               <li class="nav-item">
-                <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044764237026840626/image.png" alt="">
+                <img class="nav-button-img" src="@/assets/PICME2.png" alt="">
               </li>
               <li class="nav-item">
-                <router-link class="nav-link button button--winona" data-text="Go Movie" :to="{ name: 'MovieView' }">
+                <router-link class="nav-link nav-button button--winona" data-text="Go Movie" :to="{ name: 'MovieView' }">
                   <span>홈</span></router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link button button--winona" data-text="Go Article" :to="{ name: 'ArticleView' }">
+                <router-link class="nav-link nav-button button--winona" data-text="Go Article" :to="{ name: 'ArticleView' }">
                   <span>게시판</span></router-link>
               </li>
               <li v-if="isLogin">
-                <router-link class="nav-link button button--winona" data-text="Go Profile" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">
+                <router-link class="nav-link nav-button button--winona" data-text="Go Profile" :to="{ name: 'ProfileView', params: { username: username } }" v-if="isLogin">
                   <span>{{ nickname }}</span></router-link>
               </li>
               <li>
-                <router-link class="nav-link button button--winona" data-text="Go Sign Up" :to="{ name: 'LogInView' }" v-if="!isLogin">
+                <router-link class="nav-link nav-button button--winona" data-text="Go Sign Up" :to="{ name: 'LogInView' }" v-if="!isLogin">
                   <span>로그인</span></router-link>
-                <div class="nav-link button button--winona" data-text="Go Sign Up" @click="isLogOut" v-if="isLogin">
+                <div class="nav-link nav-button button--winona" data-text="Go Sign Up" @click="isLogOut" v-if="isLogin">
                   <span>로그아웃</span>
                 </div>
               </li>
               <li class="nav-item" v-if="!isLogin">
-                <router-link class="nav-link button button--winona" data-text="Go Sign Up" :to="{ name: 'SignUpView' }">
+                <router-link class="nav-link nav-button button--winona" data-text="Go Sign Up" :to="{ name: 'SignUpView' }">
                   <span>회원가입</span></router-link>
               </li>
             </ul>
@@ -97,7 +97,7 @@ export default {
 #nav {
   background-color: #121111;
   min-height: 1000px;
-  height: 100%;
+  height: 1100px;
 }
 #home-ul>li {
   width:100%;
@@ -113,7 +113,7 @@ li>img {
 #nav-space {
   height: 90%;
 }
-.button {
+.nav-button {
   min-width: 150px;
   max-width: 350px;
   display: block;
@@ -124,6 +124,19 @@ li>img {
   color: inherit;
   position: relative;
   z-index: 1;
+  -moz-osx-font-smoothing: grayscale;
+}
+.nav-button-img {
+  min-width: 200px;
+  max-width: 420px;
+  display: block;
+  border: none;
+  background: none;
+  color: inherit;
+  position: relative;
+  z-index: 1;
+  margin: 0 auto; 
+  padding: 0;
   -moz-osx-font-smoothing: grayscale;
 }
 .button--winona {

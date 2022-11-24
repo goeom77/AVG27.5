@@ -38,7 +38,7 @@
       </div>
     </div>
     <div>
-      <h5>{{profileuser.nickname}} PICK</h5>
+      <h5>{{profileuser.nickname}}님 PICK</h5>
       <div class="mainitem">
         <MovieCardListItem2
           v-for="movie in profileuser.pickmovies"
@@ -47,7 +47,7 @@
         />
       </div>
       <hr>
-      <h5>{{profileuser.nickname}} WISH</h5>
+      <h5>{{profileuser.nickname}}님 WISH</h5>
       <div class="mainitem">
         <MovieCardListItem2
           v-for="movie in profileuser.wishmovies"

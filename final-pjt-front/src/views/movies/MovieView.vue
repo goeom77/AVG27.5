@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="mt-5"></div>
     <div>
-      <h5>최근 영화 추천</h5>
+      <div class="mainitem-blank-height"></div>
+      <h3 class="h3-m">최근 영화 추천</h3>
       <div class="mainitem">
         <MovieCardListItem2
           v-for="movie in movie_latest_data"
@@ -11,33 +11,41 @@
         />
       </div>
     </div>
-    <div class="mt-5"></div>
-    <div>
-      <h5>{{ user_mbti }}인 {{user_nickname}}님에게 추천하는 영화</h5>
-      <div class="mainitem">
-        <MovieCardListItem2
-          v-for="movie in movie_mbti_data"
-          :key="movie.id"
-          :movie="movie"
-        />
+    <div class="mt-5 "></div>
+    <div class="mainitem">
+      <div>
+        <div>
+          <h3 class="h3-m">{{ user_mbti }}인 {{user_nickname}}님 추천 영화</h3>
+          <div class="scroll">
+            <MovieCardListItem
+              v-for="movie in movie_mbti_data"
+              :key="movie.id"
+              :movie="movie"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="mainitem-blank-size"></div>
+      <div>
+        <div></div>
+        <div>
+          <h3 class="h3-m">{{ user_age }}세 {{user_nickname}}님 추천 영화</h3>
+          <div class="scroll">
+            <MovieCardListItem
+              v-for="movie in movies"
+              :key="movie.id"
+              :movie="movie"
+            />
+          </div>
+        </div>
       </div>
     </div>
-    <div class="mt-5"></div>
+    <div class="mainitem-blank-height"></div>
+    <div class="mainitem-blank-height"></div>
     <div>
-      <h5>{{ user_age }}세 {{user_nickname}}님에게 추천하는 영화</h5>
+      <h3 class="h3-m">database 영화</h3>
       <div class="mainitem">
         <MovieCardListItem2
-          v-for="movie in movie_age_data"
-          :key="movie.id"
-          :movie="movie"
-        />
-      </div>
-    </div>
-    <div class="m-5"></div>
-    <div>
-      <h5>database 영화</h5>
-      <div class="mainitem">
-        <MovieCardListItem
           v-for="movie in movies"
           :key="movie.id"
           :movie="movie"
@@ -135,14 +143,26 @@ export default {
   width:100%
 }
 
+.mainitem-blank-size {
+  width: 200px;
+}
+
+.mainitem-blank-height {
+  height: 80px;
+}
+
 .scroll {
   overflow: auto;
-  display: flex;
+  display: inline-block;
   white-space: nowrap;
-  height:260px;
+  height:270px;
 }
 
 .scroll::-webkit-scrollbar {
   display: none;
+}
+
+.h3-m {
+  margin-bottom: 10px;
 }
 </style>

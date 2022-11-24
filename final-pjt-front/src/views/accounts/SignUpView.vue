@@ -2,7 +2,7 @@
   <div>
     <div class="signup-card">
       <div style="text-align:center">
-        <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044398045946716311/image.png" alt="">
+        <img src="@/assets/PICME3.png" alt="">
       </div>
       <div class="signup-card-div">
         <b-form @submit.prevent="signUp" @reset="onReset">
@@ -74,7 +74,7 @@
             </b-form-group>
             <div class="m-3"></div>
             <div>
-              <b-button style="width:90%" type="submit" variant="primary">LOGIN</b-button>
+              <b-button style="width:90%" type="submit" variant="primary">SIGN UP</b-button>
               <b-button style="width:10%%" type="reset" variant="danger">Reset</b-button>
             </div>
           </div>

@@ -4,7 +4,7 @@
       <img src="https://cdn.discordapp.com/attachments/997060428385484880/1044766467331215390/232323.PNG" alt="">
     </div>
     <div class="login-card-div mt-3">
-      <b-form @submit.prevent="logIn()" @reset="onReset">
+      <b-form @submit.prevent="logIn()">
         <div class="pt-4"></div>
         <div class="login-card-div-input">
           <b-form-group id="input-group-1" label="Your ID: " label-for="input-1">
@@ -27,8 +27,7 @@
             </b-form-group>
             <div class="mt-5 pt-4"></div>
             <div>
-              <b-button style="width:87%" type="submit" variant="primary">LOGIN</b-button>
-              <b-button style="width:10%%" type="reset" variant="danger">Reset</b-button>
+              <b-button style="width:100%" type="submit" variant="primary">LOGIN</b-button>
             </div>
         </div>
       </b-form>
@@ -65,13 +64,6 @@ export default {
       this.$store.dispatch('logIn', payload)
       console.log('로그인페이지', payload)
     },
-    onReset(event) {
-        event.preventDefault()
-        // Reset our form values
-        this.payload.username = ''
-        this.payload.password = ''
-        // Trick to reset/clear native browser form validation state
-      }
   }
 }
 </script>
