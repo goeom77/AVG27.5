@@ -1,42 +1,49 @@
 <template>
   <div>
-    <h1>프로필</h1>
-    <!-- {{profileuser}} -->
-    <div class="imgbox">
-      <img
-      class="profile"
-      :src="profileuser.profile_img ? profileuser.profile_img : 'https://media.discordapp.net/attachments/997060428385484880/1042322474165096478/image.png'"
-      alt="프로필 사진을 등록해주세요."
-      />
-    </div>
-    
-    <div>
-      이름 : {{profileuser.nickname}} | 
-      나이 : {{profileuser.age}} 
-    </div>
-    <div>
-      mbti : {{profileuser.mbti}}
-    </div>
-    <p>followers : {{ profileuser.followers.length ? profileuser.followers.length : 0}} | 
-    followings : {{ profileuser.followings.length ? profileuser.followings.length : 0 }}</p>
-    <p>PIck :{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}} | 
-    Wish :{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
-    <div>
-      <button v-if="samePeople">
-        <router-link
-        :to="{
-          name: 'ProfileEditView',
-          params: {
-            username: user.username,
-          },
-        }"
-        ><span>Edit Profile</span></router-link></button>
-      <div v-else @click="followPut()">
-      <!-- v-else -->
-        <button v-if="follow" @click="postfollow"><span>UnFollow</span></button>
-        <button v-else @click="postfollow"><span>Follow</span></button>
+    <div class="mainitem-blank-height"></div>
+    <div class="profile-div-class">
+      <div>
+        <h1>프로필</h1>
+        <!-- {{profileuser}} -->
+        <div class="imgbox">
+          <img
+          class="profile"
+          :src="profileuser.profile_img ? profileuser.profile_img : '@/assets/noimage.png'"
+          alt="프로필 사진을 등록해주세요."
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          이름 : {{profileuser.nickname}}  | 
+          나이 : {{profileuser.age}} 
+        </div>
+        <div>
+          mbti : {{profileuser.mbti}}
+        </div>
+        <p>followers : {{ profileuser.followers.length ? profileuser.followers.length : 0}}  | 
+        followings : {{ profileuser.followings.length ? profileuser.followings.length : 0 }}</p>
+        <p>PIck :{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}}  | 
+        Wish :{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
+        <div>
+          <button v-if="samePeople">
+            <router-link
+            :to="{
+              name: 'ProfileEditView',
+              params: {
+                username: user.username,
+              },
+            }"
+            ><span>Edit Profile</span></router-link></button>
+          <div v-else @click="followPut()">
+          <!-- v-else -->
+            <button v-if="follow" @click="postfollow"><span>UnFollow</span></button>
+            <button v-else @click="postfollow"><span>Follow</span></button>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="mainitem-blank-height"></div>
     <div>
       <h5>{{profileuser.nickname}}님 PICK</h5>
       <div class="mainitem">
@@ -180,9 +187,11 @@ export default {
   border-radius: 70%;
   overflow: hidden;
 }
+
 .profile {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 </style>
