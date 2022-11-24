@@ -107,7 +107,7 @@ export default new Vuex.Store({
       console.log('ddd')
       axios({
         method: 'get',
-        url: `${API_URL}/articles/`,
+        url: `${API_URL}/articles/article/`,
         headers: {
           Authorization: `Token ${context.state.token}`
         }

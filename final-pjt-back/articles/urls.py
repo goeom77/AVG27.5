@@ -2,9 +2,9 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from django.urls import path
 from . import views
 
-
+app_name = 'articles'
 urlpatterns = [
-    path('', views.article_list),
+    path('article/', views.article_list),
     path('<int:article_pk>/', views.article_detail),
     path('<int:article_pk>/comment/', views.comment_list_create),
     path('<int:article_pk>/comment/<int:comment_pk>/', views.comment_detail),

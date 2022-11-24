@@ -66,7 +66,7 @@ export default {
       }
       axios({
         method: 'post',
-        url: `${API_URL}/articles/`,
+        url: `${API_URL}/articles/article/`,
         data: {
           title: title,
           content: content,
