@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="mainitem-blank-height"></div>
-      <h3 class="h3-m">최근 영화 추천</h3>
+      <h3 class="h3-m">현재 상영작</h3>
       <div class="mainitem">
         <MovieCardListItem2
           v-for="movie in movie_latest_data"
@@ -43,10 +43,11 @@
     <div class="mainitem-blank-height"></div>
     <div class="mainitem-blank-height"></div>
     <div>
-      <h3 class="h3-m">database 영화</h3>
+      <h3 class="h3-m">랜덤유저어쩌구</h3>
       <div class="mainitem">
+        <button @click="random_userpick">랜덤 돌려돌려</button>
         <MovieCardListItem2
-          v-for="movie in movies"
+          v-for="movie in movie_randomUser_data.pickmovies"
           :key="movie.id"
           :movie="movie"
         />
@@ -73,13 +74,16 @@ export default {
       movie_latest_data: [],
       movie_mbti_data: [],
       movie_age_data: [],
+      movie_randomUser_data: [],
     }
   },
   created() {
     this.movie_latest,
     this.mbti,
     this.age,
-    this.movie_age
+    this.movie_age,
+    this.random_user,
+    this.random_userpick
   },
   computed: {
     user_mbti(){
@@ -123,6 +127,12 @@ export default {
     age() {
       const age = this.$store.state.user.age
       this.$store.dispatch('getMovieage', age)
+    },
+    random_user() {
+      this.$store.dispatch('randomUser')
+    },
+    random_userpick(){
+      this.movie_randomUser_data = _.sampleSize(this.$store.state.users, 1)
     }
   }
 }

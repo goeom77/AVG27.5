@@ -23,6 +23,7 @@ export default new Vuex.Store({
     movie_latest: [],
     movie_mbti: [],
     movie_age: [],
+    users: [],
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
@@ -93,6 +94,11 @@ export default new Vuex.Store({
     GET_PROFILE_USER(state, payload) {
       // console.log(payload)
       state.profileuser = payload
+    },
+    RANDOM_USER(state, users){
+      state.users = []
+      state.users = users
+      console.log(users)
     },
     ////////////////////////////////////////articles//////////////
     ARTICLE_DELETE(state, article_id) {
@@ -244,6 +250,18 @@ export default new Vuex.Store({
       })
       .then((res) => {
           console.log(res)
+      })
+    },
+    randomUser(context){
+      axios({
+        method: 'get',
+        url: `${API_URL}/accounts/users/`,
+        headers: {
+          Authorization: `Token ${context.state.token}`},
+      })
+      .then((res) => {
+        // console.log('랜덤유저 가져오는 중..',res)
+        context.commit('RANDOM_USER', res.data)
       })
     },
     ////////////////////////////////////////articles//////////////
