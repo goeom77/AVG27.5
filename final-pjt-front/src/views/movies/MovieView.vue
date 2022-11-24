@@ -11,6 +11,28 @@
         />
       </div>
     </div>
+    <div class="mt-5"></div>
+    <div>
+      <h5>{{ user_mbti }}인 {{user_nickname}}님에게 추천하는 영화</h5>
+      <div class="mainitem">
+        <MovieCardListItem2
+          v-for="movie in movie_mbti_data"
+          :key="movie.id"
+          :movie="movie"
+        />
+      </div>
+    </div>
+    <div class="mt-5"></div>
+    <div>
+      <h5>{{ user_age }}세 {{user_nickname}}님에게 추천하는 영화</h5>
+      <div class="mainitem">
+        <MovieCardListItem2
+          v-for="movie in movie_age_data"
+          :key="movie.id"
+          :movie="movie"
+        />
+      </div>
+    </div>
     <div class="m-5"></div>
     <div>
       <h5>database 영화</h5>
@@ -41,12 +63,26 @@ export default {
   data() {
     return {
       movie_latest_data: [],
+      movie_mbti_data: [],
+      movie_age_data: [],
     }
   },
   created() {
-    this.movie_latest
+    this.movie_latest,
+    this.mbti,
+    this.age,
+    this.movie_age
   },
-  computed:{
+  computed: {
+    user_mbti(){
+      return this.$store.state.user.mbti
+    },
+    user_nickname(){
+      return this.$store.state.user.nickname
+    },
+    user_age(){
+      return this.$store.state.user.age
+    },
     movies() {
       return this.$store.state.movies
     },
@@ -60,8 +96,29 @@ export default {
     isLogin() {
       return this.$store.getters.isLogin
     },
-  },
+    movie_age() {
+      this.movie_age_data = _.sampleSize(this.$store.state.movie_age,5)
+    },
+    mbti() {
+      console.log('얍')
+      const mbti = this.$store.state.user.mbti
+      if (mbti === 'INFJ' || mbti === 'ISTP' || mbti === 'ENFP') {
+        this.movie_mbti_data = _.sampleSize(this.$store.state.movie_latest,5)
+      } else if (mbti === 'ESFP' || mbti === 'ESFJ') {
+        this.movie_mbti_data = _.sampleSize(this.$store.state.movies,5)
+      } else {
+        console.log(mbti)
+        this.$store.dispatch('getMovieMbti', mbti)
+        this.movie_mbti_data = _.sampleSize(this.$store.state.movie_mbti,5)
+        }
+      },
+    age() {
+      const age = this.$store.state.user.age
+      this.$store.dispatch('getMovieage', age)
+    }
+  }
 }
+
 </script>
 
 <style>

@@ -13,7 +13,6 @@ def profile_or_edit(request, username):
     user = get_object_or_404(get_user_model(), username=username)
     if request.method == 'GET':
         serializer = ProfileSerializer(user)
-        print(serializer)
         return Response(serializer.data)
     
     elif request.user.is_authenticated:

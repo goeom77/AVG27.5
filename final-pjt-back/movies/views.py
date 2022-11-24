@@ -143,9 +143,16 @@ def recommended_mbti(request, mbti):
             for movie_genre_pk in movie['genres']:
                 if movie_genre_pk == genre_pk:
                     recommended_movies.append(movie)
+        return Response(recommended_movies)
 
-        context = {
-            'recommended_movies': recommended_movies,
-        }
-        
-        return Response(context)
+@api_view(['GET'])
+def recommended_age(request, age):
+    movies = get_list_or_404(Movie)
+    serializer = MovieListSerializer(movies, many=True)
+    movies_age = []
+    
+    if request.method == 'GET':
+        for movie in serializer.data:
+            if movie['release_date'][0:4] == str(2022 - (age // 2)):
+                movies_age.append(movie)
+        return Response(movies_age)

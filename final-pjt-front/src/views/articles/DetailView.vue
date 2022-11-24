@@ -4,8 +4,8 @@
     <button @click='profileView'>글쓴이 : {{ article?.nickname }}</button>
     <p>게시판 : {{ article?.type }}</p>
     <h3>내용 : {{ article?.content }}</h3>
-    <p>작성시간 : {{ article?.created_at }}</p>
-    <p>수정시간 : {{ article?.updated_at }}</p>
+    <p>작성시간 : {{ article?.created_at|date:'Y-m-d H:i:s' }}</p>
+    <p>수정시간 : {{ article?.updated_at|date:'Y-m-d H:i:s' }}</p>
     <button v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" @click="articleDelete" >[DELETE]</button>
     <router-link v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" :to="{ name: 'EditView',  params : {id : article.id}}">[EDIT]</router-link>
     <div>

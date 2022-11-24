@@ -21,6 +21,8 @@ export default new Vuex.Store({
     articles: [],
     movies: [],
     movie_latest: [],
+    movie_mbti: [],
+    movie_age: [],
     ////////////////////////////////////////accounts//////////////
     token: null,
     username: null,
@@ -52,6 +54,14 @@ export default new Vuex.Store({
         }
         state.movies.push(movie_g)
     })},
+    MOVIE_MBTI(state, movie_mbti) {
+      state.movie_mbti = []
+      state.movie_mbti = movie_mbti
+    },
+    MOVIE_AGE(state, movie_age) {
+      state.movie_age = []
+      state.movie_age = movie_age
+    },
     ////////////////////////////////////////accounts//////////////
     SIGN_UP(state, token) {
       state.token = token
@@ -73,7 +83,6 @@ export default new Vuex.Store({
       state.username = username
     },
     GET_USERNAME(state, username) {
-      console.log(username,'get_username뮤테이션')
       state.username = username
       router.push({ name: 'MovieView' })
     },
@@ -125,6 +134,24 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    getMovieMbti(context, mbti) {
+      axios.get(`${API_URL}/movies/recommended/${mbti}`)
+        .then((res) => {
+          context.commit('MOVIE_MBTI', res.data)
+        })
+        .catch((err) => { 
+          console.log(err)
+      })
+    },
+    getMovieage(context, age) {
+      axios.get(`${API_URL}/movies/recommended/age/${age}`)
+        .then((res) => {
+          context.commit('MOVIE_AGE', res.data)
+        })
+        .catch((err) => { 
+          console.log(err)
+      })
+    },
     ////////////////////////////////////////accounts//////////////
     signUp(context, payload) {
       axios({
@@ -170,8 +197,9 @@ export default new Vuex.Store({
           context.commit('GET_USERNAME', username)
           context.dispatch('getNowUser',username)
         })
-        .catch(() => 
-          alert('다시 로그인을 시도해 주세요.'))
+        .catch(() => {
+          alert('다시 로그인을 시도해 주세요.') 
+      })
     },
     getNowUser(context,username) {
       axios({
@@ -192,7 +220,6 @@ export default new Vuex.Store({
         url: `${API_URL}/accounts/profile/${payload.username}/`,
       })
         .then((res) => {
-          // console.log(res.data)
           context.commit('GET_PROFILE_USER', res.data)
         })
         .catch((err) => {

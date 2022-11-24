@@ -11,5 +11,6 @@ urlpatterns = [
     path('<int:movie_pk>/wishmovies/', views.wish_movies),
     path('<int:movie_pk>/pickmovies/', views.pick_movies),
     path('recommended/<str:mbti>/', views.recommended_mbti),
+    path('recommended/age/<int:age>/', views.recommended_age),
 ]
 
