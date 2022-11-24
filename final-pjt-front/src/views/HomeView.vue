@@ -88,7 +88,28 @@ export default {
     isLogOut(){
       this.$store.dispatch('logOut',this.isLogin)
     },
+    getmbtimovie() {
+      const movie_mbti = this.$store.movie_mbti
+      if (movie_mbti === undefined) {
+        const mbti = this.$store.state.user.mbti
+        if (mbti === 'INFJ' || mbti === 'ISTP' || mbti === 'ENFP') {
+          console.log('여기 infj')
+          //  전체 영화
+        } else if (mbti === 'ESFP' || mbti === 'ESFJ') {
+          console.log('여기 esfp')
+          // 최신영화
+        } else {
+          axios.get(`${API_URL}/movies/recommended/${mbti}`)
+            .then((res) => {
+              this.$store.dispatch('getMbtiMovieData', res.data)
+            })
+            .catch((err) => { 
+              console.log(err)
+            })}
+        }
+    },
   },
+  
 }
 </script>
 

@@ -118,3 +118,34 @@ def pick_movies(request, movie_pk):
             movie.pickuser.add(user)
             pick = True
         return Response(pick)
+
+@api_view(['GET'])
+def recommended_mbti(request, mbti):
+    movies = get_list_or_404(Movie)
+    serializer = MovieListSerializer(movies, many=True)
+    recommended_movies = []
+    recommend = {
+        'ISTJ' :18, 
+        'INTJ': 878,
+        'ENTP':  99, 
+        'INTP' : 80 ,
+        'ISFP' : 18,
+        'ENFJ': 10751,
+        'ENTJ' : 36,
+        'ISFJ' :10770,
+        'INFP': 10402,
+        'ESTP' : 12,
+        'ESTJ' : 27
+    }
+    genre_pk = recommend[mbti]
+    if request.method == 'GET':
+        for movie in serializer.data:
+            for movie_genre_pk in movie['genres']:
+                if movie_genre_pk == genre_pk:
+                    recommended_movies.append(movie)
+
+        context = {
+            'recommended_movies': recommended_movies,
+        }
+        
+        return Response(context)
