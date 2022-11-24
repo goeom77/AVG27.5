@@ -9,6 +9,7 @@ import SignUpView from '@/views/accounts/SignUpView'
 import LogInView from '@/views/accounts/LogInView'
 import ProfileView from '@/views/accounts/ProfileView'
 import ProfileEditView from '@/views/accounts/ProfileEditView'
+import ProfileMiniView from '@/views/accounts/ProfileMiniView'
 
 import MovieView from '@/views/movies/MovieView'
 import MovieDetailView from '@/views/movies/MovieDetailView'
@@ -65,6 +66,12 @@ const routes = [
     path: '/profile/:username',
     name: 'ProfileView',
     component: ProfileView
+  },
+
+  {
+    path: '/profilemini/:username',
+    name: 'ProfileMiniView',
+    component: ProfileMiniView
   },
 
   ///////////////////////////////////////////////////

@@ -216,7 +216,6 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token}`},
       })
       .then((res) => {
-          // console.log('follow상태')
           console.log(res)
       })
     },

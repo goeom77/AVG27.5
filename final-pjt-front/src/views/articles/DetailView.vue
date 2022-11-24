@@ -7,7 +7,7 @@
     <p>작성시간 : {{ article?.created_at }}</p>
     <p>수정시간 : {{ article?.updated_at }}</p>
     <button v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" @click="articleDelete" >[DELETE]</button>
-    <router-link :to="{ name: 'EditView',  params : {id : article.id}}">[EDIT]</router-link>
+    <router-link v-if="login_user === write_user" class="btn btn-outline-danger btn-sm mx-3" :to="{ name: 'EditView',  params : {id : article.id}}">[EDIT]</router-link>
     <div>
       <!-- 댓글내용 -->
       <hr>
@@ -75,8 +75,8 @@ export default {
       })
     },
     profileView() {
-      console.log(this.article.user.username)
-      console.log(this.article)
+      // console.log(this.article.user.username)
+      // console.log(this.article)
       this.$router.push({ name: 'ProfileView' , params:{ username : this.article.username }})
     }
   }

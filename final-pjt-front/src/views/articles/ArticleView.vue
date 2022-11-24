@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="allfont">Article Page</h1>
-    <router-link :to="{ name: 'CreateView'}">[CREATE]</router-link>
+    <h1 class="allfont">게시판</h1>
+    <router-link :to="{ name: 'CreateView'}">[글쓰기]</router-link>
     <hr>
     <ArticleList/>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>프로필</h1>
-    {{profileuser}}
+    <!-- {{profileuser}} -->
     <div class="imgbox">
       <img
       class="profile"
@@ -9,14 +9,18 @@
       alt="프로필 사진을 등록해주세요."
       />
     </div>
-    {{ profileuser.followers }}
     
     <div>
-      이름 : {{profileuser.nickname}}
+      이름 : {{profileuser.nickname}} | 
+      나이 : {{profileuser.age}} 
     </div>
     <div>
       mbti : {{profileuser.mbti}}
     </div>
+    <p>followers : {{ profileuser.followers.length ? profileuser.followers.length : 0}} | 
+    followings : {{ profileuser.followings.length ? profileuser.followings.length : 0 }}</p>
+    <p>PIck :{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}} | 
+    Wish :{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
     <div>
       <button v-if="samePeople">
         <router-link
@@ -33,16 +37,40 @@
         <button v-else @click="postfollow"><span>Follow</span></button>
       </div>
     </div>
-
-    <!-- <div>
-      {{profileuser.followers.count ? profileuser.followers.count : '_'}}팔로워
-      {{profileuser.followings.count ? profileuser.followings.count : '_'}}팔로잉
-    </div> -->
+    <div>
+      <h5>{{profileuser.nickname}} PICK</h5>
+      <div class="mainitem">
+        <MovieCardListItem2
+          v-for="movie in profileuser.pickmovies"
+          :key="movie.id"
+          :movie="movie"
+        />
+      </div>
+      <hr>
+      <h5>{{profileuser.nickname}} WISH</h5>
+      <div class="mainitem">
+        <MovieCardListItem2
+          v-for="movie in profileuser.wishmovies"
+          :key="movie.id"
+          :movie="movie"
+        />
+      </div>
+    </div>
     <div>
       <div>
-        <p>팔로워</p>
+        <hr>
+        <h1>followers</h1>
         <ProfileMini
           v-for="people in profileuser.followers"
+          :key="people.id"
+          :people="people"
+        />
+        <hr>
+      </div>
+      <div>
+        <h1>followings</h1>
+        <ProfileMini
+          v-for="people in profileuser.followings"
           :key="people.id"
           :people="people"
         />
@@ -53,6 +81,7 @@
 </template>
 
 <script>
+import MovieCardListItem2 from '@/components/movies/MovieCardListItem2'
 import ProfileMini from '@/components/profiles/ProfileMini'
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
@@ -60,6 +89,7 @@ export default {
   name: 'ProfileView',
   components: {
     ProfileMini,
+    MovieCardListItem2,
   },
   data() {
     return {
@@ -74,34 +104,36 @@ export default {
     user() {
       return this.$store.state.user
     },
-    // profileuser() {
-    //   return this.$store.state.profileuser
-    // },
     samePeople() {
-      // true 같은 사람 false 다른 사람
-      // console.log('사람비교')
-      // console.log(this.$route.params.username)
-      // console.log(this.user.username)
       return this.$route.params.username === this.user.username
     },
+    followers_count() {
+      return this.profileuser.followers === [] ? this.profileuser.followers.length : 0;
+    },
+    followings_count() {
+      return this.profileuser.followings === [] ? this.profileuser.followings.length : 0;
+    },
+    pickmovies_count() {
+      return this.profileuser.pickmovies === [] ? this.profileuser.pickmovies.length : 0;
+    },
+    wishmovies_count() {
+      return this.profileuser.wishmovies === [] ? this.profileuser.wishmovies.length : 0;
+    }
   },
   created() {
-    console.log( this.$route.params.username)
+    // console.log( this.$route.params.username)
     const payload = { username: this.$route.params.username }
     this.getProfileData(payload)
     this.followCheck(payload)
   },
   methods: {
     getProfileData(payload) {
-      // console.log('여기다!!',payload)
-      // this.$store.dispatch('getProfileUser', payload)
       axios({
         method: 'get',
         url: `${API_URL}/accounts/profile/${payload.username}/`,
       })
         .then((res) => {
           this.profileuser = res.data
-          // context.commit('GET_PROFILE_USER', res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -132,6 +164,9 @@ export default {
       })
         .then((res) => {
           this.follow = res.data
+          const payload = { username: this.$route.params.username }
+          this.getProfileData(payload)
+          
       })
     }
   },

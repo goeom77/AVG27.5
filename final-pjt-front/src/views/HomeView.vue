@@ -1,5 +1,5 @@
 <template>
-  <div style="width:200px;" class="bv-example-row allfont">
+  <div class="bv-example-row allfont">
     <b-row>
       <b-col xs="4" md="3" lg="2" sm="6">
         <div id='nav' class="text-center">
