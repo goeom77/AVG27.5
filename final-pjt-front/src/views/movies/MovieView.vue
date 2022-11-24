@@ -15,7 +15,8 @@
     <div class="mainitem" style="width:2000px;">
       <div>
         <div>
-          <h3 class="h3-m">{{ user_mbti }}인 {{user_nickname}}님 추천 영화</h3>
+          <h3 v-if="!isLogin" class="h3-m">{{ user_mbti }} 추천 영화</h3>
+          <h3 v-if="isLogin" class="h3-m">{{ user_mbti }}인 {{user_nickname}}님 추천 영화</h3>
           <div class="scroll">
             <MovieCardListItem
               v-for="movie in movie_mbti_data"
@@ -27,10 +28,11 @@
       </div>
       <div>
         <div style="padding-left:200px;">
-          <h3 class="h3-m">{{ user_age }}세 {{user_nickname}}님 추천 영화</h3>
+          <h3 v-if="!isLogin" class="h3-m">{{ user_age }}세 추천 영화</h3>
+          <h3 v-if="isLogin" class="h3-m">{{ user_age }}세 {{ user_nickname }}님 추천 영화</h3>
           <div class="scroll">
             <MovieCardListItem
-              v-for="movie in movies"
+              v-for="movie in movie_age_data"
               :key="movie.id"
               :movie="movie"
             />
@@ -40,12 +42,24 @@
     </div>
     <div class="mainitem-blank-height"></div>
     <div class="mainitem-blank-height"></div>
-    <div>
-      <h3 class="h3-m">database 영화</h3>
+    <div v-if="isLogin">
+      <h3 class="h3-m">{{movie_randomUser_data.nickname}}님의 PICK</h3>
       <div class="mainitem">
-        
+        {{movie_randomUser_data}}
+        <button class="btn btn-outline-danger btn-sm mx-3" @click.prevent="random_userpick">랜덤 돌려돌려</button>
         <MovieCardListItem2
-          v-for="movie in movies"
+          v-for="movie in movie_randomUser_data.pickmovies"
+          :key="movie.id"
+          :movie="movie"
+        />
+      </div>
+    </div>
+    <div v-if="!isLogin">
+      <button @click.prevent="random_userpick">랜덤 돌려돌려</button>
+      <h3 class="h3-m">랜덤추천 - 로그인 후 PICK LIST를 둘러보세요!</h3>
+      <div class="mainitem">
+        <MovieCardListItem2
+          v-for="movie in movie_random_pick_data"
           :key="movie.id"
           :movie="movie"
         />
@@ -72,15 +86,25 @@ export default {
       movie_latest_data: [],
       movie_mbti_data: [],
       movie_age_data: [],
+      movie_randomUser_data: [],
+      movie_random_pick_data: []
     }
   },
   created() {
     this.movie_latest
     this.mbti
-    this.age
     this.movie_age
+
+  },
+  mounted() {
+    this.age
+    this.random_userpick
+    this.movie_random_pick
   },
   computed: {
+    latest() {
+      this.$store.dispatch('getMovieLatest')
+    },
     user_mbti(){
       return this.$store.state.user.mbti
     },
@@ -107,7 +131,6 @@ export default {
       this.movie_age_data = _.sampleSize(this.$store.state.movie_age,8)
     },
     mbti() {
-      console.log('얍')
       const mbti = this.$store.state.user.mbti
       if (mbti === 'INFJ' || mbti === 'ISTP' || mbti === 'ENFP') {
         this.movie_mbti_data = _.sampleSize(this.$store.state.movie_latest,8)
@@ -123,7 +146,12 @@ export default {
       const age = this.$store.state.user.age
       this.$store.dispatch('getMovieage', age)
     },
-
+    random_userpick(){
+      this.movie_randomUser_data = _.sampleSize(this.$store.state.users, 1)
+    },
+    movie_random_pick(){
+      this.movie_random_pick_data = _.sampleSize(this.$store.state.movies, 5)
+    }
   }
 }
 

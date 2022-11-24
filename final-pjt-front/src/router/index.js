@@ -13,7 +13,6 @@ import ProfileMiniView from '@/views/accounts/ProfileMiniView'
 
 import MovieView from '@/views/movies/MovieView'
 import MovieDetailView from '@/views/movies/MovieDetailView'
-import MovieDetailViewLatest from '@/views/movies/MovieDetailViewLatest'
 
 Vue.use(VueRouter)
 
@@ -86,12 +85,6 @@ const routes = [
     path: '/movies/:id',
     name: 'MovieDetailView',
     component: MovieDetailView,
-  },
-
-  {
-    path: '/movieslatest/:id',
-    name: 'MovieDetailViewLatest',
-    component: MovieDetailViewLatest,
   },
 
 ]
