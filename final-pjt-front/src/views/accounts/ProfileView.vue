@@ -23,8 +23,6 @@
         </div>
         <p>followers : {{ profileuser.followers.length ? profileuser.followers.length : 0}}  | 
         followings : {{ profileuser.followings.length ? profileuser.followings.length : 0 }}</p>
-        <p>PIck :{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}}  | 
-        Wish :{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
         <div>
           <button v-if="samePeople">
             <router-link
@@ -43,7 +41,8 @@
         </div>
       </div>
     </div>
-    <div class="mainitem-blank-height"></div>
+      <p>PIck :{{ profileuser.pickmovies.length ? profileuser.pickmovies.length : 0}}  | 
+      Wish :{{ profileuser.wishmovies.length ? profileuser.wishmovies.length : 0}} </p> 
     <div>
       <h5>{{profileuser.nickname}}님 PICK</h5>
       <div class="mainitem">
