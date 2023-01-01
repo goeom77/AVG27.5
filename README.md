@@ -8,7 +8,7 @@
 
 ## 최신버전 <a href="https://github.com/eunjineee/AVG27.5-ver2" target="_blank"> Go Ver2</a>
 
-<a href="https://prickly-melon-45e.notion.site/887ea49bbaef4ea2a1e76f2c7ef150ea?v=39ef0c5dc5994692935e2f6fe2a85ef3" target="_blank">노션으로</a>
+<a href="https://prickly-melon-45e.notion.site/887ea49bbaef4ea2a1e76f2c7ef150ea?v=39ef0c5dc5994692935e2f6fe2a85ef3" target="_blank"> Go Notion </a>
 
 ## 팀
 
