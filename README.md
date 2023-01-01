@@ -6,9 +6,16 @@
 </div>
 <br/>
 
+## 최신버전 <a href="https://github.com/eunjineee/AVG27.5-ver2" target="_blank"> Go Ver2</a>
 
-팀명 :  AVG 27.5   팀원: 양은진, 엄형규
-<a href="https://github.com/eunjineee/AVG27.5-ver2">Go Ver2</a>
+<a href="https://prickly-melon-45e.notion.site/887ea49bbaef4ea2a1e76f2c7ef150ea?v=39ef0c5dc5994692935e2f6fe2a85ef3" target="_blank">노션으로</a>
+
+## 팀
+
+팀명 :  AVG 27.5   
+
+팀원: 양은진, 엄형규
+
 
 
 <table>
