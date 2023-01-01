@@ -1,9 +1,112 @@
 # README.md
+<div align="center">
+<br />
+<img src="https://github.com/goeom77/AVG27.5/blob/master/README.md.assets/PICME2.png" alt="PJT" width="800px" height="250px" />
+<br />
+</div>
+<br/>
+
 
 팀명 :  AVG 27.5   팀원: 양은진, 엄형규
 
-## 1. 팀원 정보 및 업무 분담 내역
+<table>
+<tr>
+<td align="center" width="150px">
+<a href="[https://github.com/eunjineee](https://github.com/eunjineee)" target="_blank">
+<a href="https://github.com/eunjineee"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/108562895?v=4" alt="양은진 프로필"/></a>
+</a>
+</td>
+<td align="center" width="150px">
+<a href="[https://github.com/goeom77](https://github.com/goeom77)" target="_blank">
+<a href="https://github.com/goeom77"><img height="100px" width="100px" src="https://avatars.githubusercontent.com/u/109336705?v=4" alt="엄형규 프로필"/></a>
+</a>
+</td>
+</tr>
+<tr>
+<td align="center" width="30px">
+양은진
+</td>
+<td align="center" width="30px">
+엄형규
+</td>
+</tr>
+</table>
 
+## 0. 웹 서비스 소개
+
+Pic Me는 개인의 성향과 비슷한 사람들을 pick해서 그 사람들이 소개하는 영화를 보는 서비스입니다.
+
+자신이 좋아하는 것은 pick리스트에, 나중에 보고싶은 영화는 wish리스트에 보관하고, 
+
+자신의 성향과 비슷한 사람들을 팔로우합니다.
+
+이 모든 영화는 자신의 프로필에서 볼수 있고, 
+
+좋아할만한 영화들로만 가득차게 되서 끊기지 않고 좋아하는 영화만 소개하는 서비스입니다.
+
+
+## 1. 팀원 정보 및 업무 분담 내역
+<table>
+<tr>
+<td align="center" width="150px">
+<a href="https://getbootstrap.com/docs/3.4/javascript/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/bootstrap-plain.svg" alt="Bootstrap" height="50" /></a>
+</td>
+<td align="center" width="150px">
+<a href="https://www.w3schools.com/css/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/css3-original-wordmark.svg" alt="CSS3" height="50" /></a>
+</td>
+<td align="center" width="150px">
+<a href="https://en.wikipedia.org/wiki/HTML5" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/html5-original-wordmark.svg" alt="HTML5" height="50" /></a>
+</td>
+<td align="center" width="150px">
+<a href="https://vuejs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/vuejs-original-wordmark.svg" alt="Vue.js" height="50" /></a>  
+</td>
+</tr>
+<tr>
+<td align="center" width="30px">
+Javascript
+</td>
+<td align="center" width="30px">
+Css3
+</td>
+<td align="center" width="30px">
+HTML
+</td>
+</td>
+<td align="center" width="30px">
+Vue
+</td>
+</tr>
+<tr>
+<td align="center" width="150px">
+<a href="https://nodejs.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/nodejs-original-wordmark.svg" alt="Node.js" height="50" /></a>  
+</td>
+<td align="center" width="150px">
+<a href="https://www.python.org/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/python-original.svg" alt="Python" height="50" /></a>  
+</td>
+<td align="center" width="150px">
+<a href="https://github.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/git-scm-icon.svg" alt="Git" height="50" /></a>  
+</td>
+<td align="center" width="150px">
+<a href="https://www.djangoproject.com/" target="_blank"><img style="margin: 10px" src="https://profilinator.rishav.dev/skills-assets/django-original.svg" alt="Django" height="50" /></a>  
+</td>
+</tr>
+<tr>
+<td align="center">
+Node.js
+</td>
+<td align="center">
+Python
+</td>
+<td align="center">
+GitBash
+</td>
+
+<td align="center">
+ Django
+</td>
+</tr>
+
+</table>
 #### 엄형규
 
 - accounts
