@@ -8,6 +8,8 @@
 
 
 팀명 :  AVG 27.5   팀원: 양은진, 엄형규
+<a href="https://github.com/eunjineee/AVG27.5-ver2">Go Ver2</a>
+
 
 <table>
 <tr>
